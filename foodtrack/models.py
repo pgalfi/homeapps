@@ -60,6 +60,10 @@ class FoodPortion(models.Model):
     gram_weight = models.FloatField()
 
 
+class RecentSelection(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
 # categories set up by the user for daily food logging,
 # default categories would be added with null owner
 class FoodLogCategory(models.Model):

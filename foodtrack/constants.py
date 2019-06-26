@@ -2,7 +2,7 @@ DAILY_TARGETS = 1
 DYNAMIC_DRBERGKETO = 10
 
 PROFILE_TYPES = (
-    (DAILY_TARGETS, "Daily Targets")
+    (DAILY_TARGETS, "Daily Targets"),
 )
 
 LOG_BREAKFAST = 10
