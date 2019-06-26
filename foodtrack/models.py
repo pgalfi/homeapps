@@ -65,3 +65,4 @@ class FoodLogEntry(models.Model):
     portion = models.ForeignKey(FoodPortion, on_delete=models.CASCADE)
     amount = models.FloatField()
 
+# test
