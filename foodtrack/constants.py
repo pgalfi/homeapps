@@ -1,0 +1,16 @@
+DAILY_TARGETS = 1
+DYNAMIC_DRBERGKETO = 10
+
+PROFILE_TYPES = (
+    (DAILY_TARGETS, "Daily Targets")
+)
+
+LOG_BREAKFAST = 10
+LOG_LUNCH = 20
+LOG_DINNER = 30
+
+DEFAULT_LOG_CATEGORIES = (
+    (LOG_BREAKFAST, "Breakfast"),
+    (LOG_LUNCH, "Lunch"),
+    (LOG_DINNER, "Dinner")
+)

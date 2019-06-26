@@ -143,7 +143,7 @@ class FoodPortionLoader(DataLoader):
     def build(self, row):
         id, fdc_id, seq_num, amount, measure_unit_id, portion_description, modifier, gram_weight, data_points, footnote, min_year_acquired = row
         portion = FoodPortion(food_id=fdc_id, amount=amount, unit_id=measure_unit_id, description=portion_description,
-                              modifier=modifier, weight=gram_weight)
+                              modifier=modifier, gram_weight=gram_weight)
         portion.id = id
         return portion
 
