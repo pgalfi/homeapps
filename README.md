@@ -1,3 +1,3 @@
-# homeapps
+# Home Applications
 
 Test
