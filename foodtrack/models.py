@@ -44,7 +44,7 @@ class FoodNutrientDerivation(models.Model):
 
 # from USDA database
 class FoodNutrient(models.Model):
-    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name='nutrients')
     nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
     amount = models.FloatField()
     derivation = models.ForeignKey(FoodNutrientDerivation, on_delete=models.CASCADE, null=True)
@@ -118,3 +118,13 @@ class NutritionProfileTargets(models.Model):
 class UserNutrition(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile = models.ForeignKey(NutritionProfile, null=True, on_delete=models.SET_NULL)
+
+
+# TODO: Create Order classes for selectable elements such as Food, Nutrient etc.
+
+# order of displaying nutrients based on recurring usage
+class NutrientOrder(models.Model):
+    nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
+    order = models.IntegerField(null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
