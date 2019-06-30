@@ -8,6 +8,8 @@ router.register('nutrients', views.NutrientViewSet)
 router.register('measures', views.MeasureUnitViewSet)
 router.register('foodcategories', views.FoodCategoryViewSet)
 router.register('food', views.FoodViewSet)
+router.register('foodlogcategories', views.FoodLogCategoryViewSet)
+router.register('foodlogentries', views.FoodLogEntryViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -141,7 +141,9 @@ class FoodNutrientLoader(DataLoader):
 class FoodPortionLoader(DataLoader):
 
     def build(self, row):
+        print(row)
         id, fdc_id, seq_num, amount, measure_unit_id, portion_description, modifier, gram_weight, data_points, footnote, min_year_acquired = row
+        if len(amount)==0: amount = "0"
         portion = FoodPortion(food_id=fdc_id, amount=amount, unit_id=measure_unit_id, description=portion_description,
                               modifier=modifier, gram_weight=gram_weight)
         portion.id = id
@@ -152,6 +154,11 @@ class FoodPortionLoader(DataLoader):
 
     def execute(self):
         FoodPortion.objects.all().delete()
+        # Create default 100g portion
+        default_portion = FoodPortion(food_id=None, amount=1, unit_id=None, description="gramm", modifier="",
+                                      gram_weight=0)
+        default_portion.id = 1
+        default_portion.save()
         return load_from_csv(os.path.join(settings.BASE_DIR, "foodtrack\\migrations\\food_portion.csv"), self)
 
 

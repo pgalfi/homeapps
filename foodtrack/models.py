@@ -14,6 +14,9 @@ class Nutrient(models.Model):
 class MeasureUnit(models.Model):
     name = models.CharField(max_length=2048)
 
+    def __str__(self):
+        return self.name
+
 
 # from USDA database
 class FoodCategory(models.Model):
@@ -27,6 +30,9 @@ class Food(models.Model):
     description = models.CharField(max_length=2048)
     category = models.ForeignKey(FoodCategory, on_delete=models.CASCADE, null=True)
     pub_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.description
 
 
 # from USDA database
@@ -42,7 +48,7 @@ class FoodNutrientDerivation(models.Model):
     source = models.ForeignKey(FoodNutrientSource, on_delete=models.CASCADE, null=True)
 
 
-# from USDA database
+# from USDA database, values are for 100g of food
 class FoodNutrient(models.Model):
     food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name='nutrients')
     nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
@@ -52,16 +58,21 @@ class FoodNutrient(models.Model):
 
 # from USDA database
 class FoodPortion(models.Model):
-    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE, null=True)
     amount = models.FloatField()
-    unit = models.ForeignKey(MeasureUnit, on_delete=models.CASCADE)
+    unit = models.ForeignKey(MeasureUnit, on_delete=models.CASCADE, null=True)
     description = models.CharField(max_length=2048)
     modifier = models.CharField(max_length=2048)
     gram_weight = models.FloatField()
 
+    def name(self):
+        if len(self.description.strip())>0:
+            return self.description
+        else:
+            return str(self.amount) + " " + self.modifier
 
-class RecentSelection(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name()
 
 
 # categories set up by the user for daily food logging,
@@ -70,23 +81,43 @@ class FoodLogCategory(models.Model):
     name = models.CharField(max_length=1024)
     owner = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 
 # data logged by user on what was consumed and when
 class FoodLogEntry(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     dt = models.DateTimeField()
     category = models.ForeignKey(FoodLogCategory, null=True, on_delete=models.CASCADE)
-    food = models.ForeignKey(Food, on_delete=models.CASCADE)
-    unit = models.ForeignKey(MeasureUnit, on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, null=True, on_delete=models.CASCADE)
     amount = models.FloatField()
+    portion = models.ForeignKey(FoodPortion, null=True, on_delete=models.SET_NULL)
 
 
 # nutrients calculated for each food log entry automatically
 # based on the food and amount entered by the user
-class FoodLogEntryNutrients(models.Model):
-    entry = models.ForeignKey(FoodLogEntry, on_delete=models.CASCADE)
+class FoodLogEntryNutrient(models.Model):
+    entry = models.ForeignKey(FoodLogEntry, on_delete=models.CASCADE, related_name="nutrients")
     nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
     amount = models.FloatField()
+
+    @staticmethod
+    def build_nutrients(log_entry):
+        FoodLogEntryNutrient.objects.filter(entry=log_entry).delete()
+        foodnutrients = list(FoodNutrient.objects.filter(food=log_entry.food, amount__gt=0))
+        entry_nutrients = []
+        if log_entry.portion.id==1:
+            gr_ratio = log_entry.amount / 100
+        else:
+            gr_ratio = log_entry.portion.gram_weight / 100
+        for foodnutrient in foodnutrients:
+            nutrient_entry = FoodLogEntryNutrient(entry=log_entry)
+            nutrient_entry.nutrient = foodnutrient.nutrient
+            nutrient_entry.amount = gr_ratio * foodnutrient.amount
+            entry_nutrients.append(nutrient_entry)
+        FoodLogEntryNutrient.objects.bulk_create(entry_nutrients)
+
 
 
 # nutrient targets for that user for a certain day
@@ -127,4 +158,3 @@ class NutrientOrder(models.Model):
     nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
     order = models.IntegerField(null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-

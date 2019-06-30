@@ -1,12 +1,14 @@
 import string
 
-from rest_framework import viewsets
+from django.db.models import Q
+from rest_framework import viewsets, permissions
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from foodtrack.models import Nutrient, MeasureUnit, FoodCategory, Food
+from foodtrack.models import Nutrient, MeasureUnit, FoodCategory, Food, FoodLogCategory, FoodLogEntry, \
+    FoodLogEntryNutrient
 from foodtrack.serializers import NutrientSerializer, MeasureUnitSerializer, FoodCategorySerializer, FoodSerializer, \
-    FoodDetailSerializer
+    FoodDetailSerializer, FoodLogCategorySerializer, FoodLogEntrySerializer
 
 
 class NutrientViewSet(viewsets.ReadOnlyModelViewSet):
@@ -45,3 +47,32 @@ class FoodViewSet(viewsets.ReadOnlyModelViewSet):
         food = get_object_or_404(Food.objects.all(), pk=pk)
         serializer = FoodDetailSerializer(food)
         return Response(serializer.data)
+
+
+class FoodLogCategoryViewSet(viewsets.ModelViewSet):
+
+    class IsOwner(permissions.BasePermission):
+
+        def has_object_permission(self, request, view, obj):
+            return obj.owner == request.user
+
+    serializer_class = FoodLogCategorySerializer
+    queryset = FoodLogCategory.objects.all()
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def get_queryset(self):
+        return FoodLogCategory.objects.filter(Q(owner__isnull=True)|Q(owner=self.request.user))
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class FoodLogEntryViewSet(viewsets.ModelViewSet):
+
+    serializer_class = FoodLogEntrySerializer
+    queryset = FoodLogEntry.objects.all()
+
+    def perform_create(self, serializer):
+        log_entry = serializer.save(user=self.request.user)
+        FoodLogEntryNutrient.build_nutrients(log_entry)
+
