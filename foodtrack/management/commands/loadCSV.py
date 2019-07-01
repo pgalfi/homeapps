@@ -185,6 +185,15 @@ def load_from_csv(csvpath, loader):
     return row_count
 
 
+def addMetricMeasures() -> None:
+    kg = MeasureUnit.objects.filter(name="kg")
+    if kg.count()==0:
+        kg = MeasureUnit(name="kg")
+        kg.id =99999
+        kg.save()
+
+
+
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
@@ -202,5 +211,6 @@ class Command(BaseCommand):
         # print(str(FoodNutrientDerivationLoader().execute()) + " rows loaded")
         # print("Loading food nutrients...")
         # print(str(FoodNutrientLoader().execute()) + " rows loaded")
-        print("Loading food portions...")
-        print(str(FoodPortionLoader().execute()) + " rows loaded")
+        # print("Loading food portions...")
+        # print(str(FoodPortionLoader().execute()) + " rows loaded")
+        addMetricMeasures()

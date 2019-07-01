@@ -91,3 +91,23 @@ class FoodLogEntrySerializer(serializers.ModelSerializer):
         fields = ('id', 'dt', 'category', 'category_name', 'food',
                   'food_desc', 'amount', 'portion', 'portion_name',
                   'nutrients')
+
+
+class CurrencySerializer(serializers.ModelSerializer):
+    rate_date = serializers.ReadOnlyField()
+    class Meta:
+        model = Currency
+        fields = ('id', 'name', 'long_name', 'rate', 'rate_date')
+
+
+class PurchaseItemSerializer(serializers.ModelSerializer):
+    dt = serializers.ReadOnlyField()
+    unit_name = serializers.ReadOnlyField(source='unit.name')
+    currency_name = serializers.ReadOnlyField(source='currency.name')
+    food = serializers.PrimaryKeyRelatedField(allow_null=True, queryset=Food.objects.all(),
+                                              style={"base_template":"input.html"})
+
+    class Meta:
+        model = PurchaseItem
+        fields = ('id', 'kind', 'food', 'description', 'pcs', 'amount', 'unit', 'unit_name',
+                  'cost', 'currency', 'currency_name', 'dt')

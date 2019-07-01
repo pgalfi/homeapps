@@ -23,10 +23,13 @@ class FoodCategory(models.Model):
     code = models.IntegerField()
     description = models.CharField(max_length=2048)
 
+    def __str__(self):
+        return self.description
+
 
 # from USDA database
 class Food(models.Model):
-    data_type = models.CharField(max_length=2048)
+    data_type = models.CharField(max_length=2048, choices=constants.FOOD_DATA_TYPES)
     description = models.CharField(max_length=2048)
     category = models.ForeignKey(FoodCategory, on_delete=models.CASCADE, null=True)
     pub_date = models.DateTimeField()
@@ -81,11 +84,17 @@ class Currency(models.Model):
     name = models.CharField(max_length=10)
     long_name = models.CharField(max_length=1024, null=True)
     rate = models.FloatField()  # rate to base currency from constants.BASE_CURRENCY
-    rate_date = models.DateTimeField() # recorded for future extension for dynamic rate updates
+    rate_date = models.DateTimeField()  # recorded for future extension for dynamic rate updates
+
+    def __str__(self):
+        return self.name
 
 
 class PurchaseItem(models.Model):
     kind = models.IntegerField(choices=constants.PURCHASE_ITEM_KINDS)
+    food = models.ForeignKey(Food, default=None, null=True, on_delete=models.SET_NULL)
+    description = models.CharField(max_length=2048, default=None, null=True)
+    pcs = models.IntegerField(verbose_name="Pieces", null=True, default=None)
     amount = models.FloatField(null=True)
     unit = models.ForeignKey(MeasureUnit, null=True, default=None, on_delete=models.SET_NULL)
     cost = models.FloatField()

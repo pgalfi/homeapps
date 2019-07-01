@@ -26,3 +26,14 @@ PURCHASE_ITEM_KINDS = {
     (PURCHASE_OTHER, "Other"),
 
 }
+
+FOOD_DATA_TYPES = {
+    ('agricultural_acquisition', 'agricultural_acquisition'),
+    ('branded_food', 'branded_food'),
+    ('foundation_food', 'foundation_food'),
+    ('market_acquisition', 'market_acquisition'),
+    ('sample_food', 'sample_food'),
+    ('sr_legacy_food', 'sr_legacy_food'),
+    ('sub_sample_food', 'sub_sample_food'),
+    ('survey_fndds_food', 'survey_fndds_food'),
+}
