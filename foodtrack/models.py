@@ -75,6 +75,24 @@ class FoodPortion(models.Model):
         return self.name()
 
 
+# Models for tracking food purchase
+
+class Currency(models.Model):
+    name = models.CharField(max_length=10)
+    long_name = models.CharField(max_length=1024, null=True)
+    rate = models.FloatField()  # rate to base currency from constants.BASE_CURRENCY
+    rate_date = models.DateTimeField() # recorded for future extension for dynamic rate updates
+
+
+class PurchaseItem(models.Model):
+    kind = models.IntegerField(choices=constants.PURCHASE_ITEM_KINDS)
+    amount = models.FloatField(null=True)
+    unit = models.ForeignKey(MeasureUnit, null=True, default=None, on_delete=models.SET_NULL)
+    cost = models.FloatField()
+    currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
+    dt = models.DateTimeField()
+
+
 # categories set up by the user for daily food logging,
 # default categories would be added with null owner
 class FoodLogCategory(models.Model):
