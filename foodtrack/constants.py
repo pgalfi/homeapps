@@ -2,10 +2,12 @@
 BASE_CURRENCY = "DKK"
 
 DAILY_TARGETS = 1
+DAILY_RATIOS = 10
 DYNAMIC_DRBERGKETO = 10
 
 PROFILE_TYPES = (
     (DAILY_TARGETS, "Daily Targets"),
+    (DAILY_RATIOS, "Daily Ratios"),
 )
 
 LOG_BREAKFAST = 10
@@ -36,4 +38,10 @@ FOOD_DATA_TYPES = {
     ('sr_legacy_food', 'sr_legacy_food'),
     ('sub_sample_food', 'sub_sample_food'),
     ('survey_fndds_food', 'survey_fndds_food'),
+}
+
+
+NUTRIENT_TARGET_TYPES = {
+    (10, 'Daily Grams'),
+    (20, 'Daily Percentage')
 }

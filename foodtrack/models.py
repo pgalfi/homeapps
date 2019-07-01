@@ -9,6 +9,8 @@ class Nutrient(models.Model):
     name = models.CharField(max_length=2048)
     unit = models.CharField(max_length=2048)
 
+    def __str__(self):
+        return self.name + " (" + self.unit + ")"
 
 # from USDA database
 class MeasureUnit(models.Model):
@@ -163,12 +165,16 @@ class NutritionProfile(models.Model):
     name = models.CharField(max_length=1024)
     kind = models.IntegerField(choices=constants.PROFILE_TYPES)
 
+    def __str__(self):
+        return self.name
+
 
 # nutrient target under a specific nutrition profile
-class NutritionProfileTargets(models.Model):
+class NutritionProfileTarget(models.Model):
     profile = models.ForeignKey(NutritionProfile, on_delete=models.CASCADE)
     nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
     amount = models.FloatField()
+    kind = models.IntegerField(choices=constants.NUTRIENT_TARGET_TYPES)
     notes = models.TextField(null=True)
 
 

@@ -12,6 +12,9 @@ router.register('foodlogcategories', views.FoodLogCategoryViewSet)
 router.register('foodlogentries', views.FoodLogEntryViewSet)
 router.register('currency', views.CurrencyViewSet)
 router.register('purchaseitems', views.PurchaseItemViewSet)
+router.register('nutritionprofiles', views.NutritionProfileViewSet)
+router.register('nutritionprofiletarget', views.NutritionProfileTargetViewSet)
+router.register('usernutrition', views.UserNutritionViewSet)
 
 
 urlpatterns = [

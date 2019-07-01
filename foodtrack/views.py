@@ -30,9 +30,9 @@ class FoodViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Food.objects.all()
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter,)
     filterset_fields = ('category', 'data_type')
-    search_fields = ('description', )
+    search_fields = ('description',)
     ordering_fields = ('description',)
-    ordering = ('description', )
+    ordering = ('description',)
 
     def retrieve(self, request, pk=None, **kwargs):
         food = get_object_or_404(Food.objects.all(), pk=pk)
@@ -80,3 +80,18 @@ class PurchaseItemViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(dt=datetime.datetime.now())
+
+
+class NutritionProfileViewSet(viewsets.ModelViewSet):
+    serializer_class = NutritionProfileSerializer
+    queryset = NutritionProfile.objects.all()
+
+
+class NutritionProfileTargetViewSet(viewsets.ModelViewSet):
+    serializer_class = NutritionProfileTargetSerializer
+    queryset = NutritionProfileTarget.objects.all()
+
+
+class UserNutritionViewSet(viewsets.ModelViewSet):
+    serializer_class = UserNutritionSerializer
+    queryset = UserNutrition.objects.all()
