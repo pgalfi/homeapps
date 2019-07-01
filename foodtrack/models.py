@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -11,6 +13,7 @@ class Nutrient(models.Model):
 
     def __str__(self):
         return self.name + " (" + self.unit + ")"
+
 
 # from USDA database
 class MeasureUnit(models.Model):
@@ -134,13 +137,13 @@ class FoodLogEntryNutrient(models.Model):
     @staticmethod
     def build_nutrients(log_entry):
         FoodLogEntryNutrient.objects.filter(entry=log_entry).delete()
-        foodnutrients = list(FoodNutrient.objects.filter(food=log_entry.food, amount__gt=0))
+        foodnutrient_set = list(FoodNutrient.objects.filter(food=log_entry.food, amount__gt=0))
         entry_nutrients = []
         if log_entry.portion.id==1:
             gr_ratio = log_entry.amount / 100
         else:
             gr_ratio = log_entry.portion.gram_weight / 100
-        for foodnutrient in foodnutrients:
+        for foodnutrient in foodnutrient_set:
             nutrient_entry = FoodLogEntryNutrient(entry=log_entry)
             nutrient_entry.nutrient = foodnutrient.nutrient
             nutrient_entry.amount = gr_ratio * foodnutrient.amount
@@ -156,8 +159,31 @@ class NutrientTargets(models.Model):
     day = models.DateField()
     nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
     amount = models.FloatField()
+    kind = models.IntegerField(choices=constants.NUTRIENT_TARGET_TYPES)
     notes = models.TextField(null=True)
 
+    #TODO: Static method needs to be created that runs maintenance and clears out old daily targets
+
+    @staticmethod
+    def generate(user):
+        day = datetime.date.today()
+        try:
+            userprofile = UserNutrition.objects.get(user=user)
+        except UserNutrition.DoesNotExist:
+            return
+        # check if targets have already been calculated
+        existing_targets = NutrientTargets.objects.filter(user=user, day=day)
+        profile = userprofile.profile
+        if profile.kind == constants.DAILY_TARGETS and existing_targets.count() > 0: return
+        target_set = NutritionProfileTarget.objects.filter(profile=profile)
+        if profile.kind == constants.DAILY_TARGETS:
+            for target in target_set:
+                nutrient_target = NutrientTargets(user=user, day=day)
+                nutrient_target.nutrient = target.nutrient
+                nutrient_target.kind = target.kind
+                nutrient_target.amount = target.amount
+                nutrient_target.notes = target.notes
+                nutrient_target.save()
 
 # a profile for a kind a nutrition plan that will include targets
 # for each nutrient

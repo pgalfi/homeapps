@@ -64,6 +64,7 @@ class FoodLogEntryViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         log_entry = serializer.save(user=self.request.user)
         FoodLogEntryNutrient.build_nutrients(log_entry)
+        NutrientTargets.generate(self.request.user)
 
 
 class CurrencyViewSet(viewsets.ModelViewSet):
