@@ -15,7 +15,8 @@ router.register('purchaseitems', views.PurchaseItemViewSet)
 router.register('nutritionprofiles', views.NutritionProfileViewSet)
 router.register('nutritionprofiletarget', views.NutritionProfileTargetViewSet)
 router.register('usernutrition', views.UserNutritionViewSet)
-
+router.register('recipes',views.RecipeViewSet)
+router.register('recipecomponents', views.RecipeComponentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

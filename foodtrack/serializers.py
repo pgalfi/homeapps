@@ -130,3 +130,25 @@ class UserNutritionSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserNutrition
         fields = ('id', 'user', 'profile')
+
+
+class RecipeSerializer(serializers.ModelSerializer):
+    serving_size_name = serializers.ReadOnlyField(source='serving_size.name')
+
+    class Meta:
+        model = Recipe
+        fields = ('id', 'name', 'serving_amount', 'serving_size',
+                  'serving_size_name')
+
+
+class RecipeComponentSerializer(serializers.ModelSerializer):
+    recipe_name = serializers.ReadOnlyField(source="recipe.name")
+    food = serializers.PrimaryKeyRelatedField(queryset=Food.objects.all(),
+                                              style={"base_template": "input.html"})
+    food_name = serializers.ReadOnlyField(source="food.description")
+    unit_name = serializers.ReadOnlyField(source='unit.name')
+
+    class Meta:
+        model = RecipeComponent
+        fields = ('id', 'recipe', 'recipe_name', 'food', 'food_name',
+                  'amount', 'unit', 'unit_name')

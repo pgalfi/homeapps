@@ -10,6 +10,11 @@ from rest_framework.response import Response
 from foodtrack.serializers import *
 
 
+class IsOwner(permissions.BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        return obj.owner == request.user
+
 class NutrientViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Nutrient.objects.all()
     serializer_class = NutrientSerializer
@@ -41,10 +46,6 @@ class FoodViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class FoodLogCategoryViewSet(viewsets.ModelViewSet):
-    class IsOwner(permissions.BasePermission):
-
-        def has_object_permission(self, request, view, obj):
-            return obj.owner == request.user
 
     serializer_class = FoodLogCategorySerializer
     queryset = FoodLogCategory.objects.all()
@@ -96,3 +97,18 @@ class NutritionProfileTargetViewSet(viewsets.ModelViewSet):
 class UserNutritionViewSet(viewsets.ModelViewSet):
     serializer_class = UserNutritionSerializer
     queryset = UserNutrition.objects.all()
+
+
+class RecipeViewSet(viewsets.ModelViewSet):
+    serializer_class = RecipeSerializer
+    queryset = Recipe.objects.all()
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class RecipeComponentViewSet(viewsets.ModelViewSet):
+    serializer_class = RecipeComponentSerializer
+    queryset = RecipeComponent.objects.all()
+

@@ -210,6 +210,43 @@ class UserNutrition(models.Model):
     profile = models.ForeignKey(NutritionProfile, null=True, on_delete=models.SET_NULL)
 
 
+class Recipe(models.Model):
+    name = models.CharField(max_length=2048)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    serving_amount = models.FloatField()
+    serving_size = models.ForeignKey(MeasureUnit, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    # def compute_nutrients(self):
+    #     components = self.components.all()
+    #     food_nutrients = list(self.food.nutrients.all())
+    #     for food_nutrient in food_nutrients:
+    #         recipe_nutrient = self.recipe.nutrients.filter(nutrient=food_nutrient)[0]
+    #         if recipe_nutrient is not None:
+    #             recipe_nutrient.amount += food_nutrient.amount
+    #         else:
+    #             recipe_nutrient = RecipeComputedNutrient(recipe=self.recipe, nutrient=food_nutrient,
+    #                                                      amount=food_nutrient.amount)
+    #         recipe_nutrient.save()
+
+
+class RecipeComponent(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='components')
+    food = models.ForeignKey(Food, on_delete=models.SET_NULL, null=True, default=None)
+    amount = models.FloatField()
+    unit = models.ForeignKey(MeasureUnit, on_delete=models.SET_NULL, null=True, default=None)
+
+
+
+class RecipeComputedNutrient(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='nutrients')
+    nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
+    amount = models.FloatField()
+
+
+
 # TODO: Create Order classes for selectable elements such as Food, Nutrient etc.
 
 # order of displaying nutrients based on recurring usage
