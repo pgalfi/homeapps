@@ -134,12 +134,10 @@ class UserNutritionSerializer(serializers.ModelSerializer):
 
 
 class RecipeSerializer(serializers.ModelSerializer):
-    serving_size_name = serializers.ReadOnlyField(source='serving_size.name')
 
     class Meta:
         model = Recipe
-        fields = ('id', 'name', 'serving_amount', 'serving_size',
-                  'serving_size_name')
+        fields = ('id', 'name', 'serving_amount')
 
 
 class RecipeComponentSerializer(serializers.ModelSerializer):

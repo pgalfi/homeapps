@@ -229,28 +229,41 @@ class Recipe(models.Model):
     name = models.CharField(max_length=2048)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     serving_amount = models.FloatField()
-    serving_size = models.ForeignKey(MeasureUnit, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
-    # def compute_nutrients(self):
-    #     components = self.components.all()
-    #     food_nutrients = list(self.food.nutrients.all())
-    #     for food_nutrient in food_nutrients:
-    #         recipe_nutrient = self.recipe.nutrients.filter(nutrient=food_nutrient)[0]
-    #         if recipe_nutrient is not None:
-    #             recipe_nutrient.amount += food_nutrient.amount
-    #         else:
-    #             recipe_nutrient = RecipeComputedNutrient(recipe=self.recipe, nutrient=food_nutrient,
-    #                                                      amount=food_nutrient.amount)
-    #         recipe_nutrient.save()
+    def compute_nutrients(self):
+        nutrients_data = list(self.components.filter(food__nutrients__amount__gt=0)
+                              .values("food_id", "amount", "portion__gram_weight",
+                                      "food__nutrients__nutrient__id", "food__nutrients__amount"))
+        print(nutrients_data)
+        recipe_nutrients = {}
+        for food_nutrient in nutrients_data:
+            if food_nutrient["food__nutrients__amount"] <= 0: continue
+            if food_nutrient["portion__gram_weight"] is None: food_nutrient["portion__gram_weight"] = 1
+            recipe_multiplier = food_nutrient["amount"] * food_nutrient["portion__gram_weight"]
+            recipe_nutrient_amount = recipe_multiplier * (food_nutrient["food__nutrients__amount"] / 100)
+            if food_nutrient["food__nutrients__nutrient__id"] not in recipe_nutrients:
+                recipe_nutrient = RecipeComputedNutrient(recipe=self,
+                                                         nutrient_id=food_nutrient["food__nutrients__nutrient__id"],
+                                                         amount=recipe_nutrient_amount)
+                recipe_nutrients[food_nutrient["food__nutrients__nutrient__id"]] = recipe_nutrient
+                # recipe_nutrients[food_nutrient["food__nutrients__nutrient__id"]].save()
+            else:
+                recipe_nutrients[food_nutrient["food__nutrients__nutrient__id"]].amount += recipe_nutrient_amount
+                # recipe_nutrients[food_nutrient["food__nutrients__nutrient__id"]].save()
+
+        print(recipe_nutrients)
+        recipe_nutrients_list = [recipe_nutrient for recipe_nutrient in recipe_nutrients.values()]
+        print(recipe_nutrients_list)
+        RecipeComputedNutrient.objects.bulk_create(recipe_nutrients_list)
 
 
 class RecipeComponent(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='components')
-    food = models.ForeignKey(Food, on_delete=models.SET_NULL, null=True, default=None)
-    amount = models.FloatField() # default is grams
+    food = models.ForeignKey(Food, on_delete=models.SET_NULL, null=True, default=None, related_name="components")
+    amount = models.FloatField()  # default is grams if portion is null
     portion = models.ForeignKey(FoodPortion, on_delete=models.SET_NULL, null=True, default=None)
 
 
