@@ -140,6 +140,7 @@ class FoodLogEntry(models.Model):
     category = models.ForeignKey(FoodLogCategory, null=True, on_delete=models.CASCADE)
     food = models.ForeignKey(Food, null=True, on_delete=models.CASCADE)
     alt_food = models.ForeignKey('Recipe', null=True, on_delete=models.CASCADE)
+    # set portion to null when alt_food is set. The portion would always be "serving"
     amount = models.FloatField()
     portion = models.ForeignKey(FoodPortion, null=True, on_delete=models.SET_NULL)
 
@@ -156,18 +157,20 @@ class FoodLogEntryNutrient(models.Model):
         FoodLogEntryNutrient.objects.filter(entry=log_entry).delete()
 
         if log_entry.food is not None:
-            foodnutrient_set = list(FoodNutrient.objects.filter(food=log_entry.food, amount__gt=0))
+            food_nutrient_set = list(FoodNutrient.objects.filter(food=log_entry.food, amount__gt=0))
+            if log_entry.portion.id == 1:
+                gr_ratio = log_entry.amount / 100
+            else:
+                gr_ratio = log_entry.portion.gram_weight / 100
         else:
-            foodnutrient_set = list(RecipeComputedNutrient.objects.filter(recipe=log_entry.alt_food, ))
+            food_nutrient_set = list(RecipeComputedNutrient.objects.filter(recipe=log_entry.alt_food, ))
+            # Take into account "serving" portion for the recipe foods, it won't be in gram
+            gr_ratio = (log_entry.amount * (log_entry.alt_food.total_gram / log_entry.alt_food.serving_amount)) / 100
         entry_nutrients = []
-        if log_entry.portion.id==1:
-            gr_ratio = log_entry.amount / 100
-        else:
-            gr_ratio = log_entry.portion.gram_weight / 100
-        for foodnutrient in foodnutrient_set:
+        for food_nutrient in food_nutrient_set:
             nutrient_entry = FoodLogEntryNutrient(entry=log_entry)
-            nutrient_entry.nutrient = foodnutrient.nutrient
-            nutrient_entry.amount = gr_ratio * foodnutrient.amount
+            nutrient_entry.nutrient = food_nutrient.nutrient
+            nutrient_entry.amount = gr_ratio * food_nutrient.amount
             entry_nutrients.append(nutrient_entry)
         FoodLogEntryNutrient.objects.bulk_create(entry_nutrients)
 
@@ -236,21 +239,30 @@ class Recipe(models.Model):
     name = models.CharField(max_length=2048)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     serving_amount = models.FloatField()
+    total_gram = models.FloatField(default=None, null=True)
 
     def __str__(self):
         return self.name
 
     def compute_nutrients(self):
+        # Clear any earlier nutrient calculation
+        RecipeComputedNutrient.objects.filter(recipe=self).delete()
         nutrients_data = list(self.components.filter(food__nutrients__amount__gt=0)
                               .values("food_id", "amount", "portion__gram_weight",
                                       "food__nutrients__nutrient__id", "food__nutrients__amount"))
         recipe_nutrients = {}
+        food_weights = {}
         for food_nutrient in nutrients_data:
             if food_nutrient["food__nutrients__amount"] <= 0: continue
             if food_nutrient["portion__gram_weight"] is None:
                 food_nutrient["portion__gram_weight"] = 1
-            recipe_multiplier = food_nutrient["amount"] * food_nutrient["portion__gram_weight"]
-            recipe_nutrient_amount = recipe_multiplier * (food_nutrient["food__nutrients__amount"] / 100)
+            # grams of that food in the recipe
+            food_gram = food_nutrient["amount"] * food_nutrient["portion__gram_weight"]
+            # save the gram of that food from the recipe
+            if food_nutrient["food_id"] not in food_weights:
+                food_weights[food_nutrient["food_id"]] = food_gram
+            # total volume of that nutrient in the total amount of food.
+            recipe_nutrient_amount = food_gram * (food_nutrient["food__nutrients__amount"] / 100)
             if food_nutrient["food__nutrients__nutrient__id"] not in recipe_nutrients:
                 recipe_nutrient = RecipeComputedNutrient(recipe=self,
                                                          nutrient_id=food_nutrient["food__nutrients__nutrient__id"],
@@ -258,6 +270,15 @@ class Recipe(models.Model):
                 recipe_nutrients[food_nutrient["food__nutrients__nutrient__id"]] = recipe_nutrient
             else:
                 recipe_nutrients[food_nutrient["food__nutrients__nutrient__id"]].amount += recipe_nutrient_amount
+
+        # Total nutrient volumes need to be now calculated from total recipe weight to 100 gr weight
+        self.total_gram = sum([food_weights[food_id] for food_id in food_weights.keys()])
+        self.save()
+        # establish ratio to 100g
+        recipe_ratio = 100 / self.total_gram
+        # set nutrient amounts with the ratio to represent per 100g values
+        for recipe_nutrient in recipe_nutrients.values():
+            recipe_nutrient.amount = recipe_nutrient.amount * recipe_ratio
         recipe_nutrients_list = [recipe_nutrient for recipe_nutrient in recipe_nutrients.values()]
         RecipeComputedNutrient.objects.bulk_create(recipe_nutrients_list)
 

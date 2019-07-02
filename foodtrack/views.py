@@ -105,11 +105,11 @@ class RecipeViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, IsOwner)
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        recipe = serializer.save(owner=self.request.user)
+        recipe.compute_nutrients()
 
     def perform_update(self, serializer):
         recipe = serializer.save()
-        print("Computing for recipe: ", recipe)
         recipe.compute_nutrients()
 
 
