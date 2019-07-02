@@ -52,10 +52,11 @@ class FoodPortionSerializer(serializers.ModelSerializer):
 
 class FoodSerializer(serializers.ModelSerializer):
     category = FoodCategorySerializer(many=False)
+    detail = serializers.HyperlinkedIdentityField(view_name='food-detail')
 
     class Meta:
         model = Food
-        fields = ('id', 'data_type', 'description', 'pub_date', 'category')
+        fields = ('id', 'detail', 'data_type', 'description', 'pub_date', 'category')
 
 
 class FoodDetailSerializer(serializers.ModelSerializer):
