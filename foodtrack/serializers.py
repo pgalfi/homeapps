@@ -10,9 +10,10 @@ class NutrientSerializer(serializers.ModelSerializer):
 
 
 class MeasureUnitSerializer(serializers.ModelSerializer):
+    # link_id = serializers.HyperlinkedIdentityField(view_name='measureunit-detail')
     class Meta:
         model = MeasureUnit
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'kind')
 
 
 class FoodCategorySerializer(serializers.ModelSerializer):
@@ -142,13 +143,15 @@ class RecipeSerializer(serializers.ModelSerializer):
 
 
 class RecipeComponentSerializer(serializers.ModelSerializer):
+    link_id = serializers.HyperlinkedIdentityField(view_name='recipecomponent-detail')
     recipe_name = serializers.ReadOnlyField(source="recipe.name")
     food = serializers.PrimaryKeyRelatedField(queryset=Food.objects.all(),
                                               style={"base_template": "input.html"})
     food_name = serializers.ReadOnlyField(source="food.description")
-    unit_name = serializers.ReadOnlyField(source='unit.name')
+    portion_name = serializers.ReadOnlyField(source='portion.name')
+
 
     class Meta:
         model = RecipeComponent
-        fields = ('id', 'recipe', 'recipe_name', 'food', 'food_name',
-                  'amount', 'unit', 'unit_name')
+        fields = ('link_id', 'id', 'recipe', 'recipe_name', 'food', 'food_name',
+                  'amount', 'portion', 'portion_name')

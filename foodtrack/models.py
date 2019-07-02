@@ -15,12 +15,27 @@ class Nutrient(models.Model):
         return self.name + " (" + self.unit + ")"
 
 
-# from USDA database
+# from USDA database - added the "kind" field to identify the type of measurement (volume/weight)
 class MeasureUnit(models.Model):
     name = models.CharField(max_length=2048)
+    kind = models.IntegerField(choices=constants.MEASURE_KINDS, default=constants.MEASURE_OTHER)
 
     def __str__(self):
         return self.name
+
+
+# standard conversion rate for volume->volume and weight->weight conversion
+# provides ratios to the "liter" for volume and to the "gram" for weight
+class UnitConversion(models.Model):
+    unit = models.OneToOneField(to=MeasureUnit, on_delete=models.CASCADE)
+    ratio = models.FloatField(null=True, default=None)
+
+    @staticmethod
+    def get_conversions(self):
+        conversions = list(UnitConversion.objects.filter(ratio__isnull=False)
+                           .values("unit_id", "unit__name", "unit__kind", "ratio"))
+        conversion_table = {conversion["unit_id"]: conversion for conversion in conversions}
+        return conversion_table
 
 
 # from USDA database
@@ -80,7 +95,7 @@ class FoodPortion(models.Model):
             return str(self.amount) + " " + self.modifier
 
     def __str__(self):
-        return self.name()
+        return self.name
 
 
 # Models for tracking food purchase
@@ -235,16 +250,14 @@ class Recipe(models.Model):
 class RecipeComponent(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='components')
     food = models.ForeignKey(Food, on_delete=models.SET_NULL, null=True, default=None)
-    amount = models.FloatField()
-    unit = models.ForeignKey(MeasureUnit, on_delete=models.SET_NULL, null=True, default=None)
-
+    amount = models.FloatField() # default is grams
+    portion = models.ForeignKey(FoodPortion, on_delete=models.SET_NULL, null=True, default=None)
 
 
 class RecipeComputedNutrient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='nutrients')
     nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
     amount = models.FloatField()
-
 
 
 # TODO: Create Order classes for selectable elements such as Food, Nutrient etc.
