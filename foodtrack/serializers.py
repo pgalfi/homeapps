@@ -86,12 +86,13 @@ class FoodLogEntrySerializer(serializers.ModelSerializer):
     food_desc = serializers.SlugField(source="food.description", read_only=True)
     portion_name = serializers.SlugField(source="portion.name", read_only=True)
     nutrients = FoodLogEntryNutrientSerializer(many=True, read_only=True)
+    alt_food_name = serializers.SlugField(source="alt_food.name", read_only=True)
 
     class Meta:
         model = FoodLogEntry
         fields = ('id', 'dt', 'category', 'category_name', 'food',
-                  'food_desc', 'amount', 'portion', 'portion_name',
-                  'nutrients')
+                  'food_desc', 'alt_food', 'alt_food_name', 'amount',
+                  'portion', 'portion_name', 'nutrients')
 
 
 class CurrencySerializer(serializers.ModelSerializer):

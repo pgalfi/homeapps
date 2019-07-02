@@ -31,7 +31,7 @@ class UnitConversion(models.Model):
     ratio = models.FloatField(null=True, default=None)
 
     @staticmethod
-    def get_conversions(self):
+    def get_conversions():
         conversions = list(UnitConversion.objects.filter(ratio__isnull=False)
                            .values("unit_id", "unit__name", "unit__kind", "ratio"))
         conversion_table = {conversion["unit_id"]: conversion for conversion in conversions}
@@ -91,15 +91,16 @@ class FoodPortion(models.Model):
     def name(self):
         if len(self.description.strip())>0:
             return self.description
-        else:
+        elif self.amount != 1:
             return str(self.amount) + " " + self.modifier
+        else:
+            return self.modifier
 
     def __str__(self):
         return self.name
 
 
 # Models for tracking food purchase
-
 class Currency(models.Model):
     name = models.CharField(max_length=10)
     long_name = models.CharField(max_length=1024, null=True)
@@ -138,6 +139,7 @@ class FoodLogEntry(models.Model):
     dt = models.DateTimeField()
     category = models.ForeignKey(FoodLogCategory, null=True, on_delete=models.CASCADE)
     food = models.ForeignKey(Food, null=True, on_delete=models.CASCADE)
+    alt_food = models.ForeignKey('Recipe', null=True, on_delete=models.CASCADE)
     amount = models.FloatField()
     portion = models.ForeignKey(FoodPortion, null=True, on_delete=models.SET_NULL)
 
@@ -152,7 +154,11 @@ class FoodLogEntryNutrient(models.Model):
     @staticmethod
     def build_nutrients(log_entry):
         FoodLogEntryNutrient.objects.filter(entry=log_entry).delete()
-        foodnutrient_set = list(FoodNutrient.objects.filter(food=log_entry.food, amount__gt=0))
+
+        if log_entry.food is not None:
+            foodnutrient_set = list(FoodNutrient.objects.filter(food=log_entry.food, amount__gt=0))
+        else:
+            foodnutrient_set = list(RecipeComputedNutrient.objects.filter(recipe=log_entry.alt_food, ))
         entry_nutrients = []
         if log_entry.portion.id==1:
             gr_ratio = log_entry.amount / 100
@@ -225,6 +231,7 @@ class UserNutrition(models.Model):
     profile = models.ForeignKey(NutritionProfile, null=True, on_delete=models.SET_NULL)
 
 
+# custom recipe based on existing foods
 class Recipe(models.Model):
     name = models.CharField(max_length=2048)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -237,11 +244,11 @@ class Recipe(models.Model):
         nutrients_data = list(self.components.filter(food__nutrients__amount__gt=0)
                               .values("food_id", "amount", "portion__gram_weight",
                                       "food__nutrients__nutrient__id", "food__nutrients__amount"))
-        print(nutrients_data)
         recipe_nutrients = {}
         for food_nutrient in nutrients_data:
             if food_nutrient["food__nutrients__amount"] <= 0: continue
-            if food_nutrient["portion__gram_weight"] is None: food_nutrient["portion__gram_weight"] = 1
+            if food_nutrient["portion__gram_weight"] is None:
+                food_nutrient["portion__gram_weight"] = 1
             recipe_multiplier = food_nutrient["amount"] * food_nutrient["portion__gram_weight"]
             recipe_nutrient_amount = recipe_multiplier * (food_nutrient["food__nutrients__amount"] / 100)
             if food_nutrient["food__nutrients__nutrient__id"] not in recipe_nutrients:
@@ -249,14 +256,9 @@ class Recipe(models.Model):
                                                          nutrient_id=food_nutrient["food__nutrients__nutrient__id"],
                                                          amount=recipe_nutrient_amount)
                 recipe_nutrients[food_nutrient["food__nutrients__nutrient__id"]] = recipe_nutrient
-                # recipe_nutrients[food_nutrient["food__nutrients__nutrient__id"]].save()
             else:
                 recipe_nutrients[food_nutrient["food__nutrients__nutrient__id"]].amount += recipe_nutrient_amount
-                # recipe_nutrients[food_nutrient["food__nutrients__nutrient__id"]].save()
-
-        print(recipe_nutrients)
         recipe_nutrients_list = [recipe_nutrient for recipe_nutrient in recipe_nutrients.values()]
-        print(recipe_nutrients_list)
         RecipeComputedNutrient.objects.bulk_create(recipe_nutrients_list)
 
 
