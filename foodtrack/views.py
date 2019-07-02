@@ -16,9 +16,21 @@ class IsOwner(permissions.BasePermission):
         return obj.owner == request.user
 
 
+class UsageOrderingFilter(OrderingFilter):
+
+    def filter_queryset(self, request, queryset, view):
+        ordering = super().get_ordering(request, queryset, view)
+        if ordering: ordering = ["-usage__count"] + list(ordering)
+        else: ordering = ["-usage__count"]
+        return queryset.order_by(*ordering)
+
+
 class NutrientViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Nutrient.objects.all()
     serializer_class = NutrientSerializer
+
+    def get_queryset(self):
+        return Nutrient.objects.all().order_by("-usage__count", "name")
 
 
 class MeasureUnitViewSet(viewsets.ReadOnlyModelViewSet):
@@ -34,7 +46,7 @@ class FoodCategoryViewSet(viewsets.ReadOnlyModelViewSet):
 class FoodViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = FoodSerializer
     queryset = Food.objects.all()
-    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter,)
+    filter_backends = (DjangoFilterBackend, SearchFilter, UsageOrderingFilter)
     filterset_fields = ('category', 'data_type')
     search_fields = ('description',)
     ordering_fields = ('description',)
@@ -66,6 +78,7 @@ class FoodLogEntryViewSet(viewsets.ModelViewSet):
         log_entry = serializer.save(user=self.request.user)
         FoodLogEntryNutrient.build_nutrients(log_entry)
         NutrientTargets.generate(self.request.user)
+        FoodUsageCounter.addCount(log_entry.food, self.request.user)
 
 
 class CurrencyViewSet(viewsets.ModelViewSet):
@@ -116,3 +129,15 @@ class RecipeViewSet(viewsets.ModelViewSet):
 class RecipeComponentViewSet(viewsets.ModelViewSet):
     serializer_class = RecipeComponentSerializer
     queryset = RecipeComponent.objects.all()
+
+
+class FoodUsageCounterViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+    serializer_class = FoodUsageCounterSerializer
+    queryset = FoodUsageCounter.objects.all()
+
+
+class NutrientUsageCounterViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+    serializer_class = NutrientUsageCounterSerializer
+    queryset = NutrientUsageCounter.objects.all()

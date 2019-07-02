@@ -296,10 +296,33 @@ class RecipeComputedNutrient(models.Model):
     amount = models.FloatField()
 
 
-# TODO: Create Order classes for selectable elements such as Food, Nutrient etc.
-
-# order of displaying nutrients based on recurring usage
-class NutrientOrder(models.Model):
-    nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
-    order = models.IntegerField(null=True)
+class FoodUsageCounter(models.Model):
+    food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name="usage")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    count = models.BigIntegerField(default=0)
+
+    @staticmethod
+    def addCount(food, user):
+        usage = FoodUsageCounter.objects.filter(food=food, owner=user)
+        if usage.count() > 0:
+            usage = usage[0]
+            usage.count += 1
+        else:
+            usage = FoodUsageCounter(food=food, owner=user, count=1)
+        usage.save()
+
+
+class NutrientUsageCounter(models.Model):
+    nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE, related_name="usage")
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    count = models.BigIntegerField(default=0)
+
+    @staticmethod
+    def addCount(nutrient, user):
+        usage = NutrientUsageCounter.objects.filter(nutrient=nutrient, owner=user)
+        if usage.count() > 0:
+            usage = usage[0]
+            usage.count += 1
+        else:
+            usage = NutrientUsageCounter(nutrient=nutrient, owner=user, count=1)
+        usage.save()

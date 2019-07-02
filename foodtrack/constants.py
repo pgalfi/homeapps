@@ -59,3 +59,14 @@ NUTRIENT_TARGET_TYPES = {
     (NUTRIENT_TARGET_GRAMS, 'Daily Grams'),
     (NUTRIENT_TARGET_PERCENT, 'Daily Percentage')
 }
+
+
+OBJECT_FOOD = 10
+OBJECT_NUTRIENT = 20
+OBJECT_RECIPE = 30
+
+OBJECT_TYPES = {
+    (OBJECT_FOOD, "Food"),
+    (OBJECT_NUTRIENT, "Nutrient"),
+    (OBJECT_RECIPE, "Recipe")
+}
