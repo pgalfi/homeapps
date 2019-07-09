@@ -51,7 +51,8 @@ class HouseProspectSerializer(serializers.ModelSerializer):
 
     def get_liked(self, house):
         blikes = house.liked.filter(pk=self.context["request"].user.id)
-        if blikes.count() > 1: return True
+        if blikes.count() > 0:
+            return True
         return False
 
 

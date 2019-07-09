@@ -6,8 +6,22 @@ $(function(){
 
 });
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        let cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            var cookie = $.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 function update_property_list(e, page=1) {
-    console.log(page);
     let form_element = document.getElementById("search-form");
     let formData = new FormData(form_element);
     let url_params = "page=" + encodeURIComponent(page);
@@ -59,9 +73,13 @@ function page_selected() {
 
 function property_click(house_link) {
     let house_id = $(house_link).closest(".row")[0].id;
+    house_id = house_id.replace('house-','');
     $.ajax({
         url: "/housing/api/houses/" + house_id + "/viewed/",
         type: "POST",
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        },
         success: function(data) {
 
         },
@@ -72,12 +90,19 @@ function property_click(house_link) {
 }
 
 function like_property(button_link) {
-    let house_id = $(house_link).closest(".row")[0].id;
+    let house_id = $(button_link).closest(".row")[0].id;
+    house_id = house_id.replace('house-','');
     $.ajax({
         url: "/housing/api/houses/" + house_id + "/liked/",
         type: "POST",
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        },
         success: function(data) {
-
+            let parent = $(button_link).parent();
+            if (data.liked) parent.html('<img src="/static/housing/img/like.png" class="card-small-image" alt=""/> ' +
+            '<button class="btn-primary btn-sm" onclick="like_property(this);">Not Like</button>');
+            else parent.html('<button class="btn-primary btn-sm" onclick="like_property(this);"> Like</button>')
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('error: ' + textStatus + ': ' + errorThrown);
@@ -116,10 +141,10 @@ function buildHouseList(api_data) {
 
     let house_listing = $("div.house-listing");
     house_listing.html("");
-    console.log(api_data);
+    // console.log(api_data);
     for (let i=0; i<api_data.results.length; i++) {
         let house = api_data.results[i];
-        console.log(house);
+        // console.log(house);
         let image_link = "";
         let profile_link = "";
         for (let j=0; j<house.links.length; j++) {
@@ -145,9 +170,9 @@ function buildHouseList(api_data) {
             + house.viewed_date + '</p>');
         else one_element = one_element.replace("%viewed%", '');
         if (house.liked === true) one_element = one_element.replace("%liked%",
-            '<p class="card-text mb-0"><img src="/static/housing/img/like.png" class="card-small-image" alt=""/>' +
+            '<p class="card-text mb-0"><img src="/static/housing/img/like.png" class="card-small-image" alt=""/> ' +
             '<button class="btn-primary btn-sm" onclick="like_property(this);">Not Like</button></p>');
-        else one_element = one_element.replace("%liked%", '<p class="card-text mb-0">' +
+        else one_element = one_element.replace("%liked%", '<p class="card-text mb-0"> ' +
             '<button class="btn-primary btn-sm" onclick="like_property(this);">Like</button></p>');
         house_listing.append(one_element);
     }
