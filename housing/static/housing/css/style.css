@@ -63,10 +63,6 @@
     height: 30px;
 }
 
-.small-text {
-    font-size: 12px;
-}
-
 .property-image {
     display: block;
     width: 300px;
@@ -81,4 +77,8 @@
 
 .house-listing {
     padding-top: 245px;
+}
+
+.small-width {
+    width: 90px;
 }

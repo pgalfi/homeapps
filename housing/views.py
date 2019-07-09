@@ -1,5 +1,6 @@
 import locale
 
+from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from rest_framework import viewsets
@@ -43,10 +44,10 @@ class HouseProspectFilter(BaseFilterBackend):
         room_filter = request.query_params.get("room_filter", "")
         start_rooms, end_rooms = get_start_end(room_filter)
         desc_text = request.query_params.get("desc_text", None)
-        # show_viewed = request.query_params.get("show_viewed", None)
-        # if show_viewed is not None: show_viewed = True
-        # show_liked = request.query_params.get("show_liked", None)
-        # if show_liked is not None: show_liked = True
+        show_viewed = request.query_params.get("show_viewed", None)
+        if show_viewed is not None: show_viewed = True
+        show_liked = request.query_params.get("show_liked", None)
+        if show_liked is not None: show_liked = True
 
         queryset = queryset.filter(is_available=True)
         if len(advertisers) > 0:
@@ -69,9 +70,9 @@ class HouseProspectFilter(BaseFilterBackend):
             queryset = queryset.filter(zip_location__gte=start_zip)
         if end_zip is not None:
             queryset = queryset.filter(zip_location__lte=end_zip)
-        # if show_viewed is None:
-        #     queryset = queryset.filter(Q(views__user=None)|~Q(views__user__id=request.user.id))
-        # if show_liked: queryset = queryset.filter(likes__user=request.user)
+        if show_viewed is None:
+            queryset = queryset.filter(Q(viewed=None)|~Q(viewed__id=request.user.id))
+        if show_liked: queryset = queryset.filter(liked__id=request.user.id)
         return queryset
 
 
