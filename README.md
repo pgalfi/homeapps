@@ -8,7 +8,7 @@ The food tracking API provides a REST API endpoint that allows retrieval of food
 
 Source of the data:
 
-U.S. Department of Agriculture, Agricultural Research Service. 20xx. USDA Branded Food Products Database. Nutrient Data Laboratory Home Page, http://ndb.nal.usda.gov
+U.S. Department of Agriculture, Agricultural Research Service. 2019. USDA Branded Food Products Database. Nutrient Data Laboratory Home Page, http://ndb.nal.usda.gov
 
 The API provides the following services:
 
