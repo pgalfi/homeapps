@@ -1,6 +1,5 @@
 import locale
 
-from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from rest_framework import viewsets
@@ -41,7 +40,7 @@ class HouseProspectFilter(BaseFilterBackend):
         start_price, end_price = get_start_end(price_filter)
         size_filter = request.query_params.get("size_filter", "")
         start_size, end_size = get_start_end(size_filter)
-        room_filter = request.query_params.get("room_filter", "")
+        room_filter = request.query_params.get("rooms_filter", "")
         start_rooms, end_rooms = get_start_end(room_filter)
         desc_text = request.query_params.get("desc_text", None)
         show_viewed = request.query_params.get("show_viewed", None)
@@ -70,9 +69,9 @@ class HouseProspectFilter(BaseFilterBackend):
             queryset = queryset.filter(zip_location__gte=start_zip)
         if end_zip is not None:
             queryset = queryset.filter(zip_location__lte=end_zip)
-        if show_viewed is None:
-            queryset = queryset.filter(Q(viewed=None)|~Q(viewed__id=request.user.id))
+        if show_viewed: queryset = queryset.exclude(viewed__id=request.user.id)
         if show_liked: queryset = queryset.filter(liked__id=request.user.id)
+        print(queryset.query)
         return queryset
 
 
