@@ -21,3 +21,18 @@ The API provides the following services:
 * create nutrition profiles that can be used to set daily nutrient targets 
 
 An automatically generated browsable API is available that can be used to discover all the API's functions.
+
+## Housing API and demo front end
+
+The Housing API provides a REST API endpoint allowing retrieval of advertised housing properties. It provides the following filtering:
+
+* location (based on postal code ranges)
+* advertised price
+* property size
+* number of rooms
+* key words in the description
+
+The API keeps track of user based "views" and "likes". A view is counted when a user clicks on a detailed profile information of a property (linked to external advertiser). A user based "like" list is maintained that can be controlled through "Like" and "Not Like" buttons. The API provides two simple actions for adding or removing properties from this list.
+
+The API's listing call can then also filter against the viewed or liked list as needed.
+
