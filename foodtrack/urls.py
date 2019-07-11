@@ -1,7 +1,8 @@
 from django.urls import path, include
+from graphene_django.views import GraphQLView
 from rest_framework.routers import DefaultRouter
 
-from foodtrack import views
+from foodtrack import views, gql_schema
 
 router = DefaultRouter()
 router.register('nutrients', views.NutrientViewSet)
@@ -21,6 +22,7 @@ router.register('foodusage', views.FoodUsageCounterViewSet)
 router.register('nutrientusage', views.NutrientUsageCounterViewSet)
 
 urlpatterns = [
+    path('graphql/', GraphQLView.as_view(graphiql=True, schema=gql_schema.schema)),
     path('', include(router.urls)),
 
 ]

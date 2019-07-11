@@ -22,6 +22,55 @@ The API provides the following services:
 
 An automatically generated browsable API is available that can be used to discover all the API's functions.
 
+### GraphQL implementation
+
+A GraphQL implementation is created at foodtrack/graphql URL using graphene and graphene-django. This allows lookups for individiual foods based on ID, or by searching for words in the food name and/or food categorization.
+
+Example queries:
+
+```gql
+query test_1 {
+	food(id: 169383) {
+    id
+    description
+    dataType
+    nutrients {
+      edges {
+        node {
+          nutrient {
+            name
+          }
+          amount
+        }
+      }
+    }
+  }
+}
+
+query test_2 {
+	foods(description: "pepper sweet yellow raw", dataType: "SR_LEGACY_FOOD") {
+    edges {
+      node {
+        id
+        description
+        nutrients {
+          edges {
+            node {
+              nutrient {
+                name
+              }
+              amount
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+No mutations are implemented at this time.
+
 ## Housing API and demo front end
 
 The Housing API provides a REST API endpoint allowing retrieval of advertised housing properties. It provides the following filtering:
