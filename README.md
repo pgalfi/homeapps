@@ -34,11 +34,12 @@ food(id: 169383) {
     id
     description
     dataType
-    nutrients {
+    nutrients(amount_Gt: 0) {
       edges {
         node {
           nutrient {
             name
+            unit
           }
           amount
         }
@@ -46,24 +47,121 @@ food(id: 169383) {
     }
   }
 }
+```
 
+Result:
+```json
+{
+  "data": {
+    "food": {
+      "id": "169383",
+      "description": "Peppers, sweet, yellow, raw",
+      "dataType": "SR_LEGACY_FOOD",
+      "nutrients": {
+        "edges": [
+          {
+            "node": {
+              "nutrient": {
+                "name": "Fiber, total dietary",
+                "unit": "G"
+              },
+              "amount": 0.9
+            }
+          },
+          {
+            "node": {
+              "nutrient": {
+                "name": "Vitamin A, IU",
+                "unit": "IU"
+              },
+              "amount": 200
+            }
+          },
+          {
+            "node": {
+              "nutrient": {
+                "name": "Energy",
+                "unit": "kJ"
+              },
+              "amount": 112
+            }
+          },
+          ...
+        ]
+      }
+    }
+  }
+}
+```
+
+```gql
 query test_2 {
 foods(description: "pepper sweet yellow raw", dataType: "SR_LEGACY_FOOD") {
     edges {
       node {
         id
         description
-        nutrients {
+        nutrients(amount_Gt: 0) {
           edges {
             node {
               nutrient {
                 name
+                unit
               }
               amount
             }
           }
         }
       }
+    }
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "foods": {
+      "edges": [
+        {
+          "node": {
+            "id": "169383",
+            "description": "Peppers, sweet, yellow, raw",
+            "nutrients": {
+              "edges": [
+                {
+                  "node": {
+                    "nutrient": {
+                      "name": "Fiber, total dietary",
+                      "unit": "G"
+                    },
+                    "amount": 0.9
+                  }
+                },
+                {
+                  "node": {
+                    "nutrient": {
+                      "name": "Vitamin A, IU",
+                      "unit": "IU"
+                    },
+                    "amount": 200
+                  }
+                },
+                {
+                  "node": {
+                    "nutrient": {
+                      "name": "Energy",
+                      "unit": "kJ"
+                    },
+                    "amount": 112
+                  }
+                },
+                ...
+              ]
+            }
+          }
+        }
+      ]
     }
   }
 }
