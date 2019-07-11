@@ -30,7 +30,7 @@ Example queries:
 
 ```gql
 query test_1 {
-	food(id: 169383) {
+food(id: 169383) {
     id
     description
     dataType
@@ -48,7 +48,7 @@ query test_1 {
 }
 
 query test_2 {
-	foods(description: "pepper sweet yellow raw", dataType: "SR_LEGACY_FOOD") {
+foods(description: "pepper sweet yellow raw", dataType: "SR_LEGACY_FOOD") {
     edges {
       node {
         id
