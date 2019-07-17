@@ -237,9 +237,13 @@ class UserNutrition(models.Model):
 # custom recipe based on existing foods
 class Recipe(models.Model):
     name = models.CharField(max_length=2048)
+    image = models.ImageField(default=None, null=True)
+    description = models.CharField(max_length=2048, default="")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     serving_amount = models.FloatField()
+    prep_time = models.FloatField(default=0)
     total_gram = models.FloatField(default=None, null=True)
+    directions = models.TextField(default="")
 
     def __str__(self):
         return self.name

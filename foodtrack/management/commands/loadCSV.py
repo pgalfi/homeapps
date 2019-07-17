@@ -143,7 +143,7 @@ class FoodPortionLoader(DataLoader):
     def build(self, row):
         print(row)
         id, fdc_id, seq_num, amount, measure_unit_id, portion_description, modifier, gram_weight, data_points, footnote, min_year_acquired = row
-        if len(amount)==0: amount = "0"
+        if len(amount) == 0: amount = "0"
         portion = FoodPortion(food_id=fdc_id, amount=amount, unit_id=measure_unit_id, description=portion_description,
                               modifier=modifier, gram_weight=gram_weight)
         portion.id = id
@@ -187,11 +187,10 @@ def load_from_csv(csvpath, loader):
 
 def addMetricMeasures() -> None:
     kg = MeasureUnit.objects.filter(name="kg")
-    if kg.count()==0:
+    if kg.count() == 0:
         kg = MeasureUnit(name="kg")
-        kg.id =99999
+        kg.id = 99999
         kg.save()
-
 
 
 class Command(BaseCommand):
