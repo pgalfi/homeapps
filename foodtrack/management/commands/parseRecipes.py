@@ -37,7 +37,15 @@ class Ingredient:
     amount = None
     unit = None
 
-    def __init__(self, line):
+    def __init__(self, line=None,food=None, amount=None, unit=None):
+        if line is not None:
+            self.construct_from_text(line)
+        else:
+            self.food = food
+            self.amount = amount
+            self.unit = unit
+
+    def construct_from_text(self, line):
         ingredient = line.strip().split("-", maxsplit=1)
         self.food = ingredient[0].strip()
         if len(ingredient) > 1:
@@ -59,20 +67,23 @@ class PrepTime:
     time = None  # in minutes
     unparsed = ""
 
-    def __init__(self, line):
-        self.unparsed = line.strip()
-        if "&" in self.unparsed or "and" in self.unparsed.lower():
-            parts = re.split("and|&", self.unparsed, maxsplit=1, flags=re.IGNORECASE)
-            self.time = PrepTime(parts[0]).get() + PrepTime("&".join(parts[1:])).get()
-            return
-        match = get_amount(re.sub("about", "", self.unparsed, flags=re.IGNORECASE).strip())
-        if match is not None:
-            value = evaluate_amount(match.group(1))
-            unit = self.unparsed.replace(match.group(), "").lower()
-            if "min" in unit:
-                self.time = value
-            elif "hour" in unit:
-                self.time = value * 60
+    def __init__(self, line=None, time=None):
+        if line is not None:
+            self.unparsed = line.strip()
+            if "&" in self.unparsed or "and" in self.unparsed.lower():
+                parts = re.split("and|&", self.unparsed, maxsplit=1, flags=re.IGNORECASE)
+                self.time = PrepTime(parts[0]).get() + PrepTime("&".join(parts[1:])).get()
+                return
+            match = get_amount(re.sub("about", "", self.unparsed, flags=re.IGNORECASE).strip())
+            if match is not None:
+                value = evaluate_amount(match.group(1))
+                unit = self.unparsed.replace(match.group(), "").lower()
+                if "min" in unit:
+                    self.time = value
+                elif "hour" in unit:
+                    self.time = value * 60
+        else:
+            self.time = time
 
     def get(self):
         if self.time is None:
@@ -84,11 +95,14 @@ class ServingSize:
     amount = None  # number of servings
     unparsed = ""
 
-    def __init__(self, line):
-        self.unparsed = line.strip()
-        match = get_amount(self.unparsed.strip())
-        if match is not None:
-            self.amount = evaluate_amount(match.group(1))
+    def __init__(self, line=None, amount=None):
+        if line is not None:
+            self.unparsed = line.strip()
+            match = get_amount(self.unparsed.strip())
+            if match is not None:
+                self.amount = evaluate_amount(match.group(1))
+        else:
+            self.amount = amount
 
     def get(self):
         return self.amount if self.amount is not None else self.unparsed
@@ -106,6 +120,9 @@ class ParsedRecipe:
         return " {\r\n" + self.name + "\r\n(" + self.desc + ")\r\nTIME: " + str(self.prep_time) + "\r\nINGREDIENTS:\r\n" \
                + str(self.ingredients) + "\r\nDIRECTIONS:\r\n" + self.directions + "}"
 
+    def finalize(self):
+        self.desc = self.desc.strip()
+
 
 class BuildSwitch:
     ingredients = False
@@ -120,7 +137,7 @@ class BuildSwitch:
         self.start = True
 
 
-class RecipeParser():
+class RecipeParser:
 
     def __init__(self, txt_path):
         self.path = txt_path
@@ -130,7 +147,7 @@ class RecipeParser():
         recipes = []
         switch = BuildSwitch()
         empty_line_count = 0
-        with open(self.path) as txt_file:
+        with open(self.path, encoding="utf-8") as txt_file:
             line = None
             while line != "":
                 line = txt_file.readline()
@@ -138,6 +155,7 @@ class RecipeParser():
                 if len(line.strip()) == 0:
                     empty_line_count += 1
                     if empty_line_count > 2 and switch.directions:
+                        build_recipe.finalize()
                         recipes.append(build_recipe)
                         build_recipe = ParsedRecipe()
                         switch.reset()
@@ -149,8 +167,6 @@ class RecipeParser():
                     switch.start = False
                     switch.description = True
                     continue
-                if switch.description:
-                    build_recipe.desc += line.strip() + " "
                 if line.startswith("TOTAL TIME:"):
                     switch.description = False
                     build_recipe.prep_time = PrepTime(line.replace("TOTAL TIME:", "").strip()).get()
@@ -158,6 +174,7 @@ class RecipeParser():
                     switch.description = False
                     build_recipe.serving_size = ServingSize(line.replace("SERVING SIZE:", "").strip()).get()
                 if line.startswith("INGREDIENTS:"):
+                    switch.description = False
                     switch.ingredients = True
                     continue
                 if line.startswith("DIRECTIONS:"):
@@ -165,18 +182,18 @@ class RecipeParser():
                     switch.directions = True
                     continue
 
+                if switch.description:
+                    build_recipe.desc += line.strip() + " "
                 if switch.ingredients:
-                    ingredient = line.strip().split("-")
-                    one_ingredient = {"food": ingredient[0].strip(), "amount": ""}
-                    if len(ingredient) > 1:
-                        one_ingredient["amount"] = ingredient[1].strip()
-                    build_recipe.ingredients.append(one_ingredient)
+                    ingredient = Ingredient(line)
+                    build_recipe.ingredients.append(ingredient)
                 if switch.directions:
                     if re.match("^[0-9]+?\\.\\s", line):
                         build_recipe.directions += "\r\n" + line.strip() + " "
                     else:
                         build_recipe.directions += line.strip() + " "
             if switch.directions:
+                build_recipe.finalize()
                 recipes.append(build_recipe)
         return recipes
 

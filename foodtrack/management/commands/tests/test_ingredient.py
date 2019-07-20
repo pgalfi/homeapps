@@ -36,3 +36,11 @@ class TestIngredient(TestCase):
         self.assertEqual(data["amount"], 1)
         self.assertEqual(data["unit"], "cup - grated")
 
+    def test_get5(self):
+        line = "Avocado - ½ medium avocado "
+        ingredient = Ingredient(line)
+        data = ingredient.get()
+        self.assertEqual(data["food"], "Avocado")
+        self.assertEqual(data["amount"], 0.5)
+        self.assertEqual(data["unit"], "medium avocado")
+
