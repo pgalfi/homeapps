@@ -8,5 +8,5 @@ router.register("houses", views.HouseProspectViewSet)
 
 urlpatterns = [
     path('', views.IndexView.as_view()),
-    path('api/', include(router.urls)),
+    path('api/<str:version>/', include(router.urls)),
 ]
