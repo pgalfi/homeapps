@@ -32,8 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'graphene_django',
-    'dal',
-    'dal_select2',
+    # 'dal',
+    # 'dal_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_word_filter',
+    # 'rest_framework_word_filter',
     'foodtrack.apps.FoodtrackConfig',
     'housing.apps.HousingConfig'
 ]
