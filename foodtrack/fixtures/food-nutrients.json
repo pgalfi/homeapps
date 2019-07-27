@@ -1,0 +1,1732 @@
+[
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525285,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1186,
+      "amount": 0.0,
+      "derivation": 68
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525286,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1099,
+      "amount": 2.3,
+      "derivation": 1
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525287,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1110,
+      "amount": 0.0,
+      "derivation": 68
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525288,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1277,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525289,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1279,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525290,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1180,
+      "amount": 6.7,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525291,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1198,
+      "amount": 0.1,
+      "derivation": 1
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525292,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1212,
+      "amount": 0.018,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525293,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1259,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525294,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1260,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525295,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1262,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525296,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1271,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525297,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1276,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525298,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1213,
+      "amount": 0.025,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525299,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1214,
+      "amount": 0.027,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525300,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1216,
+      "amount": 0.009,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525301,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1219,
+      "amount": 0.018,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525302,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1220,
+      "amount": 0.021,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525303,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1221,
+      "amount": 0.014,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525304,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1223,
+      "amount": 0.135,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525305,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1227,
+      "amount": 0.026,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525306,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1210,
+      "amount": 0.006,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525307,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1211,
+      "amount": 0.027,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525308,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1215,
+      "amount": 0.006,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525309,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1218,
+      "amount": 0.014,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525310,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1222,
+      "amount": 0.027,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525311,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1224,
+      "amount": 0.431,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525312,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1225,
+      "amount": 0.019,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525313,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1226,
+      "amount": 0.015,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525314,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1261,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525315,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1263,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525316,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1264,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525317,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1272,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525318,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1278,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525319,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1280,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525320,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1257,
+      "amount": 0.0,
+      "derivation": 68
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525321,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1018,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525322,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1105,
+      "amount": 0.0,
+      "derivation": 68
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525323,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1122,
+      "amount": 2573.0,
+      "derivation": 1
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525324,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1162,
+      "amount": 13.7,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525325,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1051,
+      "amount": 94.52,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525326,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1283,
+      "amount": 7.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525327,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1253,
+      "amount": 0.0,
+      "derivation": 68
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525328,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1178,
+      "amount": 0.0,
+      "derivation": 68
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525329,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1292,
+      "amount": 0.031,
+      "derivation": 49
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525330,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1293,
+      "amount": 0.083,
+      "derivation": 49
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525331,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1190,
+      "amount": 15.0,
+      "derivation": 49
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525332,
+    "fields": {
+      "food": 170457,
+      "nutrient": 2000,
+      "amount": 2.63,
+      "derivation": 49
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525333,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1005,
+      "amount": 3.89,
+      "derivation": 49
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525334,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1008,
+      "amount": 18.0,
+      "derivation": 49
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525335,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1265,
+      "amount": 0.02,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525336,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1266,
+      "amount": 0.008,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525337,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1268,
+      "amount": 0.03,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525338,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1269,
+      "amount": 0.08,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525339,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1270,
+      "amount": 0.003,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525340,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1104,
+      "amount": 833.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525341,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1106,
+      "amount": 42.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525342,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1062,
+      "amount": 74.0,
+      "derivation": 49
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525343,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1187,
+      "amount": 15.0,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525344,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1258,
+      "amount": 0.028,
+      "derivation": 49
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525345,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1275,
+      "amount": 0.001,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525346,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1217,
+      "amount": 0.027,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525347,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1087,
+      "amount": 10.0,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525348,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1092,
+      "amount": 237.0,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525349,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1095,
+      "amount": 0.17,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525350,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1103,
+      "amount": 0.0,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525351,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1109,
+      "amount": 0.54,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525352,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1123,
+      "amount": 123.0,
+      "derivation": 1
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525353,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1125,
+      "amount": 0.01,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525354,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1126,
+      "amount": 0.12,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525355,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1128,
+      "amount": 0.01,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525356,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1129,
+      "amount": 0.0,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525357,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1167,
+      "amount": 0.594,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525358,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1170,
+      "amount": 0.089,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525359,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1175,
+      "amount": 0.08,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525360,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1010,
+      "amount": 0.0,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525361,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1011,
+      "amount": 1.25,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525362,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1014,
+      "amount": 0.0,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525363,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1057,
+      "amount": 0.0,
+      "derivation": 68
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525364,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1058,
+      "amount": 0.0,
+      "derivation": 68
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525365,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1004,
+      "amount": 0.2,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525366,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1120,
+      "amount": 0.0,
+      "derivation": 1
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525367,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1185,
+      "amount": 7.9,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525368,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1075,
+      "amount": 0.0,
+      "derivation": 1
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525369,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1079,
+      "amount": 1.2,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525370,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1089,
+      "amount": 0.27,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525371,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1090,
+      "amount": 11.0,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525372,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1091,
+      "amount": 24.0,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525373,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1093,
+      "amount": 5.0,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525374,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1098,
+      "amount": 0.059,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525375,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1101,
+      "amount": 0.114,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525376,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1003,
+      "amount": 0.88,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525377,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1007,
+      "amount": 0.5,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525378,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1009,
+      "amount": 0.0,
+      "derivation": 1
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525379,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1012,
+      "amount": 1.37,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525380,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1013,
+      "amount": 0.0,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525381,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1107,
+      "amount": 449.0,
+      "derivation": 1
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525382,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1108,
+      "amount": 101.0,
+      "derivation": 1
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525383,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1127,
+      "amount": 0.0,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525384,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1130,
+      "amount": 0.0,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525385,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1131,
+      "amount": 0.0,
+      "derivation": 43
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525386,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1184,
+      "amount": 0.0,
+      "derivation": 1
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525387,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1165,
+      "amount": 0.037,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525388,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1166,
+      "amount": 0.019,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525389,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1177,
+      "amount": 15.0,
+      "derivation": 42
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525390,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1242,
+      "amount": 0.0,
+      "derivation": 68
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525391,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1246,
+      "amount": 0.0,
+      "derivation": 68
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 1525392,
+    "fields": {
+      "food": 170457,
+      "nutrient": 1114,
+      "amount": 0.0,
+      "derivation": 68
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795427,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1003,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795428,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1004,
+      "amount": 100.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795429,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1005,
+      "amount": 0.1,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795430,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1008,
+      "amount": 884.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795431,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1018,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795432,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1051,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795433,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1057,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795434,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1058,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795435,
+    "fields": {
+      "food": 343873,
+      "nutrient": 2000,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795436,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1079,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795437,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1087,
+      "amount": 1.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795438,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1089,
+      "amount": 0.56,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795439,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1090,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795440,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1091,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795441,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1092,
+      "amount": 1.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795442,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1093,
+      "amount": 2.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795443,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1095,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795444,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1098,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795445,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1103,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795446,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1105,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795447,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1106,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795448,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1107,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795449,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1108,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795450,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1109,
+      "amount": 14.35,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795451,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1114,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795452,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1120,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795453,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1122,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795454,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1123,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795455,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1162,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795456,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1165,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795457,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1166,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795458,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1167,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795459,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1175,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795460,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1177,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795461,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1178,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795462,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1180,
+      "amount": 0.3,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795463,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1185,
+      "amount": 60.2,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795464,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1186,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795465,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1187,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795466,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1190,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795467,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1242,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795468,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1246,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795469,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1253,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795470,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1258,
+      "amount": 13.808,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795471,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1259,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795472,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1260,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795473,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1261,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795474,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1262,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795475,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1263,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795476,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1264,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795477,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1265,
+      "amount": 11.29,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795478,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1266,
+      "amount": 1.953,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795479,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1268,
+      "amount": 71.269,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795480,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1269,
+      "amount": 9.762,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795481,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1270,
+      "amount": 0.761,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795482,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1271,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795483,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1272,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795484,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1275,
+      "amount": 1.255,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795485,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1276,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795486,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1277,
+      "amount": 0.311,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795487,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1278,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795488,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1279,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795489,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1280,
+      "amount": 0.0,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795490,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1292,
+      "amount": 72.961,
+      "derivation": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrient",
+    "pk": 2795491,
+    "fields": {
+      "food": 343873,
+      "nutrient": 1293,
+      "amount": 10.523,
+      "derivation": null
+    }
+  }
+]

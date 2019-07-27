@@ -1,0 +1,22 @@
+[
+  {
+    "model": "foodtrack.food",
+    "pk": 170457,
+    "fields": {
+      "data_type": "sr_legacy_food",
+      "description": "Tomatoes, red, ripe, raw, year round average",
+      "category": 11,
+      "pub_date": "2019-04-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "foodtrack.food",
+    "pk": 343873,
+    "fields": {
+      "data_type": "survey_fndds_food",
+      "description": "Olive oil",
+      "category": null,
+      "pub_date": "2019-04-01T00:00:00Z"
+    }
+  }
+]

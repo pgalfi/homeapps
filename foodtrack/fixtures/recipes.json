@@ -1,0 +1,35 @@
+[
+  {
+    "model": "foodtrack.recipe",
+    "pk": 1,
+    "fields": {
+      "name": "Tomatoes a la Olive",
+      "description": "Marinated tomato slices in olive oil",
+      "owner": 1,
+      "serving_amount": 4,
+      "prep_time": 10,
+      "total_gram": 400,
+      "directions": "Slice tomatoes to equal slices, then dip in olive oil. Add salt."
+    }
+  },
+  {
+    "model": "foodtrack.recipecomponent",
+    "pk": 1,
+    "fields": {
+      "recipe": 1,
+      "food": 170457,
+      "amount": 4,
+      "portion": 86686
+    }
+  },
+  {
+    "model": "foodtrack.recipecomponent",
+    "pk": 2,
+    "fields": {
+      "recipe": 1,
+      "food": 343873,
+      "amount": 8,
+      "portion": 158397
+    }
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "model": "foodtrack.foodnutrientderivation",
+    "pk": 1,
+    "fields": {
+      "code": "A",
+      "description": "Analytical",
+      "source": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrientderivation",
+    "pk": 68,
+    "fields": {
+      "code": "Z",
+      "description": "Assumed zero (Insignificant amount or not naturally occurring in a food, such as fiber in meat)",
+      "source": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrientderivation",
+    "pk": 42,
+    "fields": {
+      "code": "JA",
+      "description": "Aggregated data involving combinations of data with only source codes 1 and 12 and/or 13",
+      "source": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrientderivation",
+    "pk": 43,
+    "fields": {
+      "code": "JO",
+      "description": "Aggregated data involving combinations of data with different source codes when at least one code is not 1, 6, 12, or 13",
+      "source": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrientderivation",
+    "pk": 49,
+    "fields": {
+      "code": "NC",
+      "description": "Calculated",
+      "source": null
+    }
+  },
+  {
+    "model": "foodtrack.foodnutrientderivation",
+    "pk": 75,
+    "fields": {
+      "code": "LCCD",
+      "description": "Calculated from a daily value percentage per serving size measure",
+      "source": null
+    }
+  }
+]

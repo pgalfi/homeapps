@@ -1,0 +1,10 @@
+[
+  {
+    "model": "foodtrack.measureunit",
+    "pk": 9999,
+    "fields": {
+      "name": "undetermined",
+      "kind": 30
+    }
+  }
+]

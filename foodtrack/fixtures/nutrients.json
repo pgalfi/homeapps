@@ -1,0 +1,1818 @@
+[
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1002,
+    "fields": {
+      "name": "Nitrogen",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1003,
+    "fields": {
+      "name": "Protein",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1004,
+    "fields": {
+      "name": "Total lipid (fat)",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1005,
+    "fields": {
+      "name": "Carbohydrate, by difference",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1007,
+    "fields": {
+      "name": "Ash",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1008,
+    "fields": {
+      "name": "Energy",
+      "unit": "KCAL"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1009,
+    "fields": {
+      "name": "Starch",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1010,
+    "fields": {
+      "name": "Sucrose",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1011,
+    "fields": {
+      "name": "Glucose (dextrose)",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1012,
+    "fields": {
+      "name": "Fructose",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1013,
+    "fields": {
+      "name": "Lactose",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1014,
+    "fields": {
+      "name": "Maltose",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1018,
+    "fields": {
+      "name": "Alcohol, ethyl",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1024,
+    "fields": {
+      "name": "Specific Gravity",
+      "unit": "SP_GR"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1026,
+    "fields": {
+      "name": "Acetic acid",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1038,
+    "fields": {
+      "name": "Lactic acid",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1050,
+    "fields": {
+      "name": "Carbohydrate, by summation",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1051,
+    "fields": {
+      "name": "Water",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1056,
+    "fields": {
+      "name": "Sorbitol",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1057,
+    "fields": {
+      "name": "Caffeine",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1058,
+    "fields": {
+      "name": "Theobromine",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1062,
+    "fields": {
+      "name": "Energy",
+      "unit": "kJ"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1063,
+    "fields": {
+      "name": "Sugars, Total NLEA",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1072,
+    "fields": {
+      "name": "Carbohydrate, other",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1075,
+    "fields": {
+      "name": "Galactose",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1078,
+    "fields": {
+      "name": "Xylitol",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1079,
+    "fields": {
+      "name": "Fiber, total dietary",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1081,
+    "fields": {
+      "name": "Ribose",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1082,
+    "fields": {
+      "name": "Fiber, soluble",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1084,
+    "fields": {
+      "name": "Fiber, insoluble",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1085,
+    "fields": {
+      "name": "Total fat (NLEA)",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1086,
+    "fields": {
+      "name": "Total sugar alcohols",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1087,
+    "fields": {
+      "name": "Calcium, Ca",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1088,
+    "fields": {
+      "name": "Chlorine, Cl",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1089,
+    "fields": {
+      "name": "Iron, Fe",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1090,
+    "fields": {
+      "name": "Magnesium, Mg",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1091,
+    "fields": {
+      "name": "Phosphorus, P",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1092,
+    "fields": {
+      "name": "Potassium, K",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1093,
+    "fields": {
+      "name": "Sodium, Na",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1094,
+    "fields": {
+      "name": "Sulfur, S",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1095,
+    "fields": {
+      "name": "Zinc, Zn",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1096,
+    "fields": {
+      "name": "Chromium, Cr",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1097,
+    "fields": {
+      "name": "Cobalt, Co",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1098,
+    "fields": {
+      "name": "Copper, Cu",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1099,
+    "fields": {
+      "name": "Fluoride, F",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1100,
+    "fields": {
+      "name": "Iodine, I",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1101,
+    "fields": {
+      "name": "Manganese, Mn",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1102,
+    "fields": {
+      "name": "Molybdenum, Mo",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1103,
+    "fields": {
+      "name": "Selenium, Se",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1104,
+    "fields": {
+      "name": "Vitamin A, IU",
+      "unit": "IU"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1105,
+    "fields": {
+      "name": "Retinol",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1106,
+    "fields": {
+      "name": "Vitamin A, RAE",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1107,
+    "fields": {
+      "name": "Carotene, beta",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1108,
+    "fields": {
+      "name": "Carotene, alpha",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1109,
+    "fields": {
+      "name": "Vitamin E (alpha-tocopherol)",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1110,
+    "fields": {
+      "name": "Vitamin D",
+      "unit": "IU"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1111,
+    "fields": {
+      "name": "Vitamin D2 (ergocalciferol)",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1112,
+    "fields": {
+      "name": "Vitamin D3 (cholecalciferol)",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1113,
+    "fields": {
+      "name": "25-hydroxycholecalciferol",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1114,
+    "fields": {
+      "name": "Vitamin D (D2 + D3)",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1116,
+    "fields": {
+      "name": "Phytoene",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1117,
+    "fields": {
+      "name": "Phytofluene",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1119,
+    "fields": {
+      "name": "Zeaxanthin",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1120,
+    "fields": {
+      "name": "Cryptoxanthin, beta",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1121,
+    "fields": {
+      "name": "Lutein",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1122,
+    "fields": {
+      "name": "Lycopene",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1123,
+    "fields": {
+      "name": "Lutein + zeaxanthin",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1124,
+    "fields": {
+      "name": "Vitamin E (label entry primarily)",
+      "unit": "IU"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1125,
+    "fields": {
+      "name": "Tocopherol, beta",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1126,
+    "fields": {
+      "name": "Tocopherol, gamma",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1127,
+    "fields": {
+      "name": "Tocopherol, delta",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1128,
+    "fields": {
+      "name": "Tocotrienol, alpha",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1129,
+    "fields": {
+      "name": "Tocotrienol, beta",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1130,
+    "fields": {
+      "name": "Tocotrienol, gamma",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1131,
+    "fields": {
+      "name": "Tocotrienol, delta",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1137,
+    "fields": {
+      "name": "Boron, B",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1146,
+    "fields": {
+      "name": "Nickel, Ni",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1158,
+    "fields": {
+      "name": "Vitamin E",
+      "unit": "MG_ATE"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1159,
+    "fields": {
+      "name": "cis-beta-Carotene",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1160,
+    "fields": {
+      "name": "cis-Lycopene",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1161,
+    "fields": {
+      "name": "cis-Lutein/Zeaxanthin",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1162,
+    "fields": {
+      "name": "Vitamin C, total ascorbic acid",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1165,
+    "fields": {
+      "name": "Thiamin",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1166,
+    "fields": {
+      "name": "Riboflavin",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1167,
+    "fields": {
+      "name": "Niacin",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1170,
+    "fields": {
+      "name": "Pantothenic acid",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1175,
+    "fields": {
+      "name": "Vitamin B-6",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1176,
+    "fields": {
+      "name": "Biotin",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1177,
+    "fields": {
+      "name": "Folate, total",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1178,
+    "fields": {
+      "name": "Vitamin B-12",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1180,
+    "fields": {
+      "name": "Choline, total",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1181,
+    "fields": {
+      "name": "Inositol",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1183,
+    "fields": {
+      "name": "Menaquinone-4",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1184,
+    "fields": {
+      "name": "Dihydrophylloquinone",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1185,
+    "fields": {
+      "name": "Vitamin K (phylloquinone)",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1186,
+    "fields": {
+      "name": "Folic acid",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1187,
+    "fields": {
+      "name": "Folate, food",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1188,
+    "fields": {
+      "name": "5-methyl tetrahydrofolate (5-MTHF)",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1190,
+    "fields": {
+      "name": "Folate, DFE",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1191,
+    "fields": {
+      "name": "10-Formyl folic acid (10HCOFA)",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1192,
+    "fields": {
+      "name": "5-Formyltetrahydrofolic acid (5-HCOH4",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1194,
+    "fields": {
+      "name": "Choline, free",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1195,
+    "fields": {
+      "name": "Choline, from phosphocholine",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1196,
+    "fields": {
+      "name": "Choline, from phosphotidyl choline",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1197,
+    "fields": {
+      "name": "Choline, from glycerophosphocholine",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1198,
+    "fields": {
+      "name": "Betaine",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1199,
+    "fields": {
+      "name": "Choline, from sphingomyelin",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1210,
+    "fields": {
+      "name": "Tryptophan",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1211,
+    "fields": {
+      "name": "Threonine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1212,
+    "fields": {
+      "name": "Isoleucine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1213,
+    "fields": {
+      "name": "Leucine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1214,
+    "fields": {
+      "name": "Lysine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1215,
+    "fields": {
+      "name": "Methionine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1216,
+    "fields": {
+      "name": "Cystine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1217,
+    "fields": {
+      "name": "Phenylalanine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1218,
+    "fields": {
+      "name": "Tyrosine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1219,
+    "fields": {
+      "name": "Valine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1220,
+    "fields": {
+      "name": "Arginine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1221,
+    "fields": {
+      "name": "Histidine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1222,
+    "fields": {
+      "name": "Alanine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1223,
+    "fields": {
+      "name": "Aspartic acid",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1224,
+    "fields": {
+      "name": "Glutamic acid",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1225,
+    "fields": {
+      "name": "Glycine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1226,
+    "fields": {
+      "name": "Proline",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1227,
+    "fields": {
+      "name": "Serine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1228,
+    "fields": {
+      "name": "Hydroxyproline",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1232,
+    "fields": {
+      "name": "Cysteine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1233,
+    "fields": {
+      "name": "Glutamine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1234,
+    "fields": {
+      "name": "Taurine",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1235,
+    "fields": {
+      "name": "Sugars, added",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1242,
+    "fields": {
+      "name": "Vitamin E, added",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1246,
+    "fields": {
+      "name": "Vitamin B-12, added",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1253,
+    "fields": {
+      "name": "Cholesterol",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1257,
+    "fields": {
+      "name": "Fatty acids, total trans",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1258,
+    "fields": {
+      "name": "Fatty acids, total saturated",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1259,
+    "fields": {
+      "name": "4:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1260,
+    "fields": {
+      "name": "6:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1261,
+    "fields": {
+      "name": "8:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1262,
+    "fields": {
+      "name": "10:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1263,
+    "fields": {
+      "name": "12:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1264,
+    "fields": {
+      "name": "14:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1265,
+    "fields": {
+      "name": "16:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1266,
+    "fields": {
+      "name": "18:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1267,
+    "fields": {
+      "name": "20:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1268,
+    "fields": {
+      "name": "18:1",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1269,
+    "fields": {
+      "name": "18:2",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1270,
+    "fields": {
+      "name": "18:3",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1271,
+    "fields": {
+      "name": "20:4",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1272,
+    "fields": {
+      "name": "22:6 n-3 (DHA)",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1273,
+    "fields": {
+      "name": "22:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1274,
+    "fields": {
+      "name": "14:1",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1275,
+    "fields": {
+      "name": "16:1",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1276,
+    "fields": {
+      "name": "18:4",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1277,
+    "fields": {
+      "name": "20:1",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1278,
+    "fields": {
+      "name": "20:5 n-3 (EPA)",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1279,
+    "fields": {
+      "name": "22:1",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1280,
+    "fields": {
+      "name": "22:5 n-3 (DPA)",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1281,
+    "fields": {
+      "name": "14:1 t",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1283,
+    "fields": {
+      "name": "Phytosterols",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1285,
+    "fields": {
+      "name": "Stigmasterol",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1286,
+    "fields": {
+      "name": "Campesterol",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1288,
+    "fields": {
+      "name": "Beta-sitosterol",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1292,
+    "fields": {
+      "name": "Fatty acids, total monounsaturated",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1293,
+    "fields": {
+      "name": "Fatty acids, total polyunsaturated",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1299,
+    "fields": {
+      "name": "15:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1300,
+    "fields": {
+      "name": "17:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1301,
+    "fields": {
+      "name": "24:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1303,
+    "fields": {
+      "name": "16:1 t",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1304,
+    "fields": {
+      "name": "18:1 t",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1305,
+    "fields": {
+      "name": "22:1 t",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1306,
+    "fields": {
+      "name": "18:2 t not further defined",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1307,
+    "fields": {
+      "name": "18:2 i",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1310,
+    "fields": {
+      "name": "18:2 t,t",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1311,
+    "fields": {
+      "name": "18:2 CLAs",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1312,
+    "fields": {
+      "name": "24:1 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1313,
+    "fields": {
+      "name": "20:2 n-6 c,c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1314,
+    "fields": {
+      "name": "16:1 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1315,
+    "fields": {
+      "name": "18:1 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1316,
+    "fields": {
+      "name": "18:2 n-6 c,c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1317,
+    "fields": {
+      "name": "22:1 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1321,
+    "fields": {
+      "name": "18:3 n-6 c,c,c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1323,
+    "fields": {
+      "name": "17:1",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1325,
+    "fields": {
+      "name": "20:3",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1329,
+    "fields": {
+      "name": "Fatty acids, total trans-monoenoic",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1330,
+    "fields": {
+      "name": "Fatty acids, total trans-dienoic",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1331,
+    "fields": {
+      "name": "Fatty acids, total trans-polyenoic",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1332,
+    "fields": {
+      "name": "13:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1333,
+    "fields": {
+      "name": "15:1",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1334,
+    "fields": {
+      "name": "22:2",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1335,
+    "fields": {
+      "name": "11:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1368,
+    "fields": {
+      "name": "Epigallocatechin-3-gallate",
+      "unit": "MG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1403,
+    "fields": {
+      "name": "Inulin",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1404,
+    "fields": {
+      "name": "18:3 n-3 c,c,c (ALA)",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1405,
+    "fields": {
+      "name": "20:3 n-3",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1406,
+    "fields": {
+      "name": "20:3 n-6",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1408,
+    "fields": {
+      "name": "20:4 n-6",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1409,
+    "fields": {
+      "name": "18:3i",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1410,
+    "fields": {
+      "name": "21:5",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1411,
+    "fields": {
+      "name": "22:4",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1412,
+    "fields": {
+      "name": "18:1-11 t (18:1t n-7)",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 1414,
+    "fields": {
+      "name": "20:3 n-9",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2000,
+    "fields": {
+      "name": "Sugars, total including NLEA",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2003,
+    "fields": {
+      "name": "5:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2004,
+    "fields": {
+      "name": "7:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2005,
+    "fields": {
+      "name": "9:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2006,
+    "fields": {
+      "name": "21:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2007,
+    "fields": {
+      "name": "23:0",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2008,
+    "fields": {
+      "name": "12:1",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2009,
+    "fields": {
+      "name": "14:1 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2010,
+    "fields": {
+      "name": "17:1 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2012,
+    "fields": {
+      "name": "20:1 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2013,
+    "fields": {
+      "name": "20:1 t",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2014,
+    "fields": {
+      "name": "22:1 n-9",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2015,
+    "fields": {
+      "name": "22:1 n-11",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2016,
+    "fields": {
+      "name": "18:2 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2018,
+    "fields": {
+      "name": "18:3 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2019,
+    "fields": {
+      "name": "18:3 t",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2020,
+    "fields": {
+      "name": "20:3 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2021,
+    "fields": {
+      "name": "22:3",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2022,
+    "fields": {
+      "name": "20:4 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2023,
+    "fields": {
+      "name": "20:5 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2024,
+    "fields": {
+      "name": "22:5 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2025,
+    "fields": {
+      "name": "22:6 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2026,
+    "fields": {
+      "name": "20:2 c",
+      "unit": "G"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2028,
+    "fields": {
+      "name": "trans-beta-Carotene",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2029,
+    "fields": {
+      "name": "trans-Lycopene",
+      "unit": "UG"
+    }
+  },
+  {
+    "model": "foodtrack.nutrient",
+    "pk": 2032,
+    "fields": {
+      "name": "Cryptoxanthin, alpha",
+      "unit": "UG"
+    }
+  }
+]

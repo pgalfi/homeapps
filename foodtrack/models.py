@@ -161,7 +161,7 @@ class FoodLogEntryNutrient(models.Model):
             if log_entry.portion.id == 1:
                 gr_ratio = log_entry.amount / 100
             else:
-                gr_ratio = log_entry.portion.gram_weight / 100
+                gr_ratio = (log_entry.portion.gram_weight * log_entry.amount) / 100
         else:
             food_nutrient_set = list(RecipeComputedNutrient.objects.filter(recipe=log_entry.alt_food, ))
             # Take into account "serving" portion for the recipe foods, it won't be in gram
@@ -179,7 +179,7 @@ class FoodLogEntryNutrient(models.Model):
 # nutrient targets for that user for a certain day
 # to be automatically generated based on a nutrition profile for that day
 class NutrientTargets(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="nutrient_targets")
     day = models.DateField()
     nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
     amount = models.FloatField()

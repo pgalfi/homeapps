@@ -1,0 +1,10 @@
+[
+  {
+    "model": "foodtrack.foodcategory",
+    "pk": 11,
+    "fields": {
+      "code": 1100,
+      "description": "Vegetables and Vegetable Products"
+    }
+  }
+]

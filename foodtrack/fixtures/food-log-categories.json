@@ -1,0 +1,10 @@
+[
+  {
+    "model": "foodtrack.foodlogcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Breakfast",
+      "owner": 1
+    }
+  }
+]

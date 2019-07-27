@@ -1,0 +1,194 @@
+[
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86681,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "cup cherry tomatoes",
+      "gram_weight": 149.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86682,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "cup, chopped or sliced",
+      "gram_weight": 180.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86683,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "Italian tomato",
+      "gram_weight": 62.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86684,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "cherry",
+      "gram_weight": 17.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86685,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "large whole (3\" dia)",
+      "gram_weight": 182.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86686,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "medium whole (2-3/5\" dia)",
+      "gram_weight": 123.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86687,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "slice, medium (1/4\" thick)",
+      "gram_weight": 20.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86688,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "plum tomato",
+      "gram_weight": 62.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86689,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "small whole (2-2/5\" dia)",
+      "gram_weight": 91.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86690,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "slice, thick/large (1/2\" thick)",
+      "gram_weight": 27.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86691,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "wedge (1/4 of medium tomato)",
+      "gram_weight": 31.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86692,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "slice, thin/small",
+      "gram_weight": 15.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 86693,
+    "fields": {
+      "food": 170457,
+      "amount": 1.0,
+      "unit": 9999,
+      "description": "",
+      "modifier": "NLEA serving",
+      "gram_weight": 148.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 158396,
+    "fields": {
+      "food": 343873,
+      "amount": 0.0,
+      "unit": 9999,
+      "description": "1 cup",
+      "modifier": "10205",
+      "gram_weight": 216.0
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 158397,
+    "fields": {
+      "food": 343873,
+      "amount": 0.0,
+      "unit": 9999,
+      "description": "1 tablespoon",
+      "modifier": "21000",
+      "gram_weight": 13.5
+    }
+  },
+  {
+    "model": "foodtrack.foodportion",
+    "pk": 158398,
+    "fields": {
+      "food": 343873,
+      "amount": 0.0,
+      "unit": 9999,
+      "description": "Quantity not specified",
+      "modifier": "90000",
+      "gram_weight": 9.0
+    }
+  }
+]

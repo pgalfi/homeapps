@@ -1,0 +1,21 @@
+[
+  {
+    "model": "foodtrack.nutritionprofile",
+    "pk": 1,
+    "fields": {
+      "name": "fixed carb amount",
+      "kind": 1
+    }
+  },
+  {
+    "model": "foodtrack.nutritionprofiletarget",
+    "pk": 1,
+    "fields": {
+      "profile": 1,
+      "nutrient": 1005,
+      "amount": 30,
+      "kind": 10,
+      "notes": "carb amount set for the day"
+    }
+  }
+]
