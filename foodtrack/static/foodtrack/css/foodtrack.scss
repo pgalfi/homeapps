@@ -1,0 +1,53 @@
+$theme-colors: (
+  "primary": #0052d9,
+  "danger": #ff0051
+);
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+body {
+  background-image: url("../img/dan-gold-4_jhDO54BYg-unsplash-600x400-100dpi.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #034616;
+}
+
+.foodtrack-first {
+  height: 450px;
+}
+
+.asteriskField {
+  display: none;
+}
+
+span.twitter-typeahead {
+
+  width: 100%;
+
+  .tt-menu {
+    @extend .dropdown-menu;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .tt-suggestion {
+    @extend .dropdown-item;
+    cursor: default;
+    white-space: normal;
+  }
+
+  .tt-suggestion.tt-cursor {
+    @extend .dropdown-item, .active;
+  }
+
+  .input-group & {
+    display: flex !important;
+    align-items: center;
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+
+    .tt-menu, .tt-hint, .tt-input {
+      width: 100%;
+    }
+  }
+}

@@ -157,14 +157,3 @@ class RecipeComponentSerializer(serializers.ModelSerializer):
                   'amount', 'portion', 'portion_name')
 
 
-class FoodUsageCounterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = FoodUsageCounter
-        fields = ('id', 'food', 'owner', 'count')
-
-
-class NutrientUsageCounterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = NutrientUsageCounter
-        fields = ('id', 'nutrient', 'owner', 'count')
-

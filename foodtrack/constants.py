@@ -1,6 +1,8 @@
 
 BASE_CURRENCY = "DKK"
 
+DEFAULT_UNIT_ID = 99999  # kg
+
 MEASURE_VOLUME = 10
 MEASURE_WEIGHT = 20
 MEASURE_OTHER = 30
@@ -70,3 +72,10 @@ OBJECT_TYPES = {
     (OBJECT_NUTRIENT, "Nutrient"),
     (OBJECT_RECIPE, "Recipe")
 }
+
+DEFAULT_PREFERENCES = {
+
+}
+
+def get_default_prefs():
+    return DEFAULT_PREFERENCES

@@ -1,7 +1,10 @@
 import datetime
+import json
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Index, F
+from django_mysql.models import JSONField
 
 from foodtrack import constants
 
@@ -112,15 +115,22 @@ class Currency(models.Model):
 
 
 class PurchaseItem(models.Model):
-    kind = models.IntegerField(choices=constants.PURCHASE_ITEM_KINDS)
+    kind = models.IntegerField(choices=constants.PURCHASE_ITEM_KINDS, default=constants.PURCHASE_FOOD_DB)
     food = models.ForeignKey(Food, default=None, null=True, on_delete=models.SET_NULL)
     description = models.CharField(max_length=2048, default=None, null=True)
-    pcs = models.IntegerField(verbose_name="Pieces", null=True, default=None)
+    pcs = models.PositiveIntegerField(verbose_name="Pieces", null=True, default=None)
     amount = models.FloatField(null=True)
-    unit = models.ForeignKey(MeasureUnit, null=True, default=None, on_delete=models.SET_NULL)
+    unit = models.ForeignKey(MeasureUnit, null=True, default=constants.DEFAULT_UNIT_ID, on_delete=models.SET_NULL)
     cost = models.FloatField()
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
+    store_name = models.CharField(max_length=1024, default=None, null=True)
     dt = models.DateTimeField()
+
+    def __str__(self):
+        if self.food is not None:
+            return self.food.description + " - " + str(self.amount)
+        else:
+            return self.description + " - " + str(self.amount)
 
 
 # categories set up by the user for daily food logging,
@@ -305,28 +315,23 @@ class FoodUsageCounter(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     count = models.BigIntegerField(default=0)
 
-    @staticmethod
-    def addCount(food, user):
-        usage = FoodUsageCounter.objects.filter(food=food, owner=user)
-        if usage.count() > 0:
-            usage = usage[0]
-            usage.count += 1
-        else:
-            usage = FoodUsageCounter(food=food, owner=user, count=1)
-        usage.save()
-
-
-class NutrientUsageCounter(models.Model):
-    nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE, related_name="usage")
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    count = models.BigIntegerField(default=0)
+    class Meta:
+        indexes = [
+            Index(fields=("food", "owner")),
+        ]
 
     @staticmethod
-    def addCount(nutrient, user):
-        usage = NutrientUsageCounter.objects.filter(nutrient=nutrient, owner=user)
-        if usage.count() > 0:
-            usage = usage[0]
-            usage.count += 1
+    def add_count(food_id, user):
+        usage = FoodUsageCounter.objects.filter(food_id=food_id, owner=user)
+        if usage:
+            usage.update(count=F('count') + 1)
         else:
-            usage = NutrientUsageCounter(nutrient=nutrient, owner=user, count=1)
-        usage.save()
+            FoodUsageCounter(food_id=food_id, owner=user, count=1).save()
+
+
+class UserPreference(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="prefs")
+    prefs = JSONField(default=constants.get_default_prefs)
+
+    def __repr__(self):
+        return json.dumps(self.prefs)

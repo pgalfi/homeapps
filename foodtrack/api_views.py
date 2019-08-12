@@ -1,5 +1,3 @@
-import datetime
-
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
@@ -130,14 +128,3 @@ class RecipeComponentViewSet(viewsets.ModelViewSet):
     serializer_class = RecipeComponentSerializer
     queryset = RecipeComponent.objects.all()
 
-
-class FoodUsageCounterViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated, IsOwner)
-    serializer_class = FoodUsageCounterSerializer
-    queryset = FoodUsageCounter.objects.all()
-
-
-class NutrientUsageCounterViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated, IsOwner)
-    serializer_class = NutrientUsageCounterSerializer
-    queryset = NutrientUsageCounter.objects.all()

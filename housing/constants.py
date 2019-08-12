@@ -14,3 +14,4 @@ CONTENT_STATES = {
     (CONTENT_STATE_ORIGINAL, "Original"),
     (CONTENT_STATE_TRANSLATED, "Translated")
 }
+

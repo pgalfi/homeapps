@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from foodtrack.models import Currency, UserPreference
+
+admin.site.register(Currency)
+admin.site.register(UserPreference)
