@@ -18,8 +18,8 @@ class UsageOrderingFilter(OrderingFilter):
 
     def filter_queryset(self, request, queryset, view):
         ordering = super().get_ordering(request, queryset, view)
-        if ordering: ordering = ["-usage__count"] + list(ordering)
-        else: ordering = ["-usage__count"]
+        if ordering: ordering = ["-usage__count", "-data_type"] + list(ordering)
+        else: ordering = ["-usage__count", "-data_type"]
         return queryset.order_by(*ordering)
 
 
@@ -43,6 +43,7 @@ class FoodCategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class FoodViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = FoodSerializer
+    # queryset = Food.objects.exclude(data_type="branded_food")
     queryset = Food.objects.all()
     filter_backends = (DjangoFilterBackend, SearchFilter, UsageOrderingFilter)
     filterset_fields = ('category', 'data_type')

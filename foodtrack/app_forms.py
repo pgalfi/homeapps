@@ -54,6 +54,8 @@ class FoodPurchaseForm(forms.ModelForm):
                     if "store" in self.user_pref.prefs["purchase"] else ""
                 initial["currency"] = self.user_pref.prefs["purchase"]["currency_id"] \
                     if "currency_id" in self.user_pref.prefs["purchase"] else None
+                initial["dt"] = datetime.datetime.strptime(self.user_pref.prefs["purchase"]["date"], "%Y-%m-%d").date() \
+                    if "date" in self.user_pref.prefs["purchase"] else None
         else:
             self.user_pref = None
         kwargs["initial"] = initial
@@ -72,8 +74,7 @@ class FoodPurchaseForm(forms.ModelForm):
             ),
             Field("food", placeholder="Type food name...", id="food-select", css_class="typeahead autocomplete-select",
                   autocomplete="off", data_url=reverse("food-list", ("v1",)), data_set="results", data_id="id",
-                  data_text="description", data_query="search", data_options={"data_type": "sr_legacy_food"},
-                  data_max_results="50"),
+                  data_text="description", data_query="search", data_max_results="50"),
             Field("description", placeholder="Optional description..."),
             Div(
                 Div(Field("amount"), css_class="col"),
@@ -100,6 +101,7 @@ class FoodPurchaseForm(forms.ModelForm):
             self.user_pref.prefs["purchase"]["currency_id"] = self.cleaned_data["currency"].id
             self.user_pref.prefs["purchase"]["store"] = self.cleaned_data["store_name"]
             self.user_pref.prefs["purchase"]["unit_id"] = self.cleaned_data["unit"].id
+            self.user_pref.prefs["purchase"]["date"] = datetime.datetime.strftime(self.cleaned_data["dt"], '%Y-%m-%d')
             self.user_pref.save()
         return valid
 
@@ -109,9 +111,7 @@ class FoodPurchaseForm(forms.ModelForm):
         widgets = {
             "food": forms.TextInput,
             "dt": forms.TextInput(
-                attrs={"type": "date",
-                       "value": datetime.datetime.strftime(datetime.datetime.today(), "%Y-%m-%d")
-                       }
+                attrs={"type": "date"}
             ),
         }
         labels = {
