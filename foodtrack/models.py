@@ -162,6 +162,7 @@ class FoodLogEntryNutrient(models.Model):
     nutrient = models.ForeignKey(Nutrient, on_delete=models.CASCADE)
     amount = models.FloatField()
 
+
 # nutrient targets for that user for a certain day
 # to be automatically generated based on a nutrition profile for that day
 class NutrientTargets(models.Model):
