@@ -6,5 +6,13 @@
       "name": "undetermined",
       "kind": 30
     }
+  },
+  {
+    "model": "foodtrack.measureunit",
+    "pk": 99999,
+    "fields": {
+      "name": "kg",
+      "kind": 20
+    }
   }
 ]

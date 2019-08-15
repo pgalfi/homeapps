@@ -22,7 +22,11 @@ The API provides the following services:
 
 An automatically generated browsable API is available that can be used to discover all the API's functions.
 
-### GraphQL implementation
+### Feature Implementation
+
+1. Implement UI and logic for logging purchase data.
+
+#### GraphQL implementation
 
 A GraphQL implementation is created at foodtrack/graphql URL using graphene and graphene-django. This allows lookups for individiual foods based on ID, or by searching for words in the food name and/or food categorization.
 

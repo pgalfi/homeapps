@@ -69,7 +69,7 @@ class FoodPurchaseForm(forms.ModelForm):
             Div(
                 Div(Field("kind", ), css_class="col", ),
                 Div(Field("store_name", autofocus="true"), css_class="col"),
-                Div(Field("pcs"), css_class="col", ),
+                Div(Field("pcs"), css_class="col"),
                 css_class="row",
             ),
             Field("food", placeholder="Type food name...", id="food-select", css_class="typeahead autocomplete-select",

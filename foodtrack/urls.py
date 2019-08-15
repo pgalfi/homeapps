@@ -1,5 +1,5 @@
 from django.contrib.auth.views import logout_then_login
-from django.urls import path, include, re_path
+from django.urls import path, include, re_path, reverse_lazy
 from graphene_django.views import GraphQLView
 from rest_framework.routers import DefaultRouter
 
@@ -25,8 +25,8 @@ urlpatterns = [
     re_path('(?P<version>(v1))/', include(router.urls)),
     path('', app_views.Index.as_view(), name='foodtrack-index'),
     path('index/', app_views.Index.as_view(), name='foodtrack-index'),
-    path('auth/login/', app_views.FoodTrackLoginView.as_view(), name='foodtrack-login'),
-    path('auth/password/', app_views.FoodTrackPasswordView.as_view(), name='foodtrack-password'),
-    path('auth/logout/', logout_then_login, {"login_url": "/foodtrack/auth/login/"}, name="foodtrack-logout"),
+    path('account/login/', app_views.FoodTrackLoginView.as_view(), name='foodtrack-login'),
+    path('account/password/', app_views.FoodTrackPasswordView.as_view(), name='foodtrack-password'),
+    path('account/logout/', logout_then_login, {"login_url": reverse_lazy("foodtrack-login")}, name="foodtrack-logout"),
     path('purchase/', app_views.FoodPurchaseView.as_view(), name='foodtrack-purchase'),
 ]

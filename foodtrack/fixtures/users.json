@@ -3,7 +3,10 @@
     "model": "auth.user",
     "pk": 1,
     "fields": {
-      "username": "test"
+      "username": "admin",
+      "password": "pbkdf2_sha256$150000$LdBvDb3qJr6Q$Kq0T3ZpkDPTT9aC+FIKnk34DqKgLEeV6DuyAlxWfoAQ=",
+      "email": "admin@home.net",
+      "is_superuser": 1
     }
   }
 ]

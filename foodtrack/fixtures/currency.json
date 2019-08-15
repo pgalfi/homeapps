@@ -1,0 +1,12 @@
+[
+  {
+    "model": "foodtrack.currency",
+    "pk": 1,
+    "fields": {
+      "name": "DKK",
+      "long_name": "Danish kroner",
+      "rate": 1,
+      "rate_date": "2019-08-12"
+    }
+  }
+]
