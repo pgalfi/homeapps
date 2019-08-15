@@ -91,8 +91,9 @@ class FoodPortion(models.Model):
     modifier = models.CharField(max_length=2048)
     gram_weight = models.FloatField()
 
+    @property
     def name(self):
-        if len(self.description.strip())>0:
+        if len(self.description.strip()) > 0:
             return self.description
         elif self.amount != 1:
             return str(self.amount) + " " + self.modifier
@@ -185,7 +186,6 @@ class FoodLogEntryNutrient(models.Model):
         FoodLogEntryNutrient.objects.bulk_create(entry_nutrients)
 
 
-
 # nutrient targets for that user for a certain day
 # to be automatically generated based on a nutrition profile for that day
 class NutrientTargets(models.Model):
@@ -195,8 +195,6 @@ class NutrientTargets(models.Model):
     amount = models.FloatField()
     kind = models.IntegerField(choices=constants.NUTRIENT_TARGET_TYPES)
     notes = models.TextField(null=True)
-
-    #TODO: Static method needs to be created that runs maintenance and clears out old daily targets
 
     @staticmethod
     def generate(user):
@@ -219,7 +217,8 @@ class NutrientTargets(models.Model):
                 nutrient_target.notes = target.notes
                 nutrient_target.save()
 
-# a profile for a kind a nutrition plan that will include targets
+
+# a profile for a nutrition plan that will include targets
 # for each nutrient
 class NutritionProfile(models.Model):
     name = models.CharField(max_length=1024)
