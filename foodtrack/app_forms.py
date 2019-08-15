@@ -42,6 +42,22 @@ class FoodTrackPasswordChangeForm(PasswordChangeForm):
 
 class FoodPurchaseForm(forms.ModelForm):
     description = forms.CharField(required=False)
+    pcs = forms.IntegerField(min_value=1)
+    amount = forms.FloatField(min_value=0.0001)
+    cost = forms.FloatField(min_value=0.0001)
+
+    class Meta:
+        model = PurchaseItem
+        fields = ["kind", "food", "description", "pcs", "amount", "unit", "cost", "currency", "store_name", "dt"]
+        widgets = {
+            "food": forms.TextInput,
+            "dt": forms.TextInput(
+                attrs={"type": "date"}
+            ),
+        }
+        labels = {
+            "dt": "Purchase date"
+        }
 
     def __init__(self, *args, **kwargs):
         initial = kwargs.get("initial", {})
@@ -104,16 +120,3 @@ class FoodPurchaseForm(forms.ModelForm):
             self.user_pref.prefs["purchase"]["date"] = datetime.datetime.strftime(self.cleaned_data["dt"], '%Y-%m-%d')
             self.user_pref.save()
         return valid
-
-    class Meta:
-        model = PurchaseItem
-        fields = ["kind", "food", "description", "pcs", "amount", "unit", "cost", "currency", "store_name", "dt"]
-        widgets = {
-            "food": forms.TextInput,
-            "dt": forms.TextInput(
-                attrs={"type": "date"}
-            ),
-        }
-        labels = {
-            "dt": "Purchase date"
-        }
