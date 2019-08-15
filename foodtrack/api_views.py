@@ -5,6 +5,7 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
+from foodtrack import services
 from foodtrack.serializers import *
 
 
@@ -75,9 +76,9 @@ class FoodLogEntryViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         log_entry = serializer.save(user=self.request.user)
-        FoodLogEntryNutrient.build_nutrients(log_entry)
-        NutrientTargets.generate(self.request.user)
-        FoodUsageCounter.addCount(log_entry.food, self.request.user)
+        services.build_nutrients(log_entry)
+        services.generate_nutrient_targets(self.request.user)
+        services.add_food_usage_count(log_entry.food_id, self.request.user)
 
 
 class CurrencyViewSet(viewsets.ModelViewSet):
@@ -118,11 +119,11 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         recipe = serializer.save(owner=self.request.user)
-        recipe.compute_nutrients()
+        services.compute_nutrients(recipe)
 
     def perform_update(self, serializer):
         recipe = serializer.save()
-        recipe.compute_nutrients()
+        services.compute_nutrients(recipe)
 
 
 class RecipeComponentViewSet(viewsets.ModelViewSet):

@@ -2,7 +2,8 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils import timezone
 
-from foodtrack.models import Food, FoodLogEntry, FoodLogEntryNutrient, FoodLogCategory
+from foodtrack import services
+from foodtrack.models import Food, FoodLogEntry, FoodLogCategory
 
 
 class TestFoodLogEntryNutrient(TestCase):
@@ -23,14 +24,14 @@ class TestFoodLogEntryNutrient(TestCase):
         food_log_entry_1 = FoodLogEntry(food=self.tomato_red, user=self.one_user, dt=timezone.now(),
                                         category_id=1, amount=1, portion_id=86681)
         food_log_entry_1.save()
-        FoodLogEntryNutrient.build_nutrients(food_log_entry_1)
+        services.build_nutrients(food_log_entry_1)
         self.assertEqual(5.7961, food_log_entry_1.nutrients.get(nutrient_id=1005).amount)
 
     def test_nutrient_calculation_2(self):
         food_log_entry_2 = FoodLogEntry(food=self.tomato_red, user=self.one_user, dt=timezone.now(),
                                         category_id=1, amount=10, portion_id=86684)
         food_log_entry_2.save()
-        FoodLogEntryNutrient.build_nutrients(food_log_entry_2)
+        services.build_nutrients(food_log_entry_2)
         self.assertEqual(6.613, food_log_entry_2.nutrients.get(nutrient_id=1005).amount)
 
 

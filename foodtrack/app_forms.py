@@ -6,8 +6,8 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from rest_framework.reverse import reverse
 
-from foodtrack import constants
-from foodtrack.models import PurchaseItem, FoodUsageCounter
+from foodtrack import constants, services
+from foodtrack.models import PurchaseItem
 
 
 class FoodTrackAuthForm(AuthenticationForm):
@@ -111,7 +111,7 @@ class FoodPurchaseForm(forms.ModelForm):
     def is_valid(self):
         valid = super().is_valid()
         if valid and self.user_pref:
-            FoodUsageCounter.add_count(self.cleaned_data["food"].id, self.user_pref.owner)
+            services.add_food_usage_count(self.cleaned_data["food"].id, self.user_pref.owner)
             if "purchase" not in self.user_pref.prefs:
                 self.user_pref.prefs["purchase"] = {}
             self.user_pref.prefs["purchase"]["currency_id"] = self.cleaned_data["currency"].id
