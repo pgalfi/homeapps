@@ -124,7 +124,11 @@ class PurchaseItem(models.Model):
     cost = models.FloatField()
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     store_name = models.CharField(max_length=1024, default=None, null=True)
+    owner = models.ForeignKey(User, related_name="purchases", on_delete=models.CASCADE)
     dt = models.DateTimeField()
+
+    class Prefs:
+        fields = ["unit_id", "currency_id", "store_name", "dt"]
 
     def __str__(self):
         if self.food is not None:
@@ -239,7 +243,7 @@ class FoodUsageCounter(models.Model):
 
 
 class UserPreference(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="prefs")
+    owner = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE, related_name="prefs")
     prefs = JSONField(default=constants.get_default_prefs)
 
     def __repr__(self):
