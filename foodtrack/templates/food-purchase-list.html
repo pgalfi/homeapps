@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-11 bg-light mt-2 p-2">
+                {% crispy filter.form %}
+            </div>
+        </div>
+        {% for purchase in object_list %}
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-11 bg-light mt-2 p-2">
+                    {{ purchase.food }}
+                </div>
+            </div>
+        {% endfor %}
+{%  endblock %}

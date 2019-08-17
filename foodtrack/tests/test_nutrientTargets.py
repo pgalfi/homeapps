@@ -8,7 +8,7 @@ from foodtrack.services import nutrients
 class TestNutrientTargets(TestCase):
     fixtures = ["users.json", "nutrients.json", "measure-units.json", "user-nutrition.json"]
 
-    def setUp(self) -> None:
+    def setUp(self):
         self.user1 = User.objects.get(pk=1)
         self.nutrition_profile = NutritionProfile.objects.get(pk=1)
 
