@@ -39,10 +39,10 @@ class TestFoodPurchaseView(TestCase):
         self.assertEqual(1, purchase.count())
 
         preference = get_object_or_404(UserPreference, owner_id=1)
-        self.assertEqual("TEST", preference.prefs["purchase"]["store"])
-        self.assertEqual(99999, preference.prefs["purchase"]["unit_id"])
-        self.assertEqual(1, preference.prefs["purchase"]["currency_id"])
-        self.assertEqual("2019-08-12", preference.prefs["purchase"]["date"])
+        self.assertEqual("TEST", preference.prefs["models"]["purchaseitem"]["store_name"])
+        self.assertEqual(99999, preference.prefs["models"]["purchaseitem"]["unit_id"])
+        self.assertEqual(1, preference.prefs["models"]["purchaseitem"]["currency_id"])
+        self.assertEqual("2019-08-12 00:00:00", preference.prefs["models"]["purchaseitem"]["dt"])
 
         usage_counter = get_object_or_404(FoodUsageCounter, owner_id=1, food_id=170457)
         self.assertEqual(1, usage_counter.count)
@@ -60,6 +60,8 @@ class TestFoodPurchaseView(TestCase):
             "currency": "1",
             "dt": "2019-08-12"
         })
+        # self.maxDiff = 10240
+        # self.assertEqual("", response.content.decode("utf-8"))
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
         self.assertEqual(response.url, reverse("foodtrack-purchase"))
         purchase = PurchaseItem.objects.filter(store_name="TEST", food_id=170457)
@@ -67,5 +69,7 @@ class TestFoodPurchaseView(TestCase):
 
         response: TemplateResponse = self.client.get(reverse("foodtrack-purchase"))
         html = response.content.decode("utf-8")
+        # self.maxDiff = 10240
+        # self.assertEqual("", html)
         self.assertNotEqual(-1, html.find('<option value="99999" selected>kg</option>'))
         self.assertNotEqual(-1, html.find('name="store_name" value="TEST"'))

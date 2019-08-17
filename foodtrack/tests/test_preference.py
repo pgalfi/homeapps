@@ -4,7 +4,7 @@ from django.test import TestCase
 
 from foodtrack.models import PurchaseItem, UserPreference
 from foodtrack.services.data_events import purchase_saved
-from foodtrack.services.user_prefs import save_preference, load_preference
+from foodtrack.services.user_prefs import save_model_preference, load_model_preference
 
 
 class TestPreferences(TestCase):
@@ -33,12 +33,12 @@ class TestPreferences(TestCase):
     def test_save_preference(self):
         purchase = PurchaseItem.objects.get(pk=1)
         user = User.objects.get(pk=1)
-        save_preference(purchase, user.id)
+        save_model_preference(purchase, user.id)
         user_pref = UserPreference.objects.get(pk=1)
         self.assertEqual("TEST", user_pref.prefs["models"]["purchaseitem"]["store_name"])
 
     def test_load_preference(self):
         user = User.objects.get(pk=2)
-        pref = load_preference(PurchaseItem, user.id)
+        pref = load_model_preference(PurchaseItem, user.id)
         self.assertEqual("APPLE", pref["store_name"])
         self.assertEqual(99999, pref["unit_id"])

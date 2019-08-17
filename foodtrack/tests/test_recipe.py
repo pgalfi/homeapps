@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from foodtrack import services
 from foodtrack.models import Recipe
+from foodtrack.services import nutrients
 
 
 class TestRecipe(TestCase):
@@ -21,7 +21,7 @@ class TestRecipe(TestCase):
         self.assertEqual("Tomatoes, red, ripe, raw, year round average",self.recipe.components.all()[0].food.description)
 
     def test_03_compute_nutrients(self):
-        services.compute_nutrients(self.recipe)
+        nutrients.compute_nutrients(self.recipe)
         # 4 x medium tomatos = 492g + 8 x tbsp olive oil = 108g = 600g
         # tomato carb = 4.92 * 3.89g = 19.1388g + 1.08 * 0.1 = 0.108g --> total =19.2468g for total
         # recipe 100g carb amount = 3.2078g

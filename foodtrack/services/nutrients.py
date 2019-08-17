@@ -1,10 +1,8 @@
 import datetime
 
-from django.db.models import F
-
 from foodtrack import constants
-from foodtrack.models import FoodLogEntryNutrient, FoodLogEntry, FoodNutrient, RecipeComputedNutrient, FoodUsageCounter, \
-    UserNutrition, NutrientTargets, NutritionProfileTarget
+from foodtrack.models import FoodLogEntryNutrient, FoodLogEntry, FoodNutrient, RecipeComputedNutrient, UserNutrition, \
+    NutrientTargets, NutritionProfileTarget
 
 
 def build_nutrients(log_entry: FoodLogEntry):
@@ -27,14 +25,6 @@ def build_nutrients(log_entry: FoodLogEntry):
         nutrient_entry.amount = gr_ratio * food_nutrient.amount
         entry_nutrients.append(nutrient_entry)
     FoodLogEntryNutrient.objects.bulk_create(entry_nutrients)
-
-
-def add_food_usage_count(food_id, user):
-    usage = FoodUsageCounter.objects.filter(food_id=food_id, owner=user)
-    if usage:
-        usage.update(count=F('count') + 1)
-    else:
-        FoodUsageCounter(food_id=food_id, owner=user, count=1).save()
 
 
 def compute_nutrients(recipe):
