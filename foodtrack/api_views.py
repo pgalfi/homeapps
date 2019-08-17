@@ -5,8 +5,9 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from foodtrack import services
+import foodtrack.services.data_events
 from foodtrack.serializers import *
+from foodtrack.services import nutrients
 
 
 class IsOwner(permissions.BasePermission):
@@ -75,10 +76,10 @@ class FoodLogEntryViewSet(viewsets.ModelViewSet):
     queryset = FoodLogEntry.objects.all()
 
     def perform_create(self, serializer):
-        log_entry = serializer.save(user=self.request.user)
-        services.build_nutrients(log_entry)
-        services.generate_nutrient_targets(self.request.user)
-        services.add_food_usage_count(log_entry.food_id, self.request.user)
+        log_entry: FoodLogEntry = serializer.save(user=self.request.user)
+        nutrients.build_nutrients(log_entry)
+        nutrients.generate_nutrient_targets(self.request.user)
+        foodtrack.services.data_events.add_food_usage_count(log_entry.food, self.request.user)
 
 
 class CurrencyViewSet(viewsets.ModelViewSet):
@@ -119,11 +120,11 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         recipe = serializer.save(owner=self.request.user)
-        services.compute_nutrients(recipe)
+        nutrients.compute_nutrients(recipe)
 
     def perform_update(self, serializer):
         recipe = serializer.save()
-        services.compute_nutrients(recipe)
+        nutrients.compute_nutrients(recipe)
 
 
 class RecipeComponentViewSet(viewsets.ModelViewSet):

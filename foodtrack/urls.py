@@ -28,5 +28,6 @@ urlpatterns = [
     path('account/login/', app_views.FoodTrackLoginView.as_view(), name='foodtrack-login'),
     path('account/password/', app_views.FoodTrackPasswordView.as_view(), name='foodtrack-password'),
     path('account/logout/', logout_then_login, {"login_url": reverse_lazy("foodtrack-login")}, name="foodtrack-logout"),
-    path('purchase/', app_views.FoodPurchaseView.as_view(), name='foodtrack-purchase'),
+    path('purchase/', app_views.FoodPurchase.as_view(), name='foodtrack-purchase'),
+    path('purchase/list/', app_views.FoodPurchaseList.as_view(), name='foodtrack-purchase-list'),
 ]

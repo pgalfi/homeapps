@@ -2,20 +2,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView, ModelFormMixin
+from django.views.generic.edit import CreateView
+from django_filters.views import FilterView
 
 from foodtrack.app_forms import FoodTrackAuthForm, FoodTrackPasswordChangeForm, FoodPurchaseForm
-from foodtrack.models import PurchaseItem, UserPreference
-
-
-class UserPreferencesMixin(ModelFormMixin):
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if self.request.user.is_authenticated:
-            kwargs["initial"]["user_preference"], created = UserPreference.objects.get_or_create(
-                owner=self.request.user)
-        return kwargs
+from foodtrack.filters import FoodPurchaseItemFilter
+from foodtrack.models import PurchaseItem
+from foodtrack.services.user_prefs import load_model_preference
 
 
 class FoodTrackLoginView(LoginView):
@@ -37,9 +30,23 @@ class FoodTrackPasswordView(PasswordChangeView):
     form_class = FoodTrackPasswordChangeForm
 
 
-class FoodPurchaseView(LoginRequiredMixin, UserPreferencesMixin, CreateView):
+class FoodPurchase(LoginRequiredMixin, CreateView):
     model = PurchaseItem
     form_class = FoodPurchaseForm
     template_name = "food-purchase.html"
     success_url = reverse_lazy("foodtrack-purchase")
     login_url = reverse_lazy("foodtrack-login")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["initial"] = load_model_preference(PurchaseItem, self.request.user.id)
+        if "data" in kwargs:
+            kwargs["data"] = kwargs["data"].copy()
+            kwargs["data"]["owner"] = self.request.user.id
+        return kwargs
+
+
+class FoodPurchaseList(LoginRequiredMixin, FilterView):
+    template_name = "food-purchase-list.html"
+    paginate_by = 10
+    filterset_class = FoodPurchaseItemFilter

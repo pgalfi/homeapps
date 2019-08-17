@@ -1,12 +1,9 @@
-import datetime
-
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Hidden, HTML, Field, Div
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from rest_framework.reverse import reverse
 
-from foodtrack import constants, services
 from foodtrack.models import PurchaseItem
 
 
@@ -45,10 +42,12 @@ class FoodPurchaseForm(forms.ModelForm):
     pcs = forms.IntegerField(min_value=1)
     amount = forms.FloatField(min_value=0.0001)
     cost = forms.FloatField(min_value=0.0001)
+    # unit = forms.ChoiceField(initial=constants.DEFAULT_UNIT_ID)
 
     class Meta:
         model = PurchaseItem
-        fields = ["kind", "food", "description", "pcs", "amount", "unit", "cost", "currency", "store_name", "dt"]
+        fields = ["kind", "food", "description", "pcs", "amount", "unit", "cost", "currency", "store_name", "dt",
+                  "owner"]
         widgets = {
             "food": forms.TextInput,
             "dt": forms.TextInput(
@@ -60,25 +59,11 @@ class FoodPurchaseForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        initial = kwargs.get("initial", {})
-        if "user_preference" in initial:
-            self.user_pref = initial["user_preference"]
-            if "purchase" in initial["user_preference"].prefs:
-                initial["unit"] = self.user_pref.prefs["purchase"]["unit_id"] \
-                    if "unit_id" in self.user_pref.prefs["purchase"] else constants.DEFAULT_UNIT_ID
-                initial["store_name"] = self.user_pref.prefs["purchase"]["store"] \
-                    if "store" in self.user_pref.prefs["purchase"] else ""
-                initial["currency"] = self.user_pref.prefs["purchase"]["currency_id"] \
-                    if "currency_id" in self.user_pref.prefs["purchase"] else None
-                initial["dt"] = datetime.datetime.strptime(self.user_pref.prefs["purchase"]["date"], "%Y-%m-%d").date() \
-                    if "date" in self.user_pref.prefs["purchase"] else None
-        else:
-            self.user_pref = None
-        kwargs["initial"] = initial
-        if "data" in kwargs:
-            kwargs["data"] = kwargs["data"].copy()
+        if "data" in kwargs and "food-id" in kwargs["data"]:
             kwargs["data"]["food"] = kwargs["data"]["food-id"]
+
         super().__init__(*args, **kwargs)
+
         self.helper = FormHelper()
         self.helper.layout = Layout(
             HTML("<h4>Food Purchases</h4> <h6>Please enter a food purchase:</h6>"),
@@ -107,16 +92,3 @@ class FoodPurchaseForm(forms.ModelForm):
                 Submit("Save", "Log Purchase", css_class="btn-block")
             )
         )
-
-    def is_valid(self):
-        valid = super().is_valid()
-        if valid and self.user_pref:
-            services.add_food_usage_count(self.cleaned_data["food"].id, self.user_pref.owner)
-            if "purchase" not in self.user_pref.prefs:
-                self.user_pref.prefs["purchase"] = {}
-            self.user_pref.prefs["purchase"]["currency_id"] = self.cleaned_data["currency"].id
-            self.user_pref.prefs["purchase"]["store"] = self.cleaned_data["store_name"]
-            self.user_pref.prefs["purchase"]["unit_id"] = self.cleaned_data["unit"].id
-            self.user_pref.prefs["purchase"]["date"] = datetime.datetime.strftime(self.cleaned_data["dt"], '%Y-%m-%d')
-            self.user_pref.save()
-        return valid
