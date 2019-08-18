@@ -1,12 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView
-from django_filters.views import FilterView
+from django.views.generic import TemplateView, ListView
+from django.views.generic.edit import CreateView, FormMixin
 
-from foodtrack.app_forms import FoodTrackAuthForm, FoodTrackPasswordChangeForm, FoodPurchaseForm
-from foodtrack.filters import FoodPurchaseItemFilter
+from foodtrack.app_forms import FoodTrackAuthForm, FoodTrackPasswordChangeForm, FoodPurchaseForm, \
+    FoodPurchaseItemFilterForm
 from foodtrack.models import PurchaseItem
 from foodtrack.services.user_prefs import load_model_preference
 
@@ -46,7 +45,17 @@ class FoodPurchase(LoginRequiredMixin, CreateView):
         return kwargs
 
 
-class FoodPurchaseList(LoginRequiredMixin, FilterView):
+class FoodPurchaseList(LoginRequiredMixin, FormMixin, ListView):
     template_name = "food-purchase-list.html"
     paginate_by = 10
-    filterset_class = FoodPurchaseItemFilter
+    form_class = FoodPurchaseItemFilterForm
+
+    def get_queryset(self):
+        qs = PurchaseItem.objects.filter(owner=self.request.user).order_by("dt")
+
+        return qs
+
+
+
+
+

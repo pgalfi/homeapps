@@ -21,8 +21,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">Account</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'foodtrack-password' %}">Password</a>
+                        <a class="dropdown-item" href="{% url 'foodtrack-login' %}">Login</a>
                         <a class="dropdown-item" href="{% url 'foodtrack-logout' %}">Logout</a>
+                        <a class="dropdown-item" href="{% url 'foodtrack-password' %}">Change Password</a>
                     </div>
 
                 </li>
@@ -31,8 +32,13 @@
                     <a class="nav-link" href="{% url 'foodtrack-login' %}">Login</a>
                 </li>
                 {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'foodtrack-purchase' %}" role="button">Purchase</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">Purchase</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'foodtrack-purchase' %}" role="button">New Purchase</a>
+                        <a class="dropdown-item" href="{% url 'foodtrack-purchase-list' %}" role="button">List</a>
+
+                    </div>
                 </li>
             </ul>
         </div>

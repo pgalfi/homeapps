@@ -1,16 +1,40 @@
 {% extends 'layout.html' %}
 {% load crispy_forms_tags %}
+{% load ranged_pagination %}
 {% block content %}
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-11 bg-light mt-2 p-2">
-                {% crispy filter.form %}
+        <div class="row justify-content-center pl-md-5 pr-md-5 ml-md-5 mr-md-5">
+            <div class="col bg-light mt-2 pt-2">
+                {% crispy form %}
             </div>
         </div>
-        {% for purchase in object_list %}
-            <div class="row justify-content-center">
-                <div class="col-md-8 col-11 bg-light mt-2 p-2">
-                    {{ purchase.food }}
+        <div class="row justify-content-end pl-md-5 pr-md-5 ml-md-5 mr-md-5">
+                <div class="col bg-light pb-3">
+                    <input type="submit" name="Search" value="Search" class="btn btn-primary btn-sm" id="submit-id-search">
                 </div>
+                <div class="col-auto bg-light pb-3">
+                    {% ranged_paginator 3 %}
+                </div>
+        </div>
+        <div class="row justify-content-start pl-md-5 pr-md-5 ml-md-5 mr-md-5">
+            <div class="col bg-light">
+            <table class="table table-striped">
+            <thead>
+                <th>Store</th>
+                <th>Item</th>
+                <th>Cost</th>
+                <th>Date</th>
+            </thead>
+            <tbody>
+                {% for purchase in object_list %}
+                    <tr>
+                        <td>{{ purchase.store_name }}</td>
+                        <td>{{ purchase.food }} ({{ purchase.amount }} {{ purchase.unit }})</td>
+                        <td>{{ purchase.cost }}&nbsp;{{ purchase.currency }}</td>
+                        <td>{{ purchase.dt|date:"Y/m/d" }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
             </div>
-        {% endfor %}
+        </div>
 {%  endblock %}

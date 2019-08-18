@@ -14,5 +14,21 @@
       "owner": 1,
       "dt": "2019-08-17"
     }
+  },
+  {
+    "model": "foodtrack.purchaseitem",
+    "pk": 2,
+    "fields": {
+      "kind": 10,
+      "food": 343873,
+      "pcs": 1,
+      "amount": 0.5,
+      "unit": 99999,
+      "cost": 40,
+      "currency": 1,
+      "store_name": "TEST",
+      "owner": 1,
+      "dt": "2019-08-17"
+    }
   }
 ]

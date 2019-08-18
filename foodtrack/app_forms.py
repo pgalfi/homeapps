@@ -42,7 +42,6 @@ class FoodPurchaseForm(forms.ModelForm):
     pcs = forms.IntegerField(min_value=1)
     amount = forms.FloatField(min_value=0.0001)
     cost = forms.FloatField(min_value=0.0001)
-    # unit = forms.ChoiceField(initial=constants.DEFAULT_UNIT_ID)
 
     class Meta:
         model = PurchaseItem
@@ -92,3 +91,32 @@ class FoodPurchaseForm(forms.ModelForm):
                 Submit("Save", "Log Purchase", css_class="btn-block")
             )
         )
+
+
+class FoodPurchaseItemFilterForm(forms.Form):
+    food = forms.CharField(required=False)
+    store_name = forms.CharField(required=False)
+    date_start = forms.DateField(required=False, widget=forms.TextInput(attrs={"type": "date"}))
+    date_end = forms.DateField(required=False, widget=forms.TextInput(attrs={"type": "date"}))
+
+    def __init__(self, *args, **kwargs):
+        if "data" in kwargs and "food-id" in kwargs["data"]:
+            kwargs["data"]["food"] = kwargs["data"]["food-id"]
+
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            HTML("<h4>My Food Purchases</h4>"),
+            Field("food", placeholder="Type food name...", id="food-select", autocomplete="off",
+                  css_class="typeahead autocomplete-select form-control-sm", data_url=reverse("food-list", ("v1",)),
+                  data_set="results", data_id="id", data_text="description", data_query="search", data_max_results="50"),
+            Div(
+                Div(Field("store_name", autofocus="true", css_class="form-control-sm"), css_class="col"),
+                Div(Field("date_start", css_class="form-control-sm"), css_class="col"),
+                Div(Field("date_end", css_class="form-control-sm"), css_class="col"),
+                css_class="row",
+            ),
+        )
+
+
