@@ -51,6 +51,10 @@ jQuery.fn.extend({
             },
         }).bind("typeahead:select", function (e, suggestion) {
             $("#" + destination_id).val(suggestion[data_id]);
+        }).bind("typeahead:change", function (e) {
+            if (e.currentTarget.value==="") {
+                $("#" + destination_id).val("");
+            }
         });
 
     }

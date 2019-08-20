@@ -65,11 +65,11 @@ class FoodPurchaseList(LoginRequiredMixin, FormMixin, ListView):
         if form.is_valid():
             if form.cleaned_data["store_name"]:
                 qs = qs.filter(store_name__exact=form.cleaned_data["store_name"])
-            if form.cleaned_data["food"]:
+            if form.cleaned_data["food_id"]:
                 qs = qs.filter(food_id=form.cleaned_data["food_id"])
             if form.cleaned_data["date_start"]:
                 qs = qs.filter(dt__gte=form.cleaned_data["date_start"])
             if form.cleaned_data["date_end"]:
-                qs = qs.filter(dt_lte=form.cleaned_data["date_end"])
+                qs = qs.filter(dt__lte=form.cleaned_data["date_end"])
 
         return qs.order_by("-dt")
