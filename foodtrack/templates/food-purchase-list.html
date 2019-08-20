@@ -2,9 +2,24 @@
 {% load crispy_forms_tags %}
 {% load ranged_pagination %}
 {% block content %}
+        <form method="get">
         <div class="row justify-content-center pl-md-5 pr-md-5 ml-md-5 mr-md-5">
             <div class="col bg-light mt-2 pt-2">
-                {% crispy form %}
+                    <h4>My Food Purchases</h4>
+                    {{ form.food_id|as_crispy_field }}
+                    {{ form.food|as_crispy_field }}
+                    <div class="row">
+                        <div class="col">
+                            {{ form.store_name|as_crispy_field }}
+                        </div>
+                        <div class="col">
+                            {{ form.date_start|as_crispy_field }}
+                        </div>
+                        <div class="col">
+                            {{ form.date_end|as_crispy_field }}
+                        </div>
+                    </div>
+
             </div>
         </div>
         <div class="row justify-content-end pl-md-5 pr-md-5 ml-md-5 mr-md-5">
@@ -15,6 +30,7 @@
                     {% ranged_paginator 3 %}
                 </div>
         </div>
+        </form>
         <div class="row justify-content-start pl-md-5 pr-md-5 ml-md-5 mr-md-5">
             <div class="col bg-light">
             <table class="table table-striped">
@@ -37,4 +53,5 @@
             </table>
             </div>
         </div>
+
 {%  endblock %}

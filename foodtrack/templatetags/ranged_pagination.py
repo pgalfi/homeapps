@@ -16,3 +16,4 @@ def ranged_paginator(context: dict, adjacent_pages=2):
         "show_last": paginator_.num_pages not in page_numbers,
     })
     return context
+

@@ -1,9 +1,8 @@
 jQuery.fn.extend({
     setupAutoComplete: function () {
         let input_object = this[0];
-        $(this).before("<input type='hidden' name='" + input_object.name + "-id' id='" + input_object.id + "-id'>");
-        let minLength = input_object.dataset["min-length"] || 3;
-        let max_results = input_object.dataset["max-results"] || 30;
+        let minLength = input_object.dataset.minLength || 3;
+        let max_results = input_object.dataset.maxResults || 30;
         let data_url = input_object.dataset.url;
         let data_id = input_object.dataset.id || "id";
         let data_query = input_object.dataset.query || "q";
@@ -11,6 +10,12 @@ jQuery.fn.extend({
         let data_text = input_object.dataset.text || "name";
         let data_options_str = input_object.dataset.options || "{}";
         let data_options = JSON.parse(data_options_str.replace(/'/g, '"'));
+        let data_id_set_name = input_object.dataset.setName || input_object.name + "-id";
+        let destination_id = input_object.id + "-id";
+        let destination_element = $("[name='" + data_id_set_name + "'");
+        if (!destination_element.length) {
+            $(this).before("<input type='hidden' name='" + data_id_set_name + "' id='" + destination_id + "'>");
+        } else destination_id = destination_element[0].id;
         let typingTimer;
         $(this).typeahead({
             minLength: minLength,
@@ -45,7 +50,7 @@ jQuery.fn.extend({
                 }, 400)
             },
         }).bind("typeahead:select", function (e, suggestion) {
-            $("#" + input_object.id + "-id").val(suggestion[data_id]);
+            $("#" + destination_id).val(suggestion[data_id]);
         });
 
     }

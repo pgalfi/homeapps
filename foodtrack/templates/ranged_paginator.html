@@ -1,25 +1,26 @@
+{% load request_parameters %}
 {% if page_obj.has_previous %}
-  <a class="btn btn-sm btn-primary" href="?page={{ page_obj.previous_page_number }}">prev</a>
+  <a class="btn btn-sm btn-primary" href="?{% set-param page=page_obj.previous_page_number %}">prev</a>
 {% else %}
   <a class="btn btn-sm">prev</a>
 {% endif %}
 {% if show_first %}
-      <a class="btn btn-sm btn-outline-dark" href="?page=1">1</a>
+      <a class="btn btn-sm btn-outline-dark" href="?{% set-param page=1 %}">1</a>
     <span class="">...</span>
 {% endif %}
 {% for page_number in page_numbers %}
     {% if page_number == page_obj.number %}
         <a class="btn btn-sm">{{ page_number }}</a>
     {% else %}
-      <a class="btn btn-sm btn-outline-dark" href="?page={{ page_number }}">{{ page_number }}</a>
+      <a class="btn btn-sm btn-outline-dark" href="?{% set-param page=page_number %}">{{ page_number }}</a>
     {% endif %}
 {% endfor %}
 {% if show_last %}
     <span class="">...</span>
-    <a class="btn btn-sm btn-outline-dark" href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+    <a class="btn btn-sm btn-outline-dark" href="?{% set-param page=paginator.num_pages %}">{{ paginator.num_pages }}</a>
 {% endif %}
 {% if page_obj.has_next %}
-  <a class="btn btn-sm btn-primary " href="?page={{ page_obj.next_page_number }}">next</a>
+  <a class="btn btn-sm btn-primary " href="?{% set-param page=page_obj.next_page_number %}">next</a>
 {% else %}
   <a class="btn btn-sm">next</a>
 {% endif %}
