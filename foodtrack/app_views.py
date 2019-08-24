@@ -3,12 +3,30 @@ from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.forms import Form
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView
-from django.views.generic.edit import CreateView, FormMixin, UpdateView
+from django.views.generic.base import View
+from django.views.generic.edit import CreateView, FormMixin, UpdateView, ModelFormMixin
 
 from foodtrack.app_forms import FoodTrackAuthForm, FoodTrackPasswordChangeForm, FoodPurchaseForm, \
     FoodPurchaseItemFilterForm
 from foodtrack.models import PurchaseItem
 from foodtrack.services.user_prefs import load_form_preference, save_form_preference
+
+
+class PreferenceViewMixin(ModelFormMixin, View):
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if self.request.method == "GET":
+            kwargs["initial"] = load_form_preference(self.form_class, self.request.user.id)
+        if "data" in kwargs:
+            kwargs["data"] = kwargs["data"].copy()
+            kwargs["data"]["owner"] = self.request.user.id
+        return kwargs
+
+    def form_valid(self, form: Form):
+        response = super().form_valid(form)
+        save_form_preference(form.__class__, form.cleaned_data, self.request.user.id)
+        return response
 
 
 class FoodTrackLoginView(LoginView):
@@ -30,47 +48,20 @@ class FoodTrackPasswordView(PasswordChangeView):
     form_class = FoodTrackPasswordChangeForm
 
 
-class FoodPurchaseCreate(LoginRequiredMixin, CreateView):
+class FoodPurchaseCreate(LoginRequiredMixin, PreferenceViewMixin, CreateView):
     model = PurchaseItem
     form_class = FoodPurchaseForm
     template_name = "food-purchase.html"
     success_url = reverse_lazy("foodtrack-purchase")
     login_url = reverse_lazy("foodtrack-login")
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if self.request.method == "GET":
-            kwargs["initial"] = load_form_preference(self.form_class, self.request.user.id)
-        if "data" in kwargs:
-            kwargs["data"] = kwargs["data"].copy()
-            kwargs["data"]["owner"] = self.request.user.id
-        return kwargs
 
-    def form_valid(self, form: Form):
-        response = super().form_valid(form)
-        save_form_preference(form.__class__, form.cleaned_data, self.request.user.id)
-        return response
-
-
-class FoodPurchaseUpdate(LoginRequiredMixin, UpdateView):
+class FoodPurchaseUpdate(LoginRequiredMixin, PreferenceViewMixin, UpdateView):
     model = PurchaseItem
     form_class = FoodPurchaseForm
     template_name = "food-purchase.html"
     success_url = reverse_lazy("foodtrack-purchase")
     login_url = reverse_lazy("foodtrack-login")
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs["initial"] = load_form_preference(self.form_class, self.request.user.id)
-        if "data" in kwargs:
-            kwargs["data"] = kwargs["data"].copy()
-            kwargs["data"]["owner"] = self.request.user.id
-        return kwargs
-
-    def form_valid(self, form: Form):
-        response = super().form_valid(form)
-        save_form_preference(form.__class__, form.cleaned_data, self.request.user.id)
-        return response
 
 
 class FoodPurchaseList(LoginRequiredMixin, FormMixin, ListView):
