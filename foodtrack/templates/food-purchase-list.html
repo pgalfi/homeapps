@@ -19,7 +19,6 @@
                             {{ form.date_end|as_crispy_field }}
                         </div>
                     </div>
-
             </div>
         </div>
         <div class="row justify-content-end pl-md-5 pr-md-5 ml-md-5 mr-md-5">
@@ -43,7 +42,7 @@
             <tbody>
                 {% for purchase in object_list %}
                     <tr>
-                        <td>{{ purchase.store_name }}</td>
+                        <td><a href="{% url 'foodtrack-purchase-update' purchase.id %}">{{ purchase.store_name }}</a></td>
                         <td>{{ purchase.food }} ({{ purchase.amount }} {{ purchase.unit }})</td>
                         <td>{{ purchase.cost }}&nbsp;{{ purchase.currency }}</td>
                         <td>{{ purchase.dt|date:"Y/m/d" }}</td>
