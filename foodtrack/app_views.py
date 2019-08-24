@@ -69,6 +69,10 @@ class FoodPurchaseDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("foodtrack-purchase-list")
     login_url = reverse_lazy("foodtrack-login")
 
+    def get(self, request, *args, **kwargs):
+        # skip confirmation logic provided by GET request and convert it to a delete
+        return self.post(request, *args, **kwargs)
+
 
 class FoodPurchaseList(LoginRequiredMixin, FormMixin, ListView):
     template_name = "food-purchase-list.html"

@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% load crispy_forms_tags %}
 {% load ranged_pagination %}
+{% load static %}
 {% block content %}
         <form method="get">
         <div class="row justify-content-center pl-md-5 pr-md-5 ml-md-5 mr-md-5">
@@ -42,11 +43,15 @@
             <tbody>
                 {% for purchase in object_list %}
                     <tr>
-                        <td><a href="{% url 'foodtrack-purchase-update' purchase.id %}?next={{ request.get_full_path }}">
+                        <td>
+                            <a href="{% url 'foodtrack-purchase-update' purchase.id %}?next={{ request.get_full_path }}">
                             {{ purchase.store_name }}</a></td>
                         <td>{{ purchase.food }} ({{ purchase.amount }} {{ purchase.unit }})</td>
                         <td>{{ purchase.cost }}&nbsp;{{ purchase.currency }}</td>
-                        <td>{{ purchase.dt|date:"Y/m/d" }}</td>
+                        <td>{{ purchase.dt|date:"Y/m/d" }}
+                            <a href="{% url 'foodtrack-purchase-delete' purchase.id %}" type="button"
+                               class="close text-danger"><span>&times;</span></a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
