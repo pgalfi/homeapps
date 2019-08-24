@@ -42,7 +42,8 @@
             <tbody>
                 {% for purchase in object_list %}
                     <tr>
-                        <td><a href="{% url 'foodtrack-purchase-update' purchase.id %}">{{ purchase.store_name }}</a></td>
+                        <td><a href="{% url 'foodtrack-purchase-update' purchase.id %}?next={{ request.get_full_path }}">
+                            {{ purchase.store_name }}</a></td>
                         <td>{{ purchase.food }} ({{ purchase.amount }} {{ purchase.unit }})</td>
                         <td>{{ purchase.cost }}&nbsp;{{ purchase.currency }}</td>
                         <td>{{ purchase.dt|date:"Y/m/d" }}</td>

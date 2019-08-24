@@ -60,7 +60,7 @@ class FoodPurchaseUpdate(LoginRequiredMixin, PreferenceViewMixin, UpdateView):
     model = PurchaseItem
     form_class = FoodPurchaseForm
     template_name = "food-purchase.html"
-    success_url = reverse_lazy("foodtrack-purchase")
+    success_url = reverse_lazy("foodtrack-purchase-list")
     login_url = reverse_lazy("foodtrack-login")
 
 
