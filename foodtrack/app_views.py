@@ -4,7 +4,7 @@ from django.forms import Form
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView
 from django.views.generic.base import View
-from django.views.generic.edit import CreateView, FormMixin, UpdateView, ModelFormMixin
+from django.views.generic.edit import CreateView, FormMixin, UpdateView, ModelFormMixin, DeleteView
 
 from foodtrack.app_forms import FoodTrackAuthForm, FoodTrackPasswordChangeForm, FoodPurchaseForm, \
     FoodPurchaseItemFilterForm
@@ -60,6 +60,12 @@ class FoodPurchaseUpdate(LoginRequiredMixin, PreferenceViewMixin, UpdateView):
     model = PurchaseItem
     form_class = FoodPurchaseForm
     template_name = "food-purchase.html"
+    success_url = reverse_lazy("foodtrack-purchase-list")
+    login_url = reverse_lazy("foodtrack-login")
+
+
+class FoodPurchaseDelete(LoginRequiredMixin, DeleteView):
+    model = PurchaseItem
     success_url = reverse_lazy("foodtrack-purchase-list")
     login_url = reverse_lazy("foodtrack-login")
 

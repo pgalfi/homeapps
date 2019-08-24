@@ -21,14 +21,19 @@ router.register('recipes', api_views.RecipeViewSet)
 router.register('recipecomponents', api_views.RecipeComponentViewSet)
 
 urlpatterns = [
+    # APIs
     path('graphql/', GraphQLView.as_view(graphiql=True, schema=gql_schema.schema)),
     re_path('(?P<version>(v1))/', include(router.urls)),
+
     path('', app_views.Index.as_view(), name='foodtrack-index'),
     path('index/', app_views.Index.as_view(), name='foodtrack-index'),
+
     path('account/login/', app_views.FoodTrackLoginView.as_view(), name='foodtrack-login'),
     path('account/password/', app_views.FoodTrackPasswordView.as_view(), name='foodtrack-password'),
     path('account/logout/', logout_then_login, {"login_url": reverse_lazy("foodtrack-login")}, name="foodtrack-logout"),
+
     path('purchase/new', app_views.FoodPurchaseCreate.as_view(), name='foodtrack-purchase'),
-    path('purchase/update/<int:pk>/', app_views.FoodPurchaseUpdate.as_view(), name='foodtrack-purchase-update'),
     path('purchase/list', app_views.FoodPurchaseList.as_view(), name='foodtrack-purchase-list'),
+    path('purchase/update/<int:pk>/', app_views.FoodPurchaseUpdate.as_view(), name='foodtrack-purchase-update'),
+    path('purchase/delete/<int:pk>/', app_views.FoodPurchaseDelete.as_view(), name='foodtrack-purchase-delete'),
 ]
