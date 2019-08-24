@@ -15,12 +15,15 @@ class TestFoodPurchaseView(TestCase):
     def setUp(self) -> None:
         self.client = Client()
         self.client.login(username="admin", password="admin")
+        self.maxDiff = 10240
 
     def test_food_purchase_01(self):
+        """Test simple call to food purchase view"""
         response = self.client.get(reverse("foodtrack-purchase"))
         self.assertTrue(status.is_success(response.status_code))
 
     def test_food_purchase_02(self):
+        """Test that all user preferences are preserved in backend after a purchase is logged."""
         response = self.client.post(reverse("foodtrack-purchase"), data={
             "kind": "10",
             "store_name": "TEST",
@@ -39,15 +42,17 @@ class TestFoodPurchaseView(TestCase):
         self.assertEqual(1, purchase.count())
 
         preference = get_object_or_404(UserPreference, owner_id=1)
-        self.assertEqual("TEST", preference.prefs["models"]["purchaseitem"]["store_name"])
-        self.assertEqual(99999, preference.prefs["models"]["purchaseitem"]["unit_id"])
-        self.assertEqual(1, preference.prefs["models"]["purchaseitem"]["currency_id"])
-        self.assertEqual("2019-08-12 00:00:00", preference.prefs["models"]["purchaseitem"]["dt"])
+        self.assertEqual("TEST", preference.prefs["forms"]["foodpurchaseform"]["store_name"])
+        self.assertEqual(1, preference.prefs["forms"]["foodpurchaseform"]["currency"])
+        self.assertEqual(99999, preference.prefs["forms"]["foodpurchaseform"]["unit"])
+        self.assertEqual("2019-08-12", preference.prefs["forms"]["foodpurchaseform"]["dt"])
 
         usage_counter = get_object_or_404(FoodUsageCounter, owner_id=1, food_id=170457)
         self.assertEqual(1, usage_counter.count)
 
     def test_food_purchase_03(self):
+        """Test for purchase form submission with POST, then response of the same form, but with user preferred
+        defaults kept."""
         response = self.client.post(reverse("foodtrack-purchase"), data={
             "kind": "10",
             "store_name": "TEST",
@@ -60,7 +65,6 @@ class TestFoodPurchaseView(TestCase):
             "currency": "1",
             "dt": "2019-08-12"
         })
-        # self.maxDiff = 10240
         # self.assertEqual("", response.content.decode("utf-8"))
         self.assertEqual(response.status_code, status.HTTP_302_FOUND)
         self.assertEqual(response.url, reverse("foodtrack-purchase"))
@@ -69,7 +73,6 @@ class TestFoodPurchaseView(TestCase):
 
         response: TemplateResponse = self.client.get(reverse("foodtrack-purchase"))
         html = response.content.decode("utf-8")
-        # self.maxDiff = 10240
         # self.assertEqual("", html)
         self.assertNotEqual(-1, html.find('<option value="99999" selected>kg</option>'))
         self.assertNotEqual(-1, html.find('name="store_name" value="TEST"'))

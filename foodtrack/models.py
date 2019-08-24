@@ -125,10 +125,7 @@ class PurchaseItem(models.Model):
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     store_name = models.CharField(max_length=1024, default=None, null=True)
     owner = models.ForeignKey(User, related_name="purchases", on_delete=models.CASCADE)
-    dt = models.DateTimeField()
-
-    class Prefs:
-        fields = ["unit_id", "currency_id", "store_name", "dt"]
+    dt = models.DateField()
 
     def __str__(self):
         if self.food is not None:
