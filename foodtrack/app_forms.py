@@ -40,7 +40,7 @@ class FoodTrackPasswordChangeForm(PasswordChangeForm):
 class FoodPurchaseForm(forms.ModelForm):
     food_id = forms.IntegerField(required=False, widget=forms.HiddenInput)
     description = forms.CharField(required=False)
-    pcs = forms.IntegerField(min_value=1)
+    pcs = forms.IntegerField(min_value=1, initial=1)
     amount = forms.FloatField(min_value=0.0001)
     cost = forms.FloatField(min_value=0.0001)
 

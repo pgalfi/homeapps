@@ -118,7 +118,7 @@ class PurchaseItem(models.Model):
     kind = models.IntegerField(choices=constants.PURCHASE_ITEM_KINDS, default=constants.PURCHASE_FOOD_DB)
     food = models.ForeignKey(Food, default=None, null=True, on_delete=models.SET_NULL)
     description = models.CharField(max_length=2048, default=None, null=True)
-    pcs = models.PositiveIntegerField(verbose_name="Count", null=True, default=None)
+    pcs = models.PositiveIntegerField(verbose_name="Count", null=False, default=1)
     amount = models.FloatField(null=True)
     unit = models.ForeignKey(MeasureUnit, null=True, default=constants.DEFAULT_UNIT_ID, on_delete=models.SET_NULL)
     cost = models.FloatField()
