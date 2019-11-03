@@ -123,9 +123,11 @@ class FoodPurchaseItemFilterForm(forms.Form):
                            ))
 
     store_name = forms.CharField(required=False)
-    date_start = forms.DateField(required=False, widget=forms.TextInput(attrs={"type": "date"}))
-    date_end = forms.DateField(required=False, widget=forms.TextInput(attrs={"type": "date"}))
+    dt_start = forms.DateField(required=False, widget=forms.TextInput(attrs={"type": "date"}), label="Date start")
+    dt_end = forms.DateField(required=False, widget=forms.TextInput(attrs={"type": "date"}), label="Date end")
 
 
-
-
+class FoodPurchasesSummaryFilterForm(forms.Form):
+    store_name = forms.CharField(required=True, empty_value=None)
+    dt_start = forms.DateField(required=True, widget=forms.TextInput(attrs={"type": "date"}), label="Date start")
+    dt_end = forms.DateField(required=True, widget=forms.TextInput(attrs={"type": "date"}), label="Date end")

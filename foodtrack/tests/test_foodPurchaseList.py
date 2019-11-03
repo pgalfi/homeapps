@@ -21,11 +21,11 @@ class TestFoodPurchaseList(TestCase):
         self.assertEqual(1, response.content.decode("utf-8").count("<tr"))
 
     def test_purchase_list_03(self):
-        response = self.client.get(reverse("foodtrack-purchase-list") + "?date_start=2019-08-18")
+        response = self.client.get(reverse("foodtrack-purchase-list") + "?dt_start=2019-08-18")
         self.assertEqual(0, response.content.decode("utf-8").count("<tr"))
 
     def test_purchase_list_04(self):
-        response = self.client.get(reverse("foodtrack-purchase-list") + "?date_end=2019-08-18")
+        response = self.client.get(reverse("foodtrack-purchase-list") + "?dt_end=2019-08-18")
         self.assertEqual(2, response.content.decode("utf-8").count("<tr"))
 
     def test_purchase_list_05(self):
