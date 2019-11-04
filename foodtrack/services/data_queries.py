@@ -1,5 +1,5 @@
 import datetime
-from typing import Tuple
+from abc import ABC, abstractmethod
 
 from django.db.models import QuerySet, Sum, F
 from django.forms import Form
@@ -7,17 +7,26 @@ from django.forms import Form
 from foodtrack import constants
 
 
-class QueryFormFilter:
+class QuerySetChanger(ABC):
 
-    def __init__(self, query_set: QuerySet, frm: Form, empty_values: Tuple = ()):
+    def __init__(self, query_set: QuerySet, data=None, **kwargs):
         self.query_set = query_set
-        self.frm = frm
-        self.frm.full_clean()
-        self.empty_values = empty_values
+        self.data = data
 
-    def filter(self):
-        for cleaned_field, cleaned_data in self.frm.cleaned_data.items():
-            if cleaned_data in self.empty_values: continue
+    @abstractmethod
+    def apply(self):
+        pass
+
+
+class QuerySetFormFilter(QuerySetChanger):
+
+    def __init__(self, query_set: QuerySet, frm: Form):
+        super().__init__(query_set, data=frm)
+        self.data.full_clean()
+
+    def apply(self):
+        for cleaned_field, cleaned_data in self.data.cleaned_data.items():
+            if cleaned_data in ('', None): continue
             if isinstance(cleaned_data, datetime.date) or isinstance(cleaned_data, datetime.datetime):
                 if "_start" in cleaned_field:
                     self.query_set = self.query_set.filter(
@@ -32,27 +41,26 @@ class QueryFormFilter:
         return self.query_set
 
 
-class QueryFoodPurchaseSummarizer:
+class QueryFoodPurchaseSummarizer(QuerySetChanger):
 
     def __init__(self, query_set: QuerySet, summary_type: int):
-        self.query_set = query_set
-        self.summary_type = summary_type
+        super().__init__(query_set, data=summary_type)
 
-    def summarize(self):
-        if self.summary_type == constants.FOOD_PURCHASE_SUMM_ITEM_STORE \
-                or self.summary_type == constants.FOOD_PURCHASE_SUMM_STORE_ITEM:
+    def apply(self):
+        if self.data == constants.FOOD_PURCHASE_SUMM_ITEM_STORE \
+                or self.data == constants.FOOD_PURCHASE_SUMM_STORE_ITEM:
             self.query_set = self.query_set.values("food__description", "store_name", "currency__rate")
-        elif self.summary_type == constants.FOOD_PURCHASE_SUMM_STORE:
+        elif self.data == constants.FOOD_PURCHASE_SUMM_STORE:
             self.query_set = self.query_set.values("store_name", "currency__rate")
-        elif self.summary_type == constants.FOOD_PURCHASE_SUMM_ITEM:
+        elif self.data == constants.FOOD_PURCHASE_SUMM_ITEM:
             self.query_set = self.query_set.values("food__description", "currency__rate")
         self.query_set = self.query_set.annotate(total=Sum(F("cost") * F("currency__rate")))
-        if self.summary_type == constants.FOOD_PURCHASE_SUMM_ITEM_STORE:
+        if self.data == constants.FOOD_PURCHASE_SUMM_ITEM_STORE:
             self.query_set = self.query_set.order_by("food__description", "store_name")
-        elif self.summary_type == constants.FOOD_PURCHASE_SUMM_STORE_ITEM:
+        elif self.data == constants.FOOD_PURCHASE_SUMM_STORE_ITEM:
             self.query_set = self.query_set.order_by("store_name", "food__description")
-        elif self.summary_type == constants.FOOD_PURCHASE_SUMM_ITEM:
+        elif self.data == constants.FOOD_PURCHASE_SUMM_ITEM:
             self.query_set = self.query_set.order_by("food__description")
-        elif self.summary_type == constants.FOOD_PURCHASE_SUMM_STORE:
+        elif self.data == constants.FOOD_PURCHASE_SUMM_STORE:
             self.query_set = self.query_set.order_by("store_name")
         return self.query_set
