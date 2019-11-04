@@ -1,10 +1,9 @@
-import datetime
-
 from django.forms import Form
 from django.views import View
 from django.views.generic import ListView
 from django.views.generic.edit import ModelFormMixin, FormMixin
 
+from foodtrack.services.data_queries import QueryFormFilter
 from foodtrack.services.user_prefs import load_form_preference, save_form_preference
 
 
@@ -25,8 +24,7 @@ class PreferenceViewMixin(ModelFormMixin, View):
         return response
 
 
-class FilteredListView(FormMixin, ListView):
-
+class FormFilteredListView(FormMixin, ListView):
     empty_values = (None, '')
 
     def get_empty_values(self):
@@ -43,15 +41,22 @@ class FilteredListView(FormMixin, ListView):
         qs = super().get_queryset()
         self.kwargs["form"] = self.get_form()
         form: Form = self.kwargs["form"]
-        form.full_clean()
-        for cleaned_field, cleaned_data in form.cleaned_data.items():
-            if cleaned_data in self.get_empty_values(): continue
-            if isinstance(cleaned_data, datetime.date) or isinstance(cleaned_data, datetime.datetime):
-                if "_start" in cleaned_field: qs = qs.filter(**{cleaned_field.replace("_start","")+"__gte": cleaned_data})
-                elif "_end" in cleaned_field: qs = qs.filter(**{cleaned_field.replace("_end","")+"__lte": cleaned_data})
-                else: qs = qs.filter(**{cleaned_field: cleaned_data})
-            else:
-                qs = qs.filter(**{cleaned_field: cleaned_data})
-        return qs
+        return QueryFormFilter(qs, form, self.get_empty_values()).filter()
 
+
+class OptionsFormMixin(FormMixin):
+    options_form_class = None
+
+    def get_options_form_class(self):
+        return self.options_form_class
+
+    def get_options_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_options_form_class()
+        return form_class(**self.get_form_kwargs())
+
+    def get_context_data(self, **kwargs):
+        if 'options_form' not in kwargs:
+            kwargs['options_form'] = self.get_options_form()
+        return super().get_context_data(**kwargs)
 

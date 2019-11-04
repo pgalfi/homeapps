@@ -5,7 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.urls import reverse_lazy
 from rest_framework.reverse import reverse
 
-from foodtrack.models import PurchaseItem
+from foodtrack import constants
+from foodtrack.models import PurchaseItem, Currency
 
 
 class FoodTrackAuthForm(AuthenticationForm):
@@ -127,7 +128,14 @@ class FoodPurchaseItemFilterForm(forms.Form):
     dt_end = forms.DateField(required=False, widget=forms.TextInput(attrs={"type": "date"}), label="Date end")
 
 
+class FoodPurchasesSummaryOptionsForm(forms.Form):
+    summary_type = forms.TypedChoiceField(choices=constants.FOOD_PURCHASE_SUMMARY_TYPES, required=False, coerce=lambda x: int(x))
+    currency_id = forms.TypedChoiceField(choices=((currency["id"], currency["name"])
+                                             for currency in list(Currency.objects.all().values("id", "name"))),
+                                    label="Currency", required=False, coerce=lambda x: int(x))
+
+
 class FoodPurchasesSummaryFilterForm(forms.Form):
-    store_name = forms.CharField(required=True, empty_value=None)
-    dt_start = forms.DateField(required=True, widget=forms.TextInput(attrs={"type": "date"}), label="Date start")
-    dt_end = forms.DateField(required=True, widget=forms.TextInput(attrs={"type": "date"}), label="Date end")
+    store_name = forms.CharField(required=False, empty_value=None)
+    dt_start = forms.DateField(required=False, widget=forms.TextInput(attrs={"type": "date"}), label="Date start")
+    dt_end = forms.DateField(required=False, widget=forms.TextInput(attrs={"type": "date"}), label="Date end")

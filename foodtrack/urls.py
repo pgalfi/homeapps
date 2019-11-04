@@ -33,7 +33,7 @@ urlpatterns = [
     path('account/logout/', logout_then_login, {"login_url": reverse_lazy("foodtrack-login")}, name="foodtrack-logout"),
 
     path('purchase/new', app_views.FoodPurchaseCreate.as_view(), name='foodtrack-purchase'),
-    path('purchase/list', app_views.FoodPurchaseList.as_view(), name='foodtrack-purchase-list'),
+    path('purchase/list', app_views.FoodPurchaseListForm.as_view(), name='foodtrack-purchase-list'),
     path('purchase/summary', app_views.FoodPurchasesSummary.as_view(), name='foodtrack-purchase-summary'),
     path('purchase/update/<int:pk>/', app_views.FoodPurchaseUpdate.as_view(), name='foodtrack-purchase-update'),
     path('purchase/delete/<int:pk>/', app_views.FoodPurchaseDelete.as_view(), name='foodtrack-purchase-delete'),

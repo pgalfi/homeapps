@@ -1,5 +1,57 @@
 {% extends 'layout.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
+{% load currency_conversions %}
 {% block content %}
+        <form method="get">
+        <div class="row justify-content-center pl-md-5 pr-md-5 ml-md-5 mr-md-5">
+            <div class="col bg-light mt-2 pt-2">
+                    <h4>My Food Purchases Summary</h4>
+                    <div class="row">
+                        <div class="col">
+                            {{ form.store_name|as_crispy_field }}
+                        </div>
+                        <div class="col">
+                            {{ form.dt_start|as_crispy_field }}
+                        </div>
+                        <div class="col">
+                            {{ form.dt_end|as_crispy_field }}
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row justify-content-end pl-md-5 pr-md-5 ml-md-5 mr-md-5">
+                <div class="col bg-light pb-3">
+                    {{ options_form.summary_type|as_crispy_field }}
+                </div>
+                <div class="col bg-light pb-3">
+                    {{ options_form.currency_id|as_crispy_field }}
+                </div>
+                <div class="col bg-light pb-3">
+                    <input type="submit" name="Summarize" value="Summarize" class="btn btn-primary" id="submit-id-summary">
+                </div>
+        </div>
+        </form>
+        <div class="row justify-content-start pl-md-5 pr-md-5 ml-md-5 mr-md-5">
+            <div class="col bg-light">
+            <table class="table table-striped">
+            <thead>
+                <th>Store</th>
+                <th>Item</th>
+                <th>Cost</th>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.store_name }}</td>
+                        <td>{{ object.food__description }}</td>
+                        <td>{{ object.total|convert_currency:currency|floatformat }} {{ currency }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+            </div>
+
+        </div>
 
 {% endblock %}
