@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
-    'graphene_django',
     'rest_framework',
     'crispy_forms',
     'foodtrack.apps.FoodtrackConfig',
