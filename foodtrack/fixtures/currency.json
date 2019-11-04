@@ -8,5 +8,15 @@
       "rate": 1,
       "rate_date": "2019-08-12"
     }
+  },
+  {
+    "model": "foodtrack.currency",
+    "pk": 2,
+    "fields": {
+      "name": "USD",
+      "long_name": "Danish kroner",
+      "rate": 6.78,
+      "rate_date": "2019-08-12"
+    }
   }
 ]

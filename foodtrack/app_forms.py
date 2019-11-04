@@ -129,10 +129,10 @@ class FoodPurchaseItemFilterForm(forms.Form):
 
 
 class FoodPurchasesSummaryOptionsForm(forms.Form):
-    summary_type = forms.TypedChoiceField(choices=constants.FOOD_PURCHASE_SUMMARY_TYPES, required=False, coerce=lambda x: int(x))
-    currency_id = forms.TypedChoiceField(choices=((currency["id"], currency["name"])
+    summary_type = forms.ChoiceField(choices=constants.FOOD_PURCHASE_SUMMARY_TYPES, required=True)
+    currency_id = forms.ChoiceField(choices=((currency["id"], currency["name"])
                                              for currency in list(Currency.objects.all().values("id", "name"))),
-                                    label="Currency", required=False, coerce=lambda x: int(x))
+                                    label="Currency", required=True)
 
 
 class FoodPurchasesSummaryFilterForm(forms.Form):
