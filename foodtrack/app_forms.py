@@ -130,9 +130,14 @@ class FoodPurchaseItemFilterForm(forms.Form):
 
 class FoodPurchasesSummaryOptionsForm(forms.Form):
     summary_type = forms.ChoiceField(choices=constants.FOOD_PURCHASE_SUMMARY_TYPES, required=True)
-    currency_id = forms.ChoiceField(choices=((currency["id"], currency["name"])
-                                             for currency in list(Currency.objects.all().values("id", "name"))),
-                                    label="Currency", required=True)
+    currency_id = forms.ChoiceField(label="Currency", required=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["currency_id"] = forms.ChoiceField(choices=((currency["id"], currency["name"])
+                                                                for currency in
+                                                                list(Currency.objects.all().values("id", "name"))),
+                                                       label="Currency", required=True)
 
 
 class FoodPurchasesSummaryFilterForm(forms.Form):

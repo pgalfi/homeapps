@@ -63,3 +63,27 @@ class FoodPurchaseListForm(LoginRequiredMixin, FormFilteredListView):
     queryset = PurchaseItem.objects.all()
     ordering = "-dt"
     paginate_by = 5
+
+
+class FoodPurchasesSummary(LoginRequiredMixin, OptionsFormMixin, FormFilteredListView):
+    template_name = "food-purchase-summary.html"
+    form_class = FoodPurchasesSummaryFilterForm
+    options_form_class = FoodPurchasesSummaryOptionsForm
+    queryset = PurchaseItem.objects.all()
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        self.kwargs["options_form"] = self.get_options_form()
+        options_form: Form = self.kwargs["options_form"]
+        options_form.full_clean()
+        if "summary_type" not in options_form.cleaned_data:
+            return PurchaseItem.objects.none()
+        return QueryFoodPurchaseSummarizer(qs, int(options_form.cleaned_data["summary_type"])).apply()
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        options_form: Form = self.kwargs["options_form"]
+        if "currency_id" in options_form.cleaned_data:
+            context_data["currency"] = Currency.objects.get(pk=options_form.cleaned_data["currency_id"])
+        return context_data
+

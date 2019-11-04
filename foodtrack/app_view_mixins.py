@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic import ListView
 from django.views.generic.edit import ModelFormMixin, FormMixin
 
-from foodtrack.services.data_queries import QueryFormFilter
+from foodtrack.services.data_queries import QuerySetFormFilter
 from foodtrack.services.user_prefs import load_form_preference, save_form_preference
 
 
@@ -25,10 +25,6 @@ class PreferenceViewMixin(ModelFormMixin, View):
 
 
 class FormFilteredListView(FormMixin, ListView):
-    empty_values = (None, '')
-
-    def get_empty_values(self):
-        return self.empty_values
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs().copy()
@@ -40,8 +36,8 @@ class FormFilteredListView(FormMixin, ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         self.kwargs["form"] = self.get_form()
-        form: Form = self.kwargs["form"]
-        return QueryFormFilter(qs, form, self.get_empty_values()).filter()
+        form = self.kwargs["form"]
+        return QuerySetFormFilter(qs, form).apply()
 
 
 class OptionsFormMixin(FormMixin):

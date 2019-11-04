@@ -14,7 +14,7 @@
     "pk": 2,
     "fields": {
       "name": "USD",
-      "long_name": "Danish kroner",
+      "long_name": "US dollar",
       "rate": 6.78,
       "rate_date": "2019-08-12"
     }
