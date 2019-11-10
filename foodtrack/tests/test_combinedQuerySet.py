@@ -14,11 +14,12 @@ class TestCombinedQuerySet(TestCase):
         cqs = CombinedQuerySet(Food.objects.all(), Recipe.objects.all())
         test_query = Q(name__icontains="apple") | Q(description__iexact="bear")
         cqs.clean_filter_args([test_query], Food.objects.all())
-        self.assertEqual("", str(test_query))
+        self.assertEqual("(OR: ('pk__isnull', True), ('description__iexact', 'bear'))", str(test_query))
 
     def test_clean_filter_args_02(self):
         cqs = CombinedQuerySet(Food.objects.all(), Recipe.objects.all())
         test_query = Q(Q(name__icontains="apple") | Q(description__iexact="bear")) & Q(bird__iexact=12)
         cqs.clean_filter_args([test_query], Food.objects.all())
-        self.assertEqual("", str(test_query))
+        self.assertEqual("(AND: (OR: ('pk__isnull', True), ('description__iexact', 'bear')), ('pk__isnull', False))",
+                         str(test_query))
 
