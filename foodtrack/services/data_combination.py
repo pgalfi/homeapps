@@ -71,7 +71,14 @@ class CombinedQuerySet:
         return iter(self.queries)
 
     def __getitem__(self, k):
-        """Implements slicing on a combined queryset.
+        """
+        Implements slicing on a combined queryset.
+
+        Args:
+            k (Union[int, slice): Slice object, or an integer to return the slice or single element from the combined query
+
+        Returns:
+            Model: model object returned by the applicable query
         """
         if not isinstance(k, (int, slice)):
             raise TypeError
@@ -88,31 +95,40 @@ class CombinedQuerySet:
             start = 0 if start is None else start
 
             for query_index in range(len(self.queries)):
-                if stop < self.query_count(query_index):
+                if stop < self._query_count(query_index):
                     data_set += self.queries[query_index][start:stop]
                     break
-                if start < self.query_count(query_index):
+                if start < self._query_count(query_index):
                     data_set += self.queries[query_index][start:]
-                start -= self.query_count(query_index)
+                start -= self._query_count(query_index)
                 if start < 0:
                     start = 0
-                stop -= self.query_count(query_index)
+                stop -= self._query_count(query_index)
 
             return data_set[::k.step] if k.step else data_set
         else:
             relative_item_count = k
             for query_index in range(len(self.queries)):
-                if relative_item_count < self.query_count(query_index):
+                if relative_item_count < self._query_count(query_index):
                     return self.queries[query_index][relative_item_count]
-                relative_item_count -= self.query_count(query_index)
+                relative_item_count -= self._query_count(query_index)
 
-    def query_count(self, query_index):
+    def _query_count(self, query_index):
+        """
+        Provide the count for an individual query from the set of queries in this combined queryset. (Used internally.)
+
+        Args:
+            query_index (int): index of the query in the local queries list
+
+        Returns:
+            int: the count of elements from the requested queryset
+        """
         if self.counts[query_index] is None:
             self.counts[query_index] = self.queries[query_index].count()
         return self.counts[query_index]
 
     def count(self):
-        return sum((self.query_count(query_index) for query_index in range(len(self.queries))))
+        return sum((self._query_count(query_index) for query_index in range(len(self.queries))))
 
     def filter(self, *args, **kwargs):
         for i in range(len(self.queries)):
@@ -147,7 +163,15 @@ class CombinedQuerySet:
         return obj
 
     def clean_filter_args(self, children, query, parent: Node = None):
-        """Clean queryset filter arguments of any field reference that can not be solved for that specific query.
+        """
+        Clean queryset filter arguments of any field reference that can not be solved for that specific query.
+        Args:
+            children (List): list of parameters for the filter. Tuple with lookup, value or Q objects
+            query (QuerySet): actual query that is supposed to receive the parameters for filtering
+            parent (Node): Q object node that refers back to the parent Q object when traversing recursively
+
+        Returns:
+            None (modifies the list of children passed in as reference)
         """
         for i in range(len(children)):
             if isinstance(children[i], Node):
