@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from rest_framework.reverse import reverse
 
 from foodtrack import constants
-from foodtrack.models import PurchaseItem, Currency
+from foodtrack.models import PurchaseItem, Currency, FoodLogEntry
 
 
 class FoodTrackAuthForm(AuthenticationForm):
@@ -144,3 +144,31 @@ class FoodPurchasesSummaryFilterForm(forms.Form):
     store_name = forms.CharField(required=False, empty_value=None)
     dt_start = forms.DateField(required=False, widget=forms.TextInput(attrs={"type": "date"}), label="Date start")
     dt_end = forms.DateField(required=False, widget=forms.TextInput(attrs={"type": "date"}), label="Date end")
+
+
+class FoodLogEntryForm(forms.ModelForm):
+    food_text = forms.CharField(required=True,
+                                widget=forms.TextInput(
+                                    attrs={
+                                        "placeholder": "Type food name...",
+                                        "autocomplete": "off",
+                                        "class": "typeahead autocomplete-select form-control-sm",
+                                        "data-url": reverse_lazy("food-list", args=["v1"]),
+                                        "data-set": "results",
+                                        "data-id": "id",
+                                        "data-text": "description",
+                                        "data-query": "search",
+                                        "data-max-results": "50",
+                                        "data-set-name": "food_id"
+                                    }
+                                ))
+    food_id = forms.IntegerField(required=False, widget=forms.HiddenInput)
+    alt_food_id = forms.IntegerField(required=False, widget=forms.HiddenInput)
+    amount = forms.FloatField(min_value=0.0001)
+
+    class Meta:
+        model = FoodLogEntry
+        fields = ["amount", "portion", "category", "dt"]
+        widgets = {
+            "food": forms.TextInput,
+        }

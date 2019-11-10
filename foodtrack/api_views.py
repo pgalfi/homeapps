@@ -1,8 +1,9 @@
 import datetime
 
+from django.db import connection
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, mixins
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -10,6 +11,7 @@ from rest_framework.response import Response
 import foodtrack.services.data_events
 from foodtrack.serializers import *
 from foodtrack.services import nutrients
+from foodtrack.services.data_combination import CombinedQuerySet
 
 
 class IsOwner(permissions.BasePermission):
@@ -22,8 +24,10 @@ class UsageOrderingFilter(OrderingFilter):
 
     def filter_queryset(self, request, queryset, view):
         ordering = super().get_ordering(request, queryset, view)
-        if ordering: ordering = ["-usage__count", "-data_type"] + list(ordering)
-        else: ordering = ["-usage__count", "-data_type"]
+        if ordering:
+            ordering = ["-usage__count", "-data_type"] + list(ordering)
+        else:
+            ordering = ["-usage__count", "-data_type"]
         return queryset.order_by(*ordering)
 
 
@@ -56,7 +60,7 @@ class FoodViewSet(viewsets.ReadOnlyModelViewSet):
     ordering = ('description',)
 
     def retrieve(self, request, pk=None, **kwargs):
-        food = get_object_or_404(Food.objects.all(), pk=pk)
+        food = get_object_or_404(Food, pk=pk)
         serializer = FoodDetailSerializer(food)
         return Response(serializer.data)
 
@@ -132,4 +136,25 @@ class RecipeViewSet(viewsets.ModelViewSet):
 class RecipeComponentViewSet(viewsets.ModelViewSet):
     serializer_class = RecipeComponentSerializer
     queryset = RecipeComponent.objects.all()
+
+
+class FoodAndRecipeFacadeViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = FoodAndRecipeFacadeSerializer
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('name', 'description')
+    ordering_fields = ('name', 'description')
+
+    def get_queryset(self) -> CombinedQuerySet:
+        food_qs = Food.objects.all().select_related("category")
+        recipe_qs = Recipe.objects.all()
+        return CombinedQuerySet(food_qs, recipe_qs)
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        for query in connection.queries:
+            print(query)
+        print(len(connection.queries))
+        return response
+
+
 

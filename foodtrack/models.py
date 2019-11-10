@@ -217,7 +217,7 @@ class Recipe(models.Model):
 
 class RecipeComponent(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='components')
-    food = models.ForeignKey(Food, on_delete=models.SET_NULL, null=True, default=None, related_name="components")
+    food = models.ForeignKey(Food, on_delete=models.SET_NULL, null=True, default=None, related_name="component_recipes")
     amount = models.FloatField()  # default is grams if portion is null
     portion = models.ForeignKey(FoodPortion, on_delete=models.SET_NULL, null=True, default=None)
 

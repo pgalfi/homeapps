@@ -64,3 +64,5 @@ class QueryFoodPurchaseSummarizer(QuerySetChanger):
         elif self.data == constants.FOOD_PURCHASE_SUMM_STORE:
             self.query_set = self.query_set.order_by("store_name")
         return self.query_set
+
+

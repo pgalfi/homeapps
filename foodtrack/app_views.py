@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from foodtrack.app_forms import FoodTrackAuthForm, FoodTrackPasswordChangeForm, FoodPurchaseForm, \
     FoodPurchaseItemFilterForm, FoodPurchasesSummaryFilterForm, FoodPurchasesSummaryOptionsForm
 from foodtrack.app_view_mixins import PreferenceViewMixin, FormFilteredListView, OptionsFormMixin
-from foodtrack.models import PurchaseItem, Currency
+from foodtrack.models import PurchaseItem, Currency, FoodLogEntry
 from foodtrack.services.data_queries import QueryFoodPurchaseSummarizer
 
 
@@ -29,6 +29,10 @@ class Index(LoginRequiredMixin, TemplateView):
 class FoodTrackPasswordView(PasswordChangeView):
     template_name = "account/password_change_form.html"
     form_class = FoodTrackPasswordChangeForm
+
+
+class FoodLogEntryCreate(LoginRequiredMixin, PreferenceViewMixin, CreateView):
+    model = FoodLogEntry
 
 
 class FoodPurchaseCreate(LoginRequiredMixin, PreferenceViewMixin, CreateView):
