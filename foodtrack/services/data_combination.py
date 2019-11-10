@@ -55,6 +55,12 @@ class CombinedQuerySet:
     counts: typing.List[typing.Optional[int]] = []
 
     def __init__(self, *args):
+        """
+        Combines querysets so queryset operations on different models so that a combined queryset object can be
+        passed to components that need a queryset.
+        Args:
+            *args (List[QuerySet]): queryset objects.
+        """
         self.queries = list(args)
         self.counts = [None] * len(self.queries)
         if len(self.queries) == 0:
@@ -138,6 +144,16 @@ class CombinedQuerySet:
         return self
 
     def order_by(self, *field_names):
+        """
+        Implements ordering on the combined queryset - ordering occurs separately on both querysets and the results
+        don't get combined as that would require retrieving all data from the backend and merging them at the app level.
+
+        Args:
+            *field_names (List[str]): list of field names that are used to order the querysets
+
+        Returns:
+            CombinedQuerySet - returns itself after having applied the order_by to each of the member queries
+        """
         for i in range(len(self.queries)):
             # collect valid fields of each model being queried and filter out any order by fields that don't exist
             model_field_names = [field.name for field in self.queries[i].model._meta.fields]
@@ -151,6 +167,17 @@ class CombinedQuerySet:
         return self
 
     def get(self, *args, **kwargs):
+        """
+        Retrieves a single object from the combined queryset. It goes through each member queryset and tries to retrieve
+        object based on the provided arguments. If fails, then goes on to the next member queryset. If all fail, then
+        raises the not found exception.
+        Args:
+            *args (): captures all arguments and passes them on to the .get method of each member query
+            **kwargs (): captures all keyword arguments and passes them on to the .get method of each member query
+
+        Returns:
+            Model: relevant model instance from one of the member querysets, or raises exception.
+        """
         obj = None
         for query in self.queries:
             try:
