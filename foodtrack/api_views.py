@@ -1,14 +1,12 @@
 import datetime
 
-from django.db import connection
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions, mixins
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
 
 import foodtrack.services.data_events
+from foodtrack.api_view_mixins import PerformanceCheckMixin
 from foodtrack.serializers import *
 from foodtrack.services import nutrients
 from foodtrack.services.data_combination import CombinedQuerySet
@@ -49,20 +47,24 @@ class FoodCategoryViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = FoodCategorySerializer
 
 
-class FoodViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = FoodSerializer
-    # queryset = Food.objects.exclude(data_type="branded_food")
-    queryset = Food.objects.all()
+class FoodViewSet(PerformanceCheckMixin, viewsets.ReadOnlyModelViewSet):
     filter_backends = (DjangoFilterBackend, SearchFilter, UsageOrderingFilter)
     filterset_fields = ('category', 'data_type')
     search_fields = ('description',)
     ordering_fields = ('description',)
     ordering = ('description',)
 
-    def retrieve(self, request, pk=None, **kwargs):
-        food = get_object_or_404(Food, pk=pk)
-        serializer = FoodDetailSerializer(food)
-        return Response(serializer.data)
+    def get_serializer_class(self):
+        if self.action == "retrieve":
+            return FoodDetailSerializer
+        return FoodSerializer
+
+    def get_queryset(self):
+        if self.action == "list":
+            return Food.objects.all().select_related("category")
+        if self.action == "retrieve":
+            return Food.objects.all().select_related("category").prefetch_related("nutrients", "nutrients__nutrient")
+        return Food.objects.all()
 
 
 class FoodLogCategoryViewSet(viewsets.ModelViewSet):
@@ -138,7 +140,7 @@ class RecipeComponentViewSet(viewsets.ModelViewSet):
     queryset = RecipeComponent.objects.all()
 
 
-class FoodAndRecipeFacadeViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class FoodAndRecipeFacadeViewSet(mixins.ListModelMixin, PerformanceCheckMixin, viewsets.GenericViewSet):
     serializer_class = FoodAndRecipeFacadeSerializer
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('name', 'description')
@@ -148,13 +150,3 @@ class FoodAndRecipeFacadeViewSet(mixins.ListModelMixin, viewsets.GenericViewSet)
         food_qs = Food.objects.all().select_related("category")
         recipe_qs = Recipe.objects.all()
         return CombinedQuerySet(food_qs, recipe_qs)
-
-    def dispatch(self, request, *args, **kwargs):
-        response = super().dispatch(request, *args, **kwargs)
-        for query in connection.queries:
-            print(query)
-        print(len(connection.queries))
-        return response
-
-
-
