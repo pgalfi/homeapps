@@ -1,0 +1,12 @@
+[
+  {
+    "model": "foodtrack.usagecounter",
+    "pk": 1,
+    "fields": {
+      "object_id": 170457,
+      "count": 30,
+      "content_type_id": 8,
+      "owner_id": 2
+    }
+  }
+]

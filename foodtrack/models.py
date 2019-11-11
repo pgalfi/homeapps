@@ -1,14 +1,26 @@
 import json
 
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.db.models import Index
+from django.db.models import Index, Model
 from django_mysql.models import JSONField
 
 from foodtrack import constants
 
+
+class UsageCounter(models.Model):
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    count = models.BigIntegerField(default=0)
+
+    class Meta:
+        indexes = [
+            Index(fields=("object_id", "content_type", "owner"))
+        ]
 
 # from USDA database
 class Nutrient(models.Model):
@@ -57,7 +69,6 @@ class Food(models.Model):
     description = models.CharField(max_length=2048)
     category = models.ForeignKey(FoodCategory, on_delete=models.CASCADE, null=True)
     pub_date = models.DateTimeField()
-    usage = GenericRelation('UsageCounter')
 
     def __str__(self):
         return self.description
@@ -214,7 +225,6 @@ class Recipe(models.Model):
     prep_time = models.FloatField(default=0)
     total_gram = models.FloatField(default=None, null=True)
     directions = models.TextField(default="")
-    usage = GenericRelation("UsageCounter")
 
     def __str__(self):
         return self.name
@@ -241,14 +251,3 @@ class UserPreference(models.Model):
         return json.dumps(self.prefs)
 
 
-class UsageCounter(models.Model):
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    count = models.BigIntegerField(default=0)
-
-    class Meta:
-        indexes = [
-            Index(fields=("object_id", "content_type", "owner"))
-        ]

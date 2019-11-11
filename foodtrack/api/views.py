@@ -7,7 +7,9 @@ from rest_framework.filters import OrderingFilter
 import foodtrack.services.data_events
 from foodtrack.api.filters import FieldFiltering
 from foodtrack.api.serializers import *
+from foodtrack.api.view_mixins import PerformanceCheckMixin
 from foodtrack.services import nutrients
+from foodtrack.services.data_proxies import create_usage_proxy
 from foodtrack.services.data_union import QuerySetUnion
 
 
@@ -60,12 +62,15 @@ class FoodViewSet(viewsets.ReadOnlyModelViewSet):
         return FoodSerializer
 
     def get_queryset(self):
+        FoodProxy = create_usage_proxy(self.request.user.id, Food)
+        qs = FoodProxy.objects.all()
+
         # Based on the type of serializer that will be used provide querysets that load all needed data efficiently
         if self.action == "list":
-            return Food.objects.all().select_related("category")
+            return qs.select_related("category")
         if self.action == "retrieve":
-            return Food.objects.all().select_related("category").prefetch_related("nutrients", "nutrients__nutrient")
-        return Food.objects.all()
+            return qs.select_related("category").prefetch_related("nutrients", "nutrients__nutrient")
+        return qs
 
 
 class FoodLogCategoryViewSet(viewsets.ModelViewSet):
@@ -141,14 +146,17 @@ class RecipeComponentViewSet(viewsets.ModelViewSet):
     queryset = RecipeComponent.objects.all()
 
 
-class FoodAndRecipeViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class FoodAndRecipeViewSet(mixins.ListModelMixin, PerformanceCheckMixin, viewsets.GenericViewSet):
     serializer_class = FoodAndRecipeFacadeSerializer
     filter_backends = (FieldFiltering, UsageOrderingFilter)
     filter_fields = [{"name": "description", "label": "Name", "lookup": "icontains"},
                      {"name": "data_type", "label": "Data Type"}]
-    ordering_fields = ('description', )
+    ordering_fields = ('description',)
     ordering = ('description',)
 
     def get_queryset(self) -> QuerySetUnion:
-        return QuerySetUnion(Food.objects.values_list("id", "description", "data_type", "usage__count"),
-                             Recipe.objects.values_list("id", "name", "data_type", "usage__count"))
+        FoodProxy = create_usage_proxy(self.request.user.id, Food)
+        RecipeProxy  = create_usage_proxy(self.request.user.id, Recipe)
+
+        return QuerySetUnion(FoodProxy.objects.values_list("id", "description", "data_type", "usage__count"),
+                             RecipeProxy.objects.values_list("id", "name", "data_type", "usage__count"))
