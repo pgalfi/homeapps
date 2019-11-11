@@ -6,10 +6,9 @@ from rest_framework import viewsets, permissions, mixins
 from rest_framework.filters import OrderingFilter, SearchFilter
 
 import foodtrack.services.data_events
-from foodtrack.api_view_mixins import PerformanceCheckMixin
 from foodtrack.serializers import *
 from foodtrack.services import nutrients
-from foodtrack.services.data_union_filtered import QuerySetUnion
+from foodtrack.services.data_union import QuerySetUnion
 
 
 class IsOwner(permissions.BasePermission):
@@ -47,7 +46,7 @@ class FoodCategoryViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = FoodCategorySerializer
 
 
-class FoodViewSet(PerformanceCheckMixin, viewsets.ReadOnlyModelViewSet):
+class FoodViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = (DjangoFilterBackend, SearchFilter, UsageOrderingFilter)
     filterset_fields = ('category', 'data_type')
     search_fields = ('description',)
@@ -60,6 +59,7 @@ class FoodViewSet(PerformanceCheckMixin, viewsets.ReadOnlyModelViewSet):
         return FoodSerializer
 
     def get_queryset(self):
+        # Based on the type of serializer that will be used provide querysets that load all needed data efficiently
         if self.action == "list":
             return Food.objects.all().select_related("category")
         if self.action == "retrieve":
@@ -140,7 +140,7 @@ class RecipeComponentViewSet(viewsets.ModelViewSet):
     queryset = RecipeComponent.objects.all()
 
 
-class FoodAndRecipeFacadeViewSet(mixins.ListModelMixin, PerformanceCheckMixin, viewsets.GenericViewSet):
+class FoodAndRecipeViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = FoodAndRecipeFacadeSerializer
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('description', )

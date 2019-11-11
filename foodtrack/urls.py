@@ -17,9 +17,9 @@ router.register('nutritionprofiles', api_views.NutritionProfileViewSet)
 router.register('nutritionprofiletarget', api_views.NutritionProfileTargetViewSet)
 router.register('usernutrition', api_views.UserNutritionViewSet)
 router.register('recipes', api_views.RecipeViewSet)
-router.register('foodandrecipe', api_views.FoodAndRecipeFacadeViewSet, basename="foodandrecipe")
+router.register('foodandrecipe', api_views.FoodAndRecipeViewSet, basename="foodandrecipe")
 router.register('recipecomponents', api_views.RecipeComponentViewSet)
-
+# print(router.urls)
 urlpatterns = [
     # APIs
     re_path('(?P<version>(v1))/', include(router.urls)),
