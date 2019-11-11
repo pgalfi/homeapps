@@ -2,7 +2,7 @@ import datetime
 
 from django.db.models import Q
 from rest_framework import viewsets, permissions, mixins
-from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.filters import OrderingFilter
 
 import foodtrack.services.data_events
 from foodtrack.api.filters import FieldFiltering
@@ -51,7 +51,6 @@ class FoodViewSet(viewsets.ReadOnlyModelViewSet):
     filter_fields = [{"name": "category"},
                      {"name": "data_type", "label": "Data Type"},
                      {"name": "description", "lookup": "icontains"}]
-    # search_fields = ('description',)
     ordering_fields = ('description',)
     ordering = ('description',)
 
@@ -144,8 +143,9 @@ class RecipeComponentViewSet(viewsets.ModelViewSet):
 
 class FoodAndRecipeViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = FoodAndRecipeFacadeSerializer
-    filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('description', )
+    filter_backends = (FieldFiltering, OrderingFilter)
+    filter_fields = [{"name": "description", "label": "Name", "lookup": "icontains"},
+                     {"name": "data_type", "label": "Data type"}]
     ordering_fields = ('description', )
 
     def get_queryset(self) -> QuerySetUnion:
