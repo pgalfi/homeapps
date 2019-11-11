@@ -86,7 +86,7 @@ class FoodPurchaseForm(forms.ModelForm):
             Field("food_id"),
             Field("food", placeholder="Type food name...", id="food-select", css_class="typeahead autocomplete-select",
                   autocomplete="off", data_url=reverse("food-list", args=["v1"]), data_set="results", data_id="id",
-                  data_text="description", data_query="search", data_max_results="50", data_set_name="food_id"),
+                  data_text="description", data_query="description", data_max_results="50", data_set_name="food_id"),
             Field("description", placeholder="Optional description..."),
             Div(
                 Div(Field("amount"), css_class="col"),
@@ -117,7 +117,7 @@ class FoodPurchaseItemFilterForm(forms.Form):
                                    "data-set": "results",
                                    "data-id": "id",
                                    "data-text": "description",
-                                   "data-query": "search",
+                                   "data-query": "description",
                                    "data-max-results": "50",
                                    "data-set-name": "food_id"
                                }
@@ -157,7 +157,7 @@ class FoodLogEntryForm(forms.ModelForm):
                                         "data-set": "results",
                                         "data-id": "id",
                                         "data-text": "description",
-                                        "data-query": "search",
+                                        "data-query": "description",
                                         "data-max-results": "50",
                                         "data-set-name": "food_id"
                                     }

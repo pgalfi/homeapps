@@ -21,6 +21,7 @@ class TestFoodAndRecipeViewSet(TestCase):
         self.assertEqual(3, len(response.data["results"]))
 
     def test_foodandrecipe_02(self):
-        response: Response = self.client.get(reverse("foodandrecipe-list", args=["v1"]) + "?search=tomato", format="json")
+        response: Response = self.client.get(reverse("foodandrecipe-list", args=["v1"]) + "?description=tomato",
+                                             format="json")
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(2, len(response.data["results"]))
