@@ -34,7 +34,8 @@ class FieldFiltering(BaseFilterBackend):
             elif not to_queryset:
                 args[field_name] = {
                     "value": filter_value,
-                    "label": filter_field["label"] if "label" in filter_field else field_name.title()
+                    "label": filter_field["label"].rstrip(":") + ":" if "label" in filter_field
+                                else field_name.title().rstrip(":") + ":"
                 }
         return args
 

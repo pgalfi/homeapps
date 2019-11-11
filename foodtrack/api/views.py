@@ -145,7 +145,7 @@ class FoodAndRecipeViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = FoodAndRecipeFacadeSerializer
     filter_backends = (FieldFiltering, OrderingFilter)
     filter_fields = [{"name": "description", "label": "Name", "lookup": "icontains"},
-                     {"name": "data_type", "label": "Data type"}]
+                     {"name": "data_type", "label": "Data Type"}]
     ordering_fields = ('description', )
 
     def get_queryset(self) -> QuerySetUnion:
