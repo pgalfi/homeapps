@@ -202,6 +202,7 @@ class UserNutrition(models.Model):
 
 # custom recipe based on existing foods
 class Recipe(models.Model):
+    data_type = models.CharField(max_length=2048, default="recipe", choices=(("recipe", "recipe"),))
     name = models.CharField(max_length=2048)
     image = models.ImageField(default=None, null=True)
     description = models.CharField(max_length=2048, default="")

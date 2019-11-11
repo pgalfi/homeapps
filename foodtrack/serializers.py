@@ -160,13 +160,10 @@ class RecipeComponentSerializer(serializers.ModelSerializer):
 class FoodAndRecipeFacadeSerializer(serializers.BaseSerializer):
 
     def to_representation(self, instance):
-        instance_type = constants.OBJECT_FOOD if isinstance(instance, Food) else \
-                        constants.OBJECT_RECIPE if isinstance(instance, Recipe) else None
         return_data = {
-            "id": instance.id,
-            "data_type": instance_type,
-            "data": RecipeSerializer(context=self.context).to_representation(instance) if instance_type==constants.OBJECT_RECIPE else
-                    FoodSerializer(context=self.context).to_representation(instance) if instance_type==constants.OBJECT_FOOD else None
+            "id": instance[0],
+            "name": instance[1],
+            "data_type": instance[2],
         }
         return return_data
 

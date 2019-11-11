@@ -9,7 +9,7 @@ import foodtrack.services.data_events
 from foodtrack.api_view_mixins import PerformanceCheckMixin
 from foodtrack.serializers import *
 from foodtrack.services import nutrients
-from foodtrack.services.data_combination import CombinedQuerySet
+from foodtrack.services.data_union_filtered import QuerySetUnion
 
 
 class IsOwner(permissions.BasePermission):
@@ -143,10 +143,9 @@ class RecipeComponentViewSet(viewsets.ModelViewSet):
 class FoodAndRecipeFacadeViewSet(mixins.ListModelMixin, PerformanceCheckMixin, viewsets.GenericViewSet):
     serializer_class = FoodAndRecipeFacadeSerializer
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('name', 'description')
-    ordering_fields = ('name', 'description')
+    search_fields = ('description', )
+    ordering_fields = ('description', )
 
-    def get_queryset(self) -> CombinedQuerySet:
-        food_qs = Food.objects.all().select_related("category")
-        recipe_qs = Recipe.objects.all()
-        return CombinedQuerySet(food_qs, recipe_qs)
+    def get_queryset(self) -> QuerySetUnion:
+        return QuerySetUnion(Food.objects.values_list("id", "description", "data_type"),
+                             Recipe.objects.values_list("id", "name", "data_type"))
