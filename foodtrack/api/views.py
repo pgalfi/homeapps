@@ -6,7 +6,7 @@ from rest_framework.filters import OrderingFilter
 
 import foodtrack.services.data_events
 from foodtrack.api.filters import FieldFiltering
-from foodtrack.serializers import *
+from foodtrack.api.serializers import *
 from foodtrack.services import nutrients
 from foodtrack.services.data_union import QuerySetUnion
 
@@ -143,11 +143,12 @@ class RecipeComponentViewSet(viewsets.ModelViewSet):
 
 class FoodAndRecipeViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = FoodAndRecipeFacadeSerializer
-    filter_backends = (FieldFiltering, OrderingFilter)
+    filter_backends = (FieldFiltering, UsageOrderingFilter)
     filter_fields = [{"name": "description", "label": "Name", "lookup": "icontains"},
                      {"name": "data_type", "label": "Data Type"}]
     ordering_fields = ('description', )
+    ordering = ('description',)
 
     def get_queryset(self) -> QuerySetUnion:
-        return QuerySetUnion(Food.objects.values_list("id", "description", "data_type"),
-                             Recipe.objects.values_list("id", "name", "data_type"))
+        return QuerySetUnion(Food.objects.values_list("id", "description", "data_type", "usage__count"),
+                             Recipe.objects.values_list("id", "name", "data_type", "usage__count"))

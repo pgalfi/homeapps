@@ -1,6 +1,8 @@
 import json
 
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import Index
 from django_mysql.models import JSONField
@@ -55,6 +57,7 @@ class Food(models.Model):
     description = models.CharField(max_length=2048)
     category = models.ForeignKey(FoodCategory, on_delete=models.CASCADE, null=True)
     pub_date = models.DateTimeField()
+    usage = GenericRelation('UsageCounter')
 
     def __str__(self):
         return self.description
@@ -211,6 +214,7 @@ class Recipe(models.Model):
     prep_time = models.FloatField(default=0)
     total_gram = models.FloatField(default=None, null=True)
     directions = models.TextField(default="")
+    usage = GenericRelation("UsageCounter")
 
     def __str__(self):
         return self.name
@@ -229,20 +233,22 @@ class RecipeComputedNutrient(models.Model):
     amount = models.FloatField()
 
 
-class FoodUsageCounter(models.Model):
-    food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name="usage")
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    count = models.BigIntegerField(default=0)
-
-    class Meta:
-        indexes = [
-            Index(fields=("food", "owner")),
-        ]
-
-
 class UserPreference(models.Model):
     owner = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE, related_name="prefs")
     prefs = JSONField(default=constants.get_default_prefs)
 
     def __repr__(self):
         return json.dumps(self.prefs)
+
+
+class UsageCounter(models.Model):
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    count = models.BigIntegerField(default=0)
+
+    class Meta:
+        indexes = [
+            Index(fields=("object_id", "content_type", "owner"))
+        ]

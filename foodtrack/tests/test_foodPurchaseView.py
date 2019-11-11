@@ -4,7 +4,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from rest_framework import status
 
-from foodtrack.models import PurchaseItem, UserPreference, FoodUsageCounter
+from foodtrack.models import PurchaseItem, UserPreference, UsageCounter
 
 
 class TestFoodPurchaseView(TestCase):
@@ -47,7 +47,7 @@ class TestFoodPurchaseView(TestCase):
         self.assertEqual(99999, preference.prefs["forms"]["foodpurchaseform"]["unit"])
         self.assertEqual("2019-08-12", preference.prefs["forms"]["foodpurchaseform"]["dt"])
 
-        usage_counter = get_object_or_404(FoodUsageCounter, owner_id=1, food_id=170457)
+        usage_counter = get_object_or_404(UsageCounter, owner_id=1, object_id=170457)
         self.assertEqual(1, usage_counter.count)
 
     def test_food_purchase_03(self):
