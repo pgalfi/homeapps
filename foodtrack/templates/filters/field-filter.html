@@ -1,0 +1,16 @@
+<h2>Field Filter</h2>
+<form>
+    <div class="form-group">
+    {% for arg_name, arg_value in filter_args.items %}
+        <label for="id_{{ arg_name }}">{{ arg_name|title }}</label>
+        <input id="id_{{ arg_name }}" type="text" class="form-control" style="width: 350px" name="{{ arg_name }}" value="{{ arg_value }}">
+    {% endfor %}
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter</button>
+          </span>
+        </div>
+    </div>
+</form>

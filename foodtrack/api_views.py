@@ -1,11 +1,11 @@
 import datetime
 
 from django.db.models import Q
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions, mixins
 from rest_framework.filters import OrderingFilter, SearchFilter
 
 import foodtrack.services.data_events
+from foodtrack.api_filters import FieldFilter
 from foodtrack.serializers import *
 from foodtrack.services import nutrients
 from foodtrack.services.data_union import QuerySetUnion
@@ -47,8 +47,8 @@ class FoodCategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class FoodViewSet(viewsets.ReadOnlyModelViewSet):
-    filter_backends = (DjangoFilterBackend, SearchFilter, UsageOrderingFilter)
-    filterset_fields = ('category', 'data_type')
+    filter_backends = (FieldFilter, SearchFilter, UsageOrderingFilter)
+    field_names = ('category', 'data_type')
     search_fields = ('description',)
     ordering_fields = ('description',)
     ordering = ('description',)

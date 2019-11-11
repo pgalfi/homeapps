@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'crispy_forms',
     'foodtrack.apps.FoodtrackConfig',
-    'housing.apps.HousingConfig'
 ]
 
 MIDDLEWARE = [
