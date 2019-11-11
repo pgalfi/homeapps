@@ -1,16 +1,10 @@
-<h2>Field Filter</h2>
-<form>
-    <div class="form-group">
-    {% for arg_name, arg_value in filter_args.items %}
-        <label for="id_{{ arg_name }}">{{ arg_name|title }}</label>
-        <input id="id_{{ arg_name }}" type="text" class="form-control" style="width: 350px" name="{{ arg_name }}" value="{{ arg_value }}">
-    {% endfor %}
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter</button>
-          </span>
+<h2>Field Search & Filter</h2>
+<form class="">
+    {% for arg_name, arg_data in filter_args.items %}
+        <div class="form-group">
+            <label for="id_{{ arg_name }}" class="control-label">{{ arg_data.label }}</label>
+            <input id="id_{{ arg_name }}" type="text" class="form-control" name="{{ arg_name }}" value="{{ arg_data.value }}">
         </div>
-    </div>
+    {% endfor %}
+    <button class="btn btn-default" type="submit">Apply Filtering</button>
 </form>

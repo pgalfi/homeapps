@@ -5,7 +5,7 @@ from rest_framework import viewsets, permissions, mixins
 from rest_framework.filters import OrderingFilter, SearchFilter
 
 import foodtrack.services.data_events
-from foodtrack.api_filters import FieldFilter
+from foodtrack.api.filters import FieldFiltering
 from foodtrack.serializers import *
 from foodtrack.services import nutrients
 from foodtrack.services.data_union import QuerySetUnion
@@ -47,9 +47,11 @@ class FoodCategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class FoodViewSet(viewsets.ReadOnlyModelViewSet):
-    filter_backends = (FieldFilter, SearchFilter, UsageOrderingFilter)
-    field_names = ('category', 'data_type')
-    search_fields = ('description',)
+    filter_backends = (FieldFiltering, UsageOrderingFilter)
+    filter_fields = [{"name": "category"},
+                     {"name": "data_type", "label": "Data Type"},
+                     {"name": "description", "lookup": "icontains"}]
+    # search_fields = ('description',)
     ordering_fields = ('description',)
     ordering = ('description',)
 

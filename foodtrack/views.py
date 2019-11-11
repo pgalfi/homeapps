@@ -5,11 +5,11 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from foodtrack.app_forms import FoodTrackAuthForm, FoodTrackPasswordChangeForm, FoodPurchaseForm, \
+from foodtrack.forms import FoodTrackAuthForm, FoodTrackPasswordChangeForm, FoodPurchaseForm, \
     FoodPurchaseItemFilterForm, FoodPurchasesSummaryFilterForm, FoodPurchasesSummaryOptionsForm
-from foodtrack.app_view_mixins import PreferenceViewMixin, FormFilteredListView, OptionsFormMixin
 from foodtrack.models import PurchaseItem, Currency, FoodLogEntry
 from foodtrack.services.data_queries import QueryFoodPurchaseSummarizer
+from foodtrack.view_mixins import PreferenceViewMixin, FormFilteredListView, OptionsFormMixin
 
 
 class FoodTrackLoginView(LoginView):

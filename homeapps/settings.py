@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'crispy_forms',
-    'foodtrack.apps.FoodtrackConfig',
+    'foodtrack.config.FoodtrackConfig',
 ]
 
 MIDDLEWARE = [

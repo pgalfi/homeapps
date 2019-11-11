@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.test import TestCase
 
-from foodtrack.app_forms import FoodPurchaseForm
+from foodtrack.forms import FoodPurchaseForm
 from foodtrack.models import PurchaseItem, UserPreference
 from foodtrack.services.data_events import purchase_saved
 from foodtrack.services.user_prefs import save_form_preference, load_form_preference
