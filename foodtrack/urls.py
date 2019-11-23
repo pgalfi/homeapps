@@ -38,4 +38,6 @@ urlpatterns = [
     path('purchase/summary', views.FoodPurchasesSummary.as_view(), name='foodtrack-purchase-summary'),
     path('purchase/update/<int:pk>/', views.FoodPurchaseUpdate.as_view(), name='foodtrack-purchase-update'),
     path('purchase/delete/<int:pk>/', views.FoodPurchaseDelete.as_view(), name='foodtrack-purchase-delete'),
+
+    path('foodlog/new', views.NewFoodLogEntry.as_view(), name='foodtrack-log-newentry'),
 ]

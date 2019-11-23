@@ -150,25 +150,22 @@ class FoodLogEntryForm(forms.ModelForm):
     food_text = forms.CharField(required=True,
                                 widget=forms.TextInput(
                                     attrs={
-                                        "placeholder": "Type food name...",
+                                        "placeholder": "Type food or recipe name...",
                                         "autocomplete": "off",
                                         "class": "typeahead autocomplete-select form-control-sm",
-                                        "data-url": reverse_lazy("food-list", args=["v1"]),
+                                        "data-url": reverse_lazy("foodandrecipe-list", args=["v1"]),
                                         "data-set": "results",
                                         "data-id": "id",
                                         "data-text": "description",
                                         "data-query": "description",
                                         "data-max-results": "50",
-                                        "data-set-name": "food_id"
+                                        "data-set-name": "foodrecipe_id"
                                     }
                                 ))
-    food_id = forms.IntegerField(required=False, widget=forms.HiddenInput)
-    alt_food_id = forms.IntegerField(required=False, widget=forms.HiddenInput)
+    foodrecipe_id = forms.IntegerField(widget=forms.HiddenInput)
+    data_type = forms.IntegerField(widget=forms.HiddenInput)
     amount = forms.FloatField(min_value=0.0001)
 
     class Meta:
         model = FoodLogEntry
         fields = ["amount", "portion", "category", "dt"]
-        widgets = {
-            "food": forms.TextInput,
-        }

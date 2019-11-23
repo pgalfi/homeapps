@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from foodtrack.forms import FoodTrackAuthForm, FoodTrackPasswordChangeForm, FoodPurchaseForm, \
-    FoodPurchaseItemFilterForm, FoodPurchasesSummaryFilterForm, FoodPurchasesSummaryOptionsForm
+    FoodPurchaseItemFilterForm, FoodPurchasesSummaryFilterForm, FoodPurchasesSummaryOptionsForm, FoodLogEntryForm
 from foodtrack.models import PurchaseItem, Currency, FoodLogEntry
 from foodtrack.services.data_queries import QueryFoodPurchaseSummarizer
 from foodtrack.view_mixins import PreferenceViewMixin, FormFilteredListView, OptionsFormMixin
@@ -29,10 +29,6 @@ class Index(LoginRequiredMixin, TemplateView):
 class FoodTrackPasswordView(PasswordChangeView):
     template_name = "account/password_change_form.html"
     form_class = FoodTrackPasswordChangeForm
-
-
-class FoodLogEntryCreate(LoginRequiredMixin, PreferenceViewMixin, CreateView):
-    model = FoodLogEntry
 
 
 class FoodPurchaseCreate(LoginRequiredMixin, PreferenceViewMixin, CreateView):
@@ -90,4 +86,12 @@ class FoodPurchasesSummary(LoginRequiredMixin, OptionsFormMixin, FormFilteredLis
         if "currency_id" in options_form.cleaned_data:
             context_data["currency"] = Currency.objects.get(pk=options_form.cleaned_data["currency_id"])
         return context_data
+
+
+class NewFoodLogEntry(LoginRequiredMixin, PreferenceViewMixin, CreateView):
+    model = FoodLogEntry
+    form_class = FoodLogEntryForm
+    template_name = "food-log-newentry.html"
+    success_url = reverse_lazy("foodtrack-index")
+    login_url = reverse_lazy("foodtrack-login")
 
