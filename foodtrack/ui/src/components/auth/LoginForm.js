@@ -1,3 +1,4 @@
+import "./Authentications.css";
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Alert, Button, Container, Form, Row} from "react-bootstrap";
@@ -6,6 +7,7 @@ import {Redirect, withRouter} from "react-router-dom";
 import {authLoginAction} from "../../store/states/auth-state";
 import {authenticate} from "../../backend/api";
 import {BASE_URL} from "../../config";
+
 
 class LoginForm extends Component {
 
@@ -48,7 +50,7 @@ class LoginForm extends Component {
         return (
             <Container>
                 <Row className={"justify-content-center"}>
-                    <div className={"bg-light mt-5 p-4"}>
+                    <div className={"auth-dialog bg-light mt-5 p-4"}>
                         <Form onSubmit={this.submitForm}>
                             { errorMessage ? <Alert variant={"danger"}>{errorMessage}</Alert> : null}
                             <h4>Authentication Required</h4>

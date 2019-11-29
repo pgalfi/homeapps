@@ -1,5 +1,6 @@
 const initialAuthState = {
-    token: null,
+    // token: null,
+    token: "45a06a77d1c1ec543a72c26e4f23e3f88ab1b762", // test user
     user: null,
 };
 

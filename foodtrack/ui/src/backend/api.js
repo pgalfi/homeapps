@@ -12,3 +12,14 @@ export const authenticate = (username, password) => {
         password: password
     })
 };
+
+export const change_password = (token, old_password, new_password) => {
+    return api_instance.put("/user/password/", {
+        old_password: old_password,
+        new_password: new_password
+    }, {
+        headers: {
+            "Authorization": "Token " + token,
+        }
+    });
+};

@@ -1,8 +1,9 @@
 import React from "react";
-import {BASE_URL} from "../../config";
-import {authLogoutAction} from "../../store/states/auth-state";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
+
+import {BASE_URL} from "../../config";
+import {authLogoutAction} from "../../store/states/auth-state";
 
 const logout = (props) => {
     props.logout();
