@@ -26,6 +26,7 @@ router.register('recipecomponents', api_views.RecipeComponentViewSet)
 urlpatterns = [
     # APIs
     re_path('(?P<version>(v1))/api-token-auth/', obtain_auth_token),
+    re_path('(?P<version>(v1))/user/password', api_views.ChangePasswordView.as_view(), name="password"),
     re_path('(?P<version>(v1))/', include(router.urls)),
 
     path('/', app_views.Index.as_view(), name='foodtrack-index'),

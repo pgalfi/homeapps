@@ -3,6 +3,11 @@ from rest_framework import serializers
 from foodtrack.models import *
 
 
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+
 class NutrientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nutrient
