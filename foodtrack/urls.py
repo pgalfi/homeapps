@@ -1,5 +1,6 @@
 from django.contrib.auth.views import logout_then_login
 from django.urls import path, include, re_path, reverse_lazy
+from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 
 from foodtrack import views
@@ -24,6 +25,7 @@ router.register('recipecomponents', api_views.RecipeComponentViewSet)
 
 urlpatterns = [
     # APIs
+    re_path('(?P<version>(v1))/api-token-auth/', obtain_auth_token),
     re_path('(?P<version>(v1))/', include(router.urls)),
 
     path('/', app_views.Index.as_view(), name='foodtrack-index'),

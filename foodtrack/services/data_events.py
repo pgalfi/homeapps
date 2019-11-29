@@ -1,6 +1,8 @@
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
 
 from foodtrack.models import PurchaseItem, UsageCounter, Food
 
@@ -11,6 +13,12 @@ def purchase_saved(sender, **kwargs):
         purchase: PurchaseItem = kwargs["instance"]
         add_food_usage_count(purchase.food, purchase.owner)
         # save_form_preference(purchase, purchase.owner_id)
+
+
+@receiver(post_save, sender=User)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 
 
 def add_food_usage_count(food, user):
